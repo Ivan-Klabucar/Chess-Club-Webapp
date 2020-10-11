@@ -13,9 +13,17 @@
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Vlasnik (naručitelj)				
+				\item Zaposlenici šahovskog kluba
+				\begin{packed_enum}
+						
+					\item Treneri
+						
+				\end{packed_enum}
+				\item Članovi šahovskog kluba
+				\item Neregistrirani korisnici aplikacije
+				\item Administrator
+				\item Razvojni tim
 				
 			\end{packed_enum}
 			
@@ -23,50 +31,79 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Neregistrirani korisnik (inicijator) može:}
+				\item  \underbar{Trener (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item postavljati dnevne šahovske taktike
+					\item slagati raspored vlastitih treninga
+					\item organizirati turnire
+					\item vidjeti rang liste članova
+					\item pristupiti i objavljivati novi sadržaj na stranici novosti 
+					
+				\end{packed_enum}
+			
+				\item  \underbar{Član šahovskog kluba (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item platiti članarinu putem aplikacije
+					\item prijavljivati se za treninge kod pojedinih trenera
+					\item prijavljivati se za turnire
+					\item rješavati dnevne šahovske taktike
 					\begin{packed_enum}
 						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
-				
+						\item nakon rješavanja dnevne šahovske taktike mogu joj dodijeliti ocjenu
+						\item nakon rješavanja dnevne šahovske taktike mogu prijaviti grešku u taktici
+						
 					\end{packed_enum}
-					\item  funkcionalnost 3
+					\item vidjeti rang liste članova
+					\item pristupiti stranici novosti
 					
 				\end{packed_enum}
-				
 			
-				\item  \underbar{Član može:}
+				\item \underbar{Administrator (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\item funkcionalnost 3
+					\item potpuno zabraniti pristup bilo kojem članu ili treneru
+					\item zabraniti pristup bilo čemu \textbf{osim} uplate članarine bilo kojem članu
+					\item vidjeti rang liste članova
+					\item objavljivati i skidati sadržaj na stranici novosti
+					\item mijenjati raspored treninga bilo kojem treneru
+					\item postavljati i skidati dnevne šahovske taktike
+					\begin{packed_enum}
+						
+						\item nakon rješavanja dnevne šahovske taktike mogu joj dodijeliti ocjenu
+						\item nakon rješavanja dnevne šahovske taktike mogu prijaviti grešku u taktici
+						
+					\end{packed_enum}
+					\item dodavati i skidati turnire
+					\item pregledavati transakcije
 					
 				\end{packed_enum}
-				
-				
-				\item  \underbar{Trener može:}
+			
+				\item \underbar{Neregistrirani korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item rješavati dnevne šahovske taktike
+					\item vidjeti rang liste članova
+					\item pristupiti novostima
 					
 				\end{packed_enum}
-				
-				
-				\item  \underbar{Administrator može:}
+			
+				\item \underbar{Baza podataka (sudionik):}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item pohranjuje sve podatke o korisnicima i njihovim ovlastima
+					\item pohranjuje sve dnevne šahovske taktike
+					\item pohranjuje rang listu članova
+					\item pohranjuje povijest svih transakcija
+					\item pohranjuje termine svih treninga
+					\item pohranjuje termine svih turnira
+					\item pohranjuje svaku stavku na stranici novosti
 					
 				\end{packed_enum}
 				
