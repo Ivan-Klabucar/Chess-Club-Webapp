@@ -54,8 +54,8 @@
 					\item prijaviti se u aplikaciju putem korisničkog imena i lozinke
 					\item odjaviti se iz aplikacije
 					\item platiti članarinu putem aplikacije
-					\item prijavljivati se za treninge kod pojedinih trenera
-					\item prijavljivati se za turnire
+					\item prijavljivati se na treninge kod pojedinih trenera
+					\item prijavljivati se na turnire
 					\item rješavati dnevne šahovske taktike
 					\begin{packed_enum}
 						
@@ -186,7 +186,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Rješavanje dnevne taktike}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: }Korisnik, član
 						\item  \textbf{Cilj: } Uspješno riješiti odabranu dnevnu taktiku
 						\item  \textbf{Sudionici: }-
 						\item  \textbf{Preduvjet: }Korisnik je prethodno odabrao taktiku
@@ -204,14 +204,27 @@
 						
 						\item[] \begin{packed_item}
 	
+							
 							\item[2.a] Korisnik napravi pogrešan potez
 							\item[] \begin{packed_enum}
 								
 								\item Simulacija obavještava korisnika o pogrešnom potezu i vraća ploču u stanje prije pogrešnog poteza.
 								\item Korisnik pokušava s novim potezom.
 								
+								
 							\end{packed_enum}
+						
+						\item[3.a] Korisnik je prijavljen u aplikaciju kao član
+						\item[] \begin{packed_enum}
 							
+							\item Nakon rješavanja dnevne taktike članu se otvara prozor s mogućnošću davanja ocjene taktici na skali od 1 do 5
+							\item Korisnik potvrđuje odabranu ocjenu ili odustaje od davanja ocjene
+							\item Članu se otvara prozor s mogućnošću prijave pogreške u taktici
+							\item Korisnik u slučaju pogrešaka unosi nove poteze i opis novih poteza
+							\item Korisnik potvrđuje unesene informacije ili odustaje od unosa novih poteza i njihovih opisa ako nema pogreške
+							
+							
+						\end{packed_enum}
 						\end{packed_item}
 					\end{packed_item}
 
@@ -219,10 +232,10 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled rang liste}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: }Korisnik, član, trener, administrator
 						\item  \textbf{Cilj: }Pregledati rang listu članova kluba
 						\item  \textbf{Sudionici: }Baza podataka
-						\item  \textbf{Preduvjet: }-
+						\item  \textbf{Preduvjet: }Ako je korisnik prijavljen kao član mora imati tekuću članarinu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -575,7 +588,152 @@
 					\end{packed_item}
 					
 
+						\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Prijava u korisnički račun}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Član, trener, administrator
+						\item  \textbf{Cilj: } Prijaviti se u korisnički račun
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik otvara sučelje za prijavu u korisnički račun
+							\item Korisnik upisuje korisničko ime i lozinku
+							\item Korisniku se otvara stranica s novostima
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Korisnik koji ima status člana nema plaćenu članarinu
+							\item[] \begin{packed_enum}
+								
+								\item Korisniku se otvara stranica za uplatu članarine
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Uplata članarine}}
+				\begin{packed_item}
 					
+					\item \textbf{Glavni sudionik: }Član
+					\item  \textbf{Cilj: } Uplatiti članarinu
+					\item  \textbf{Sudionici: } Baza podataka
+					\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Član odabire opciju "Uplata članarine"
+						\item Članu se otvara sučelje s mogućnošću upisa potrebnih podataka za uplatu članarine  
+						\item Član upisuje potrebne podatke za uplatu i potvrđuje svoj unos
+						\item Član dobiva obavijest da je transakcija uspješna
+						
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+					\item[3.a] Član je unio netočne podatke
+					\item[] \begin{packed_enum}
+						
+						\item Članu dolazi obavijest o netočnom unosu podataka te mu se omogućuje da ponovno unese podatke
+						
+					\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Prijava na trening}}
+			\begin{packed_item}
+				
+				\item \textbf{Glavni sudionik: } Član
+				\item  \textbf{Cilj: } Prijaviti se na trening kod odabranog trenera
+				\item  \textbf{Sudionici: } Baza podataka
+				\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+				\item  \textbf{Opis osnovnog tijeka:}
+				
+				\item[] \begin{packed_enum}
+					
+					\item Član odabire opciju "Prijavite trening"
+					\item Članu se prikazuje popis raspoloživih trenera
+					\item Član odabire jednog od ponuđenih trenera
+					\item Član odabire jedan od raspoloživih termina treninga
+					\item Član dobiva obavijest da je željeni termin treninga kod odabranog trenera zabilježen
+					
+				\end{packed_enum}
+			\end{packed_item}
+		
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Prijava na turnir}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Član
+			\item  \textbf{Cilj: } Prijaviti se na turnir
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Član odabire opciju "Prijava na turnir"
+				\item Članu se javlja obavijest o terminu sljedećeg turnira te poruka o nužnosti potvrde za prijavu na turnir uz mogućnost odabira opcije "Potvrđujem prijavu" ili opcije "Odustajem od prijave"
+				\item Član odabire opciju "Potvrđujem prijavu"
+				\item Član dobiva obavijest da je prijava zabilježena
+				
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[2.a] Član odustaje od prijave
+				\item[] \begin{packed_enum}
+					
+					\item Član odabire opciju "Odustajem od prijave"
+					
+				\end{packed_enum}
+				
+			\end{packed_item}
+		\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Prijava na turnir}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: } Član
+		\item  \textbf{Cilj: } Prijaviti se na turnir
+		\item  \textbf{Sudionici: } Baza podataka
+		\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Član odabire opciju "Prijava na turnir"
+			\item Članu se javlja obavijest o terminu sljedećeg turnira te poruka o nužnosti potvrde za prijavu na turnir uz mogućnost odabira opcije "Potvrđujem prijavu" ili opcije "Odustajem od prijave"
+			\item Član odabire opciju "Potvrđujem prijavu"
+			\item Član dobiva obavijest da je prijava zabilježena
+			
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Član odustaje od prijave
+			\item[] \begin{packed_enum}
+				
+				\item Član odabire opciju "Odustajem od prijave"
+				
+			\end{packed_enum}
+			
+		\end{packed_item}
+	\end{packed_item}
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
