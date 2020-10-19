@@ -246,6 +246,330 @@
 							
 						\end{packed_enum}
 					\end{packed_item}
+					\eject
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Odjava}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: } Administrator, Član, Trener
+						\item  \textbf{Cilj: } Okončati aktivnu sjednicu
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Prijava u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Klik na gumb 'Odjavi se'
+							\item Učitavanje stranice novosti 
+							
+						\end{packed_enum}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Objava dnevne šahovske taktike}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Stvoriti novu dnevnu šahovsku taktiku
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Otvaranje stranice za unos nove taktike
+							\item Trener unosi podatke o taktici poput imena, težine itd.
+							\item Trener namješta inicijalnu kofiguraciju ploče na interaktivnoj simulaciji
+							\item Trener potvrđuje inicijalnu kofiguraciju
+							\item Trener naizmjence pomiče crne i bijele šahovske figurice i tako unosi poteze taktike
+							\item Trener potvrđuje korektan unos poteza i objavljuje dnevnu taktiku
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Zabuna u namještanju inicijalne konfiguracije ploče
+							\item[] \begin{packed_enum}
+								
+								\item klik na gumb 'reset'
+								\item ploča se vraća na startnu konfiguraciju
+								
+							\end{packed_enum}
+							
+							\item Zabuna u unosu poteza taktike
+							\item[] \begin{packed_enum}
+								
+								\item klik na gumb 'reset'
+								\item ploča se vraća na inicijalnu konfiguraciju unesenu u prošlom koraku
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled vlastitih treninga}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Prikazati sve buduće treninge prijavljenog trenera
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Klik na karticu 'Treninzi'
+							\item Kronološki prikaz svih budućih treninga 
+						\end{packed_enum}
+					\end{packed_item}
+					
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje vlastitog treninga}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Obrisati postojeći trening
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na gumb za brisanje jednog od prikazanih treninga
+							\item prikaz dijaloškog okvira koji traži potvrdu od trenera da uistinu želi obrisati trening
+							\item nakon davanja potvrde trening nestaje iz prikaza
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Trener se predomisli o brisanju treninga
+							\item[] \begin{packed_enum}
+								
+								\item pritisak na gumb 'odustani' u dijaloškom okviru za potvrdu
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Stvaranje novog treninga}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Stvoriti novi trening
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na gumb za dodavanje novog treninga
+							\item prikaz dijaloškog okvira u koji trener unosi podatke o treningu kao vrijeme, naziv itd.
+							\item klik na gumb za stvaranje treninga
+							\item zatvara se dijaloški okvir i novi trening dodaje se u prikaz treninga
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Odustajanje od stvaranja novog treninga
+							\item[] \begin{packed_enum}
+								
+								\item pritisak na gumb 'odustani' u dijaloškom okviru za unos podataka o treningu
+								\item zatvaranje dijaloškog okvira i odbacivanje unesenih podataka
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled turnira}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener, Administrator, Član, Korisnik ?
+						\item  \textbf{Cilj: } Prikazati sve buduće turnire
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Klik na karticu 'Turniri'
+							\item Kronološki prikaz svih budućih turnira
+						\end{packed_enum}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje vlastitog turnira}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Obrisati postojeći turnir čiji je organizator prijavljeni trener
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda turnira, te je vlasnik turnira odabranog za brisanje
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na gumb za brisanje jednog od prikazanih turnira
+							\item prikaz dijaloškog okvira koji traži potvrdu od trenera da uistinu želi obrisati turnir
+							\item nakon davanja potvrde turnir nestaje iz prikaza
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Trener se predomisli o brisanju turnira
+							\item[] \begin{packed_enum}
+								
+								\item pritisak na gumb 'odustani' u dijaloškom okviru za potvrdu
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Stvaranje novog turnira}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Stvoriti novi trening
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda turnira
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na gumb za dodavanje novog turnira
+							\item prikaz dijaloškog okvira u koji trener unosi podatke o turniru kao vrijeme, naziv itd.
+							\item klik na gumb za stvaranje turnira
+							\item zatvara se dijaloški okvir i novi turnir dodaje se na stranicu
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Odustajanje od stvaranja novog turnira
+							\item[] \begin{packed_enum}
+								
+								\item pritisak na gumb 'odustani' u dijaloškom okviru za unos podataka
+								\item zatvaranje dijaloškog okvira i odbacivanje unesenih podataka
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pristup stranici novosti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Član, Trener, Administrator, Korisnik
+						\item  \textbf{Cilj: } Vidjeti sve nedavne novosti
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na karticu 'novosti'
+							\item prikaz svih nedavnih novosti
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Objava novosti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Objaviti novost na stranici novosti
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Trener se nalazi na stranici novosti
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na gumb za objavu novosti
+							\item ispunjavanje dijaloškog okvira za stvaranje novosti
+							\item klik na gumb za objavu
+							\item novost se prikazuje na vrhu stranice novosti
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Odustajanje od stvaranja novosti
+							\item[] \begin{packed_enum}
+								
+								\item pritisak na gumb 'odustani' u dijaloškom okviru za unos podataka
+								\item zatvaranje dijaloškog okvira i odbacivanje unesenih podataka
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Revidiranje pogreške u taktici}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Trener
+						\item  \textbf{Cilj: } Prihvatiti ili odbaciti dojavu o pogrešci u nekoj taktici
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } Član je prijavio pogrešku u taktici
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item otvara se pregled sa detaljima o dojavi pogreške na taktici
+							\item Trener klikom na gumb potvrđuje da je dojava o pogrešci valjana
+							\item taktika u pitanju automatski se revidira te se ažuriraju i rang liste članova
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item Odbijanje dojave
+							\item[] \begin{packed_enum}
+								
+								\item pritisakom na gumb 'odbaci' dojava se zanemaruje
+								
+							\end{packed_enum}
+							
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled profila}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator, Član, Trener
+						\item  \textbf{Cilj: } pregled informacija vlastitog profila
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item klik na karticu 'profil'
+							\item učitava se prikaz osobnih podataka i svih aktivnosti na aplikaciji
+							
+						\end{packed_enum}
+					\end{packed_item}
+					
 
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
