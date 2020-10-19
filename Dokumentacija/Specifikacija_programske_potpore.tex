@@ -127,42 +127,126 @@
 				\subsubsection{Opis obrazaca uporabe}
 					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
-
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Registracija}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj: } Stvoriti korisnički račun za pristup sustavu
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
+							\item Korisnik otvara sučelje za registraciju
+							\item Korisnik unosi sve potrebne podatke za registraciju
+							\item Korisnik prima obavijest o uspješnosti registracije
+							
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+							\item[2.a] Unos već postojećeg korisničkog imena i/ili e-maila, unos nepostojećeg e-maila, unos podatka u nedozvoljenom formatu.
 							\item[] \begin{packed_enum}
 								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
+								\item Sučelje obavještava korisnika o pogrešci u registraciji i vraća ga na stranicu za registraciju.
+								\item Korisnik mijenja podatke i pokušava ponovo ili odustaje od registracije.
 								
 							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
 							
 						\end{packed_item}
 					\end{packed_item}
-				
+					
+
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled dnevnih taktika}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj: } Pregledati dostupne taktike za rješavanje tog dana
+						\item  \textbf{Sudionici: } Baza podataka
+						\item  \textbf{Preduvjet: } -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik otvara stranicu s popisom dnevnih taktika
+							\item Korisnik odabire taktiku koju želi rješavati
+							\item Pokreće se simulacija šahovske ploče s odabranom taktikom
+							
+						\end{packed_enum}
+					\end{packed_item}
+
+
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Rješavanje dnevne taktike}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj: } Uspješno riješiti odabranu dnevnu taktiku
+						\item  \textbf{Sudionici: }-
+						\item  \textbf{Preduvjet: }Korisnik je prethodno odabrao taktiku
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisniku se pokreće simulacija šahovske ploče
+							\item Korisnik rješava dnevnu taktiku
+							\item Simulacija se zatvara po uspješnom rješavanju
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[2.a] Korisnik napravi pogrešan potez
+							\item[] \begin{packed_enum}
+								
+								\item Simulacija obavještava korisnika o pogrešnom potezu i vraća ploču u stanje prije pogrešnog poteza.
+								\item Korisnik pokušava s novim potezom.
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+
+
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled rang liste}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj: }Pregledati rang listu članova kluba
+						\item  \textbf{Sudionici: }Baza podataka
+						\item  \textbf{Preduvjet: }-
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik otvara stranicu s rang listom
+							\item Prikazuje se rang lista članova kluba
+							
+						\end{packed_enum}
+					\end{packed_item}
+					
+
+					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled novosti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj: }Pregledati novosti
+						\item  \textbf{Sudionici: }Baza podataka
+						\item  \textbf{Preduvjet: }-
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik otvara stranicu s novostima
+							\item Korisnik pregledava obajvljene novosti
+							
+						\end{packed_enum}
+					\end{packed_item}
+
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
