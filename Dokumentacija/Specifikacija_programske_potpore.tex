@@ -134,7 +134,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Registracija}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: } Neregistrirani korisnik
 						\item  \textbf{Cilj: } Stvoriti korisnički račun za pristup sustavu
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } -
@@ -167,7 +167,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled dnevnih taktika}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: } Neregistrirani korisnik, član, administrator
 						\item  \textbf{Cilj: } Pregledati dostupne taktike za rješavanje tog dana
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } -
@@ -186,7 +186,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Rješavanje dnevne taktike}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik, član
+						\item \textbf{Glavni sudionik: } Neregistrirani korisnik, član, administrator
 						\item  \textbf{Cilj: } Uspješno riješiti odabranu dnevnu taktiku
 						\item  \textbf{Sudionici: }-
 						\item  \textbf{Preduvjet: }Korisnik je prethodno odabrao taktiku
@@ -250,7 +250,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled novosti}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: }Neregistrirani korisnik, član, trener, administrator
 						\item  \textbf{Cilj: }Pregledati novosti
 						\item  \textbf{Sudionici: }Baza podataka
 						\item  \textbf{Preduvjet: }-
@@ -285,7 +285,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Objava dnevne šahovske taktike}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
+						\item \textbf{Glavni sudionik: }Trener, administrator
 						\item  \textbf{Cilj: } Stvoriti novu dnevnu šahovsku taktiku
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } -
@@ -457,8 +457,8 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Stvaranje novog turnira}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
-						\item  \textbf{Cilj: } Stvoriti novi trening
+						\item \textbf{Glavni sudionik: }Trener, Administrator
+						\item  \textbf{Cilj: } Stvoriti novi turnir
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda turnira
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -490,7 +490,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pristup stranici novosti}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Član, Trener, Administrator, Korisnik
+						\item \textbf{Glavni sudionik: }Član, Trener, Administrator, Neregistrirani korisnik
 						\item  \textbf{Cilj: } Vidjeti sve nedavne novosti
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } -
@@ -508,7 +508,7 @@
 					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Objava novosti}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
+						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Objaviti novost na stranici novosti
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } Trener se nalazi na stranici novosti
@@ -702,38 +702,284 @@
 				
 			\end{packed_item}
 		\end{packed_item}
+		\eject
 	
-	\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Prijava na turnir}}
-	\begin{packed_item}
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje novosti}}
+		\begin{packed_item}
 		
-		\item \textbf{Glavni sudionik: } Član
-		\item  \textbf{Cilj: } Prijaviti se na turnir
-		\item  \textbf{Sudionici: } Baza podataka
-		\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
-		\item  \textbf{Opis osnovnog tijeka:}
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Obrisati novost s stranice novosti
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
 		
-		\item[] \begin{packed_enum}
+			\item[] \begin{packed_enum}
 			
-			\item Član odabire opciju "Prijava na turnir"
-			\item Članu se javlja obavijest o terminu sljedećeg turnira te poruka o nužnosti potvrde za prijavu na turnir uz mogućnost odabira opcije "Potvrđujem prijavu" ili opcije "Odustajem od prijave"
-			\item Član odabire opciju "Potvrđujem prijavu"
-			\item Član dobiva obavijest da je prijava zabilježena
-			
-		\end{packed_enum}
+				\item Administrator se postavlja na listu novosti
+				\item Administrator bira opciju "Obriši obavijest" pored obavijesti koju želi obrisati
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
+			\end{packed_enum}
+	
+			\item  \textbf{Opis mogućih odstupanja:}
 		
-		\item  \textbf{Opis mogućih odstupanja:}
-		
-		\item[] \begin{packed_item}
+			\item[] \begin{packed_item}
 			
-			\item[2.a] Član odustaje od prijave
+				\item[2.a] Administrator odustaje od brisanja novosti
+				\item[] \begin{packed_enum}
+				
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+				
+				\end{packed_enum}
+			\end{packed_item}
+	
+		\end{packed_item}
+
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Zabrana pristupa treneru ili članu}}
+		\begin{packed_item}
+		
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Zabraniti pristup treneru ili članu
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+		
+			\item[] \begin{packed_enum}
+			
+				\item Administrator se postavlja na listu registriranih korisnika
+				\item Administrator bira opciju "Zabrani pristup svemu" pored člana ili trenera kojem želi zabraniti pristup
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
+			\end{packed_enum}
+		
+			\item  \textbf{Opis mogućih odstupanja:}
+		
+			\item[] \begin{packed_item}
+			
+				\item[2.a] Administrator odustaje od zabrane pristupa
+				\item[] \begin{packed_enum}
+				
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+				
+				\end{packed_enum}
+			\end{packed_item}
+		
+		\end{packed_item}
+
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Pregled transakcija}}
+		\begin{packed_item}
+		
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Pregledati obavljene transakcije
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+		
+			\item[] \begin{packed_enum}
+			
+				\item Administrator kilkne na karticu "Transakcije"
+				\item Na stranici se prikažu sve transakcije
+			\end{packed_enum}
+		
+		\end{packed_item}
+
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Zabrana pristupa članu osim plaćanja članarine}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Zabraniti pristup članu svemu osim plaćanju članarine
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
 			\item[] \begin{packed_enum}
 				
-				\item Član odabire opciju "Odustajem od prijave"
-				
+				\item Administrator se postavlja na listu registriranih korisnika
+				\item Administrator bira opciju "Zabrani pristup svemu osim plaćanju članarine" pored člana kojem želi zabraniti pristup
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
 			\end{packed_enum}
 			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[2.a] Administrator odustaje od zabrane pristupa svemu osim plaćanju članarine
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
 		\end{packed_item}
-	\end{packed_item}
+		
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje treninga}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Obrisati trening
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Administrator se postavlja na listu zakazanih treninga
+				\item Administrator bira opciju "Obriši trening" pored treninga kojeg želi izbrisati
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[2.a] Administrator odustaje od brisanja treninga
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
+		\end{packed_item}
+	
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Dodavanje treninga}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Dodati termin treninga jednome od trenera
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Administrator se postavlja na listu zakazanih treninga
+				\item Administrator bira opciju "Dodaj novi trening"
+				\item Otvara se novi dijaloški okvir s poljima za unos podataka te opcijama "Dodaj" i "Odustani"
+				\item Administrator unosi podatke o treningu u dijaloški okvir te trenera koji će ga održavati te odabire opciju "Dodaj"
+				\item Zatvara se dijaloški okvir i novi trening se dodaje u prikaz treninga
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[3.a] Administrator odustaje od dodavanja novog treninga
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Odustani" u dijaloškom okviru za unos podataka o treningu
+					
+				\end{packed_enum}
+				\item[3.b] Uneseni podatci o treningu nisu važeći
+				\item[] \begin{packed_enum}
+					
+					\item Dijaloški okvir se ne zatvori, nego javlja grešku
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
+		\end{packed_item}
+	
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Dodavanje turnira}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Dodati turnir
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Administrator se postavlja na listu zakazanih turnira
+				\item Administrator bira opciju "Dodaj novi turnir"
+				\item Otvara se novi dijaloški okvir s poljima za unos podataka te opcijama "Dodaj" i "Odustani"
+				\item Administrator unosi podatke o turniru u dijaloški okvir te odabire trenera kojeg će se smatrati organizatorom tog turnira te odabire opciju "Dodaj"
+				\item Zatvara se dijaloški okvir i novi turnir se dodaje u prikaz turnira
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[3.a] Administrator odustaje od dodavanja novog turnira
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Odustani" u dijaloškom okviru za unos podataka o turniru
+					
+				\end{packed_enum}
+				\item[3.b] Uneseni podatci o turniru nisu važeći
+				\item[] \begin{packed_enum}
+					
+					\item Dijaloški okvir se ne zatvori, nego javlja grešku
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
+		\end{packed_item}
+		\eject
+	
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje turnira}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Obrisati turnir
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Administrator se postavlja na listu zakazanih turnira
+				\item Administrator bira opciju "Obriši turnir" pored turnira kojeg želi izbrisati
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[2.a] Administrator odustaje od brisanja turnira
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
+		\end{packed_item}
+	
+		\noindent \underbar{\textbf{UC$<$broj obrasca$>$ - Brisanje dnevne šahovske taktike}}
+		\begin{packed_item}
+			
+			\item \textbf{Glavni sudionik: } Administrator
+			\item  \textbf{Cilj: } Obrisati dnevnu šahovsku taktiku
+			\item  \textbf{Sudionici: } Baza podataka
+			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Opis osnovnog tijeka:}
+			
+			\item[] \begin{packed_enum}
+				
+				\item Administrator se postavlja na listu dnevnih šahovskih taktika
+				\item Administrator bira opciju "Obriši dnevnu šahovsku taktiku" pored dnevne šahovske taktike koju želi izbrisati
+				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
+			\end{packed_enum}
+			
+			\item  \textbf{Opis mogućih odstupanja:}
+			
+			\item[] \begin{packed_item}
+				
+				\item[2.a] Administrator odustaje od brisanja dnevne šahovske taktike
+				\item[] \begin{packed_enum}
+					
+					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
+					
+				\end{packed_enum}
+			\end{packed_item}
+			
+		\end{packed_item}
+	
+		
+	
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
