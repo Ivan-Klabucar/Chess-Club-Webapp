@@ -2,6 +2,7 @@
 {% block header %}
     <div class="container text-center">
       <h1>Welcome to Scrolling Nav</h1>
+      <p class="lead">{% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}</p>
       <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
     </div>
 {% endblock %}

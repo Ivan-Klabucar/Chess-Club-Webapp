@@ -25,7 +25,9 @@
                        id="id_password">
             </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <button type="submit" class="btn btn-primary btn-lg"
+                        onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
+                'homepage'))} {%endif%}>Login</button>
             </div>
         </form>
     </div>
