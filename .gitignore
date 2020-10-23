@@ -7,3 +7,14 @@
 /dokumentacija/*.synctex.gz
 /dokumentacija/*.toc
 *.DS_Store
+/Dokumentacija/*.aux
+/Dokumentacija/*.lof
+/Dokumentacija/*.log
+/Dokumentacija/*.lot
+/Dokumentacija/*.out
+/Dokumentacija/*.pdf
+/Dokumentacija/*.synctex.gz
+/Dokumentacija/*.toc
+/IzvorniKod/MISFLIP/__pycache__/
+/IzvorniKod/SahovskiKlub/__pycache__/
+/IzvorniKod/db.sqlite3
