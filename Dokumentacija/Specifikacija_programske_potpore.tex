@@ -988,11 +988,20 @@
 			\subsection{Sekvencijski dijagrami}
 				
 				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Revidiranje pogreške u taktici}\\
-				\\Trener šalje zahtjev za prikaz određene dojave o pogrešci taktike kako bi ju mogao pobliže proučiti i odlučiti je li primjedba valjana. Poslužitelj zatraženu dojavu vadi iz baze podataka te ju prikazuje. Taj prikaz sastoji se od osnovnih informacija o dojavi poput ime prijavljenje taktike, težine prijavljenje taktike itd., ali se sastoji i od dvije šahovske simulacije. Prva simulacija prikazuje trenutni tijek taktike, a druga simulacija prikazuje novi tijek taktike koji je predložen u dojavi o pogrešci. Svaka simulacija ima svoj gumb 'next move', koji pokreće izvršavanje sljedećeg poteza kada ga trener pritisne. Gumb se može pritisnuti samo ako simulacija nije izvršila sve poteze. Trener također može i poslati zahtjev za resetiranje jedne ili druge simulacije i tako je vratiti u početni položaj. Kada trener nakon usporedbe dviju simulacija donese odluku, šalje poslužitelju zahtjev za potvrdu ili odbacivanje dojave o pogrešci. Ako je trener potvrdio dojavu, poslužitelj ju tako mora obilježiti u bazi podataka, te zatim oduzeti odgovarajući broj bodova svim igračima koji su uspješno riješili 'zastarjelu' verziju taktike. Ako je trener odbacio dojavu, poslužitelj ju samo mora evidentirati kao odbačenu u bazi podataka.
+				\\Trener šalje zahtjev za prikaz određene dojave o pogrešci taktike kako bi ju mogao pobliže proučiti i odlučiti je li primjedba valjana. Poslužitelj zatraženu dojavu vadi iz baze podataka te ju prikazuje. Taj prikaz sastoji se od osnovnih informacija o dojavi poput ime prijavljenje taktike, težine prijavljenje taktike itd., ali se sastoji i od simulacije dvije šahovske ploče. Na prvoj ploča simulira se trenutni tijek taktike, a na drugoj se simulira novi tijek taktike koji je predložen u dojavi o pogrešci. Trener pritiskom na odgovarajuće gumbe šalje zahtjeve za sljedeći korak u simulaciji. Trener također može i poslati zahtjev za resetiranje simulacije i tako ju vratiti u početni položaj. Nakon što je proučio simulaciju trener šalje poslužitelju zahtjev za potvrdu ili odbacivanje dojave o pogrešci. Ako je trener potvrdio dojavu, poslužitelj ju tako mora obilježiti u bazi podataka, te zatim oduzeti odgovarajući broj bodova svim igračima koji su uspješno riješili 'zastarjelu' verziju taktike. Ako je trener odbacio dojavu, poslužitelj ju samo mora evidentirati kao odbačenu u bazi podataka.
+				
+				\makeatletter
+\newcommand*{\centerfloat}{%
+  \parindent \z@
+  \leftskip \z@ \@plus 1fil \@minus \textwidth
+  \rightskip\leftskip
+  \parfillskip \z@skip}
+\makeatother
+
 				
 				\begin{figure}[H]
-        					\includegraphics[scale=0.38]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\centering
+					\centerfloat
+        					\includegraphics[scale=0.46]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
         					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
         					\label{fig:UC$<$broj obrasca$>$}
 				\end{figure}
