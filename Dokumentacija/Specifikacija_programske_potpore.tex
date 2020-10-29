@@ -985,11 +985,43 @@
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
 				\eject		
 				
+								\makeatletter
+                                                                        \newcommand*{\centerfloat}{%
+                                                                          \parindent \z@
+                                                                          \leftskip \z@ \@plus 1fil \@minus \textwidth
+                                                                          \rightskip\leftskip
+                                                                          \parfillskip \z@skip}
+                                                                   \makeatother
+				
+				
 			\subsection{Sekvencijski dijagrami}
+			
+			
+				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Stvaranje novog treninga}\\
+				Trener šalje zahtjev web aplikaciji za stvaranje novog treninga. Web aplikacija dohvaća iz baze podataka sve ostale treninge tog trenera i provjerava da se novi trening ne preklapa ni sa jednim postojećim treningom. Ako uistinu ne postoji preklapanje, novi trening se zapisuje u bazu podataka te se treneru šalje obavijest o uspjehu kreiranja novog treninga. Ukoliko postoji preklapanje s već postojećim treningom, treneru web aplikacija javlja informacije o preklapanju i nemogućnosti stvaranja zatraženog treninga.
+				\eject
 				
-				\textbf{\textit{dio 1. revizije}}\\
+				\begin{figure}[H]
+					\centerfloat
+        					\includegraphics[scale=0.48]{dijagrami/StvaranjeNovogTreninga.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
+        					\label{fig:UC$<$broj obrasca$>$}
+				\end{figure}
 				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+				\eject
+				
+				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Revidiranje pogreške u taktici}\\
+				\\Trener šalje zahtjev za prikaz određene dojave o pogrešci taktike kako bi ju mogao pobliže proučiti i odlučiti je li primjedba valjana. Poslužitelj zatraženu dojavu vadi iz baze podataka te ju prikazuje. Taj prikaz sastoji se od osnovnih informacija o dojavi poput ime prijavljenje taktike, težine prijavljenje taktike itd., ali se sastoji i od simulacije dvije šahovske ploče. Na prvoj ploča simulira se trenutni tijek taktike, a na drugoj se simulira novi tijek taktike koji je predložen u dojavi o pogrešci. Trener pritiskom na odgovarajuće gumbe šalje zahtjeve za sljedeći korak u simulaciji. Trener također može i poslati zahtjev za resetiranje simulacije i tako ju vratiti u početni položaj. Nakon što je proučio simulaciju trener šalje poslužitelju zahtjev za potvrdu ili odbacivanje dojave o pogrešci. Ako je trener potvrdio dojavu, poslužitelj ju tako mora obilježiti u bazi podataka, te zatim oduzeti odgovarajući broj bodova svim igračima koji su uspješno riješili 'zastarjelu' verziju taktike. Ako je trener odbacio dojavu, poslužitelj ju samo mora evidentirati kao odbačenu u bazi podataka.
+			
+
+				
+				\begin{figure}[H]
+					\centerfloat
+        					\includegraphics[scale=0.46]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
+        					\label{fig:UC$<$broj obrasca$>$}
+				\end{figure}
+				
 				\eject
 	
 		\section{Ostali zahtjevi}
