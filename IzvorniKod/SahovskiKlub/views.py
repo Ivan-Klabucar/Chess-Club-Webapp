@@ -35,4 +35,4 @@ def listaTaktika(request):
             }
         ]
     }
-    return render(request, 'listaDnevnihTaktika', context)
+    return render(request, 'listaDnevnihTaktika.html', context)
