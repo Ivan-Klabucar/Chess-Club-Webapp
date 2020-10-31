@@ -22,21 +22,17 @@ def sign_up(request):
     context['form'] = form
     return render(request, 'registration/sign_up.html', context)
 
-def novosti(request):
+def listaTaktika(request):
     context = {
-        "listaNovosti" : [
+        "listaTaktika" : [
             {
-                "naslov" : "test",
-                "korisnik" : "Marko",
-                "datum" : "30.10.2020",
-                "opis" : "Tu smo se prikupili kako bismo ispratili našu dragu volju u bolji život. Oduvijek smo znali da je ona pre dobra za ovaj život, te da je neljudski ju držati ovdje"
+                "autor" : "Marko",
+                "datum" : "17.8.2019"
             },
             {
-                "naslov" : "test2",
-                "korsinik" : "Ivo",
-                "datum" : "31.10.2020",
-                "opis" : "Marko nam je svima lagao, on je lažni mesija. Čujte i počujte, o narode, jer ja vam kažem, uredu je. Zašto? Jer sam ja došao!"
+                "autor" : "Ivo",
+                "datum" : "19.10.2020"
             }
         ]
     }
-    return render(request, 'novosti/novosti.html', context)
+    return render(request, 'listaDnevnihTaktika', context)
