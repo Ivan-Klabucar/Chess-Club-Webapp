@@ -6,10 +6,19 @@
 {% endblock %}
 
 {% block content %}
+{% for taktikaIstaknuta in listaTaktikeIstaknute %}
+<div class=istaknutiStavakContainer>
+    <p> Autor: {{ taktikaIstaknuta.autor }} </p>
+    <p> Datum: {{ taktikaIstakunta.datum }} </p>
+</div>
+{%endfor%}
 
 {% for taktika in listaTaktika %}
-    {{ taktika.autor }}
-    {{ taktika.datum }}
+
+<div class="stavakContainer" onclick="location.href='/';" style="cursor: pointer;">
+    <p> Autor: {{ taktika.autor }} </p>
+    <p> Datum objave: {{ taktika.datum }} </p>
+</div>
 {%endfor%}
 
 {% endblock %}

@@ -33,6 +33,12 @@ def listaTaktika(request):
                 "autor" : "Ivo",
                 "datum" : "19.10.2020"
             }
+        ],
+        "listaTaktikeIstaknute" : [
+            {
+                "autor" : "Bruno",
+                "datum" : "19.10.2021"
+            }
         ]
     }
     return render(request, 'listaDnevnihTaktika.html', context)
