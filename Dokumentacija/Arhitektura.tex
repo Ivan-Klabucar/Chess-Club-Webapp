@@ -1,5 +1,5 @@
 \chapter{Arhitektura i dizajn sustava}
-		
+
 		\textbf{\textit{dio 1. revizije}}\\
 
 		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
@@ -123,6 +123,63 @@
 					
 				\end{longtabu}
 			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[8, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idUser & INT &  identfikacijski broj člana \\ \hline
+					\cellcolor{LightBlue} idGrupa & INT & identifikacijski broj grupe \\ \hline
+					username & VARCHAR (20) &  korisničko ime člana \\ \hline 
+					password & VARCHAR (20) & lozinka člana \\ \hline 
+					email & VARCHAR (20) & mail adresa člana \\ \hline
+					ime & VARCHAR (20) & ime člana \\ \hline
+					prezime & VARCHAR (20) & prezime člana \\ \hline
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Grupa}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Grupa}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idGrupa & INT & identifikacijski broj grupe \\ \hline
+					imeGrupe & VARCHAR (20) &  ime grupe \\ \hline
+				
+				\end{longtabu}
+				
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Novost}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Novost}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idUser & INT & identifikacijski broj autora \\ \hline
+					\cellcolor{LightGreen} vrijemeObjavljivanja & DATETIME & vrijeme i datum objavljivanja \\ \hline
+					naslov & VARCHAR (50) & naslov novosti\\ \hline
+					tekst & TEXT & tekst novosti\\ \hline
+				
+				\end{longtabu}
+				
+
+				
 			
 			\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
