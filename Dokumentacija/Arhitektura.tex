@@ -177,7 +177,96 @@
 					tekst & TEXT & tekst novosti\\ \hline
 				
 				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
 				
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTreninga & INT & identifikacijski broj treninga\\ \hline
+					\cellcolor{LightBlue} idOrganizatora & INT & identifikacijski broj organizatora treninga \\ \hline
+					vrijemePocetka & DATETIME & vrijeme i datum početka treninga\\ \hline
+					vrijemeZavrsetka & DATETIME & vrijeme i datum završetka treninga\\ \hline
+					opisTreninga & TEXT & opisan sadržaj treninga\\ \hline
+				
+				\end{longtabu}
+				
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTreninga & INT & identifikacijski broj treninga\\ \hline
+					\cellcolor{LightBlue} idOrganizatora & INT & identifikacijski broj organizatora treninga \\ \hline
+					vrijemePocetka & DATETIME & vrijeme i datum početka treninga\\ \hline
+					vrijemeZavrsetka & DATETIME & vrijeme i datum završetka treninga\\ \hline
+					opisTreninga & TEXT & opisan sadržaj treninga\\ \hline
+				
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Turnir}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Turnir}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTurnira & INT & identifikacijski broj turnira\\ \hline
+					formatTurnira & TEXT & opisan format turnira \\ \hline
+					vrijemePocetka & DATETIME & vrijeme i datum početka turnira\\ \hline
+					vrijemeZavrsetka & DATETIME & vrijeme i datum završetka turnira\\ \hline
+					brojSudionika & INT & maksimalan broj sudionika na turniru\\ \hline
+				
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTrening}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTrening}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} idČlana & INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idTreninga & INT & identifikacijski broj treninga \\ \hline
+				
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTurnir}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTurnir}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} idČlana & INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idTurnira & INT & identifikacijski broj turnira \\ \hline
+				
+				\end{longtabu}
 
 				
 			
