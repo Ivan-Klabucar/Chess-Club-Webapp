@@ -45,6 +45,83 @@
 					
 					
 				\end{longtabu}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{taktika}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{taktika}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idTaktika & INT	   &  identfikacijski broj taktike	\\ \hline
+					createdAt	& TIMESTAMP &   vrijeme stvaranja taktike, služi za kronološko sortiranje taktika	\\ \hline 
+					\cellcolor{LightBlue}idUser & INT & identifikator trenera ili admina koji je stvorio taktiku  \\ \hline 
+					initConfig & VARCHAR (100)	&  string koji opisuje inicijalno stanje šahovske ploče	\\ \hline 
+					movesWhite & VARCHAR (3000) & string koji opisuje poteze bijelih figurica \\ \hline
+					movesBlack & VARCHAR (3000) & string koji opisuje poteze crnih figurica \\ \hline
+					tezina & DECIMAL & težina taktike, koristi se u računanju bodova, u rasponu od 1 do 3 \\ \hline
+					brojGlasova & INT & broj korisnika koji su glasali za neku težinu taktike \\ \hline
+
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{rjesenjeTaktika}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{rjesenjeTaktika}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idTaktika & INT	   &  identfikacijski broj taktike koja je rješena, foreign key	\\ \hline
+					\cellcolor{LightGreen}idUser & INT & identifikator člana koji je riješio taktiku, foreign key  \\ \hline 
+					vrijeme & DECIMAL & vrijeme rješavanja taktike u minutama \\ \hline
+					
+				\end{longtabu}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{dojavaPogreske}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{dojavaPogreske}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idDojava & INT	   &  identfikacijski broj dojave o pogrešci	\\ \hline
+					\cellcolor{LightBlue}idTaktika & INT	   &  identfikacijski broj prijavljene taktike	\\ \hline
+					\cellcolor{LightBlue}idUserDojavio & INT & identifikator člana koji je dojavio pogrešku na taktiku  \\ \hline 
+					\cellcolor{LightBlue}idUserRevidira & INT & identifikator trenera koji revidira dojavu  \\ \hline 
+					prihvacena & BOOLEAN	&  je li dojava prihvacena ili odbacena, NULL znači da čeka na revidiranje	\\ \hline 
+					predlozeniTijek & VARCHAR (6000) & string koji opisuje poteze koje je predložio član koji je dojavio pogrešku \\ \hline
+					opisPoteza & TEXT & opis poteza koje je član unio \\ \hline
+					
+				\end{longtabu}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{view - rangLista}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{view - rangLista}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idUser & INT	   &  identfikacijski broj člana	\\ \hline
+					username & VARCHAR	   &  korisničko ime člana	\\ \hline
+					bodovi & INT & broj bodova koje je član sveukupno osvojio \\ \hline 
+					
+				\end{longtabu}
 			
 			
 			\subsection{Dijagram baze podataka}
