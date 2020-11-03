@@ -985,13 +985,7 @@
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
 				\eject		
 				
-								\makeatletter
-                                                                        \newcommand*{\centerfloat}{%
-                                                                          \parindent \z@
-                                                                          \leftskip \z@ \@plus 1fil \@minus \textwidth
-                                                                          \rightskip\leftskip
-                                                                          \parfillskip \z@skip}
-                                                                   \makeatother
+								
 				
 				
 			\subsection{Sekvencijski dijagrami}
@@ -1000,6 +994,14 @@
 				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Stvaranje novog treninga}\\
 				Trener šalje zahtjev web aplikaciji za stvaranje novog treninga. Web aplikacija dohvaća iz baze podataka sve ostale treninge tog trenera i provjerava da se novi trening ne preklapa ni sa jednim postojećim treningom. Ako uistinu ne postoji preklapanje, novi trening se zapisuje u bazu podataka te se treneru šalje obavijest o uspjehu kreiranja novog treninga. Ukoliko postoji preklapanje s već postojećim treningom, treneru web aplikacija javlja informacije o preklapanju i nemogućnosti stvaranja zatraženog treninga.
 				\eject
+				
+				\makeatletter
+                                                                        \newcommand*{\centerfloat}{%
+                                                                          \parindent \z@
+                                                                          \leftskip \z@ \@plus 1fil \@minus \textwidth
+                                                                          \rightskip\leftskip
+                                                                          \parfillskip \z@skip}
+                                                                   \makeatother
 				
 				\begin{figure}[H]
 					\centerfloat
@@ -1017,7 +1019,7 @@
 				
 				\begin{figure}[H]
 					\centerfloat
-        					\includegraphics[scale=0.46]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\includegraphics[scale=0.40]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
         					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
         					\label{fig:UC$<$broj obrasca$>$}
 				\end{figure}
