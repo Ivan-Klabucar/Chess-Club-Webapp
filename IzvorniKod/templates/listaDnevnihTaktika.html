@@ -7,7 +7,7 @@
 
 {% block content %}
 {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-<div class=istaknutiStavakContainer onclick="location.href='/';" style="cursor: pointer;">
+<div class=istaknutiStavakContainer onclick="location.href='/taktika';" style="cursor: pointer;">
     <p> Autor: {{ taktikaIstaknuta.autor }} </p>
     <p> Datum: {{ taktikaIstakunta.datum }} </p>
 </div>
@@ -15,7 +15,7 @@
 
 {% for taktika in listaTaktika %}
 
-<div class="stavakContainer" onclick="location.href='/';" style="cursor: pointer;">
+<div class="stavakContainer" onclick="location.href='/taktika';" style="cursor: pointer;">
     <p> Autor: {{ taktika.autor }} </p>
     <p> Datum objave: {{ taktika.datum }} </p>
 </div>

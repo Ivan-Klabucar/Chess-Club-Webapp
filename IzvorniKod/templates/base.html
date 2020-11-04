@@ -18,6 +18,7 @@
     <link href="{% static 'css/scrolling-nav.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/listaDnevnihTaktika.css' %}">
 
+    {% block css_import %} {% endblock %}
 </head>
 
 <body id="page-top">
@@ -84,6 +85,8 @@
 
 <!-- Custom JavaScript for this theme -->
 <script src="{% static 'js/scrolling-nav.js' %}"></script>
+
+{% block js_import %} {% endblock %}
 
 </body>
 

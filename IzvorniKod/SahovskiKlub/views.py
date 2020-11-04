@@ -42,3 +42,14 @@ def listaTaktika(request):
         ]
     }
     return render(request, 'listaDnevnihTaktika.html', context)
+
+class DemoTacticView(View):
+    def get(self, request):
+        context = {
+            'tactic_data': {
+                'start_position': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+                'white_moves': ['d4', 'e4', 'f4', 'exd5', 'Bxf4'],
+                'black_moves': ['d5', 'e5', 'f5', 'exf4']
+            }
+        }
+        return render(request, 'tactic.html', context)
