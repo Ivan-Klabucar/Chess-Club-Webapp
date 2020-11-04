@@ -7,7 +7,7 @@
 
 {% block content %}
 {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-<div class=istaknutiStavakContainer>
+<div class=istaknutiStavakContainer onclick="location.href='/';" style="cursor: pointer;">
     <p> Autor: {{ taktikaIstaknuta.autor }} </p>
     <p> Datum: {{ taktikaIstakunta.datum }} </p>
 </div>
