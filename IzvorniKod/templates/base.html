@@ -16,7 +16,6 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/scrolling-nav.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/listaDnevnihTaktika.css' %}">
 
     {% block css_import %} {% endblock %}
 </head>
@@ -30,6 +29,7 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand js-scroll-trigger" href="/dnevneTaktike">Dnevne taktike</a>
         {% if user.is_authenticated %}
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -44,7 +44,6 @@
         {% else %}
         <a class="navbar-brand js-scroll-trigger" href="/login">Login</a>
         <a class="navbar-brand js-scroll-trigger" href="/register">Register</a>
-        <a class="navbar-brand js-scroll-trigger" href="/dnevneTaktike">Dnevne taktike</a>
         {% endif %}
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">

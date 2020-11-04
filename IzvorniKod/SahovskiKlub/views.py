@@ -13,7 +13,7 @@ class HomeView(View):
 
 def sign_up(request):
     context = {}
-    form = UserCrseationForm(request.POST or None)
+    form = UserCreationForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             user = form.save()

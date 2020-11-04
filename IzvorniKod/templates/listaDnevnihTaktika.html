@@ -6,18 +6,30 @@
 {% endblock %}
 
 {% block content %}
+
+<h2 style="margin-left: 5%; margin-bottom: 50px;">Aktivne dnevne taktike</h2>
+
 {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-<div class=istaknutiStavakContainer onclick="location.href='/taktika';" style="cursor: pointer;">
-    <p> Autor: {{ taktikaIstaknuta.autor }} </p>
-    <p> Datum: {{ taktikaIstakunta.datum }} </p>
+
+
+
+<div class="card border border-dark bg-warning text-dark rounded" style="width: 50%; margin-left: 25%; margin-bottom: 100px; cursor: pointer;" onclick="location.href='/taktika';">
+    <div class="card-body">
+        <p> Autor: {{ taktikaIstaknuta.autor }} </p>
+        <p> Datum: {{ taktikaIstakunta.datum }} </p>
+    </div>
 </div>
 {%endfor%}
 
+<h2 style="margin-left: 5%; margin-bottom: 50px;">Popis neaktivnih dnevnih taktika</h2>
+
 {% for taktika in listaTaktika %}
 
-<div class="stavakContainer" onclick="location.href='/taktika';" style="cursor: pointer;">
-    <p> Autor: {{ taktika.autor }} </p>
-    <p> Datum objave: {{ taktika.datum }} </p>
+<div class="card border border-dark bg-dark text-white rounded" style="width: 50%; margin-left: 25%; margin-bottom: 100px; cursor: pointer;" onclick="location.href='/taktika';">
+    <div class="card-body">
+        <p> Autor: {{ taktika.autor }} </p>
+        <p> Datum objave: {{ taktika.datum }} </p>
+    </div>
 </div>
 {%endfor%}
 
