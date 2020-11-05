@@ -332,19 +332,19 @@
 					
 					\eject
 					
-					\noindent \underbar{\textbf{UC8 - Brisanje vlastitog treninga}}
+					\noindent \underbar{\textbf{UC8 - Brisanje treninga}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
+						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Obrisati postojeći trening
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda vlastitih treninga
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item klik na gumb za brisanje jednog od prikazanih treninga
-							\item prikaz dijaloškog okvira koji traži potvrdu od trenera da uistinu želi obrisati trening
+							\item prikaz dijaloškog okvira koji traži potvrdu od korisnika da uistinu želi obrisati trening
 							\item nakon davanja potvrde trening nestaje iz prikaza
 							
 						\end{packed_enum}
@@ -353,7 +353,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Trener se predomisli o brisanju treninga
+							\item[3.a] Korisnik se predomisli o brisanju treninga
 							\item[] \begin{packed_enum}
 								
 								\item pritisak na gumb 'odustani' u dijaloškom okviru za potvrdu
@@ -367,16 +367,16 @@
 					\noindent \underbar{\textbf{UC9 - Stvaranje novog treninga}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
+						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Stvoriti novi trening
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda vlastitih treninga
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item klik na gumb za dodavanje novog treninga
-							\item prikaz dijaloškog okvira u koji trener unosi podatke o treningu kao vrijeme, naziv itd.
+							\item prikaz dijaloškog okvira u koji korisnik unosi podatke o treningu kao vrijeme, naziv, izvoditelj itd.
 							\item klik na gumb za stvaranje treninga
 							\item zatvara se dijaloški okvir i novi trening dodaje se u prikaz treninga
 							
@@ -386,6 +386,15 @@
 						
 						\item[] \begin{packed_item}
 	
+							\item[2.a]Trener dodaj podatke
+							\item[] \begin{packed_enum}
+								
+								\item trener ne može birati izvoditelja nego je on sam zaključan kao izvoditelj prilikom stvaranja
+								
+								
+							\end{packed_enum}
+						
+						
 							\item[3.a] Odustajanje od stvaranja novog treninga
 							\item[] \begin{packed_enum}
 								
@@ -393,6 +402,8 @@
 								\item zatvaranje dijaloškog okvira i odbacivanje unesenih podataka
 								
 							\end{packed_enum}
+						
+						
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -415,19 +426,19 @@
 						\end{packed_enum}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC11 - Brisanje vlastitog turnira}}
+					\noindent \underbar{\textbf{UC11 - Brisanje turnira}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
-						\item  \textbf{Cilj: } Obrisati postojeći turnir čiji je organizator prijavljeni trener
+						\item \textbf{Glavni sudionik: }Trener, Administrator
+						\item  \textbf{Cilj: } Obrisati postojeći turnir čiji je organizator prijavljeni korisnik
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda turnira, te je vlasnik turnira odabranog za brisanje
+						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda turnira, te je vlasnik turnira odabranog za brisanje
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item klik na gumb za brisanje jednog od prikazanih turnira
-							\item prikaz dijaloškog okvira koji traži potvrdu od trenera da uistinu želi obrisati turnir
+							\item prikaz dijaloškog okvira koji traži potvrdu od korisnika da uistinu želi obrisati turnir
 							\item nakon davanja potvrde turnir nestaje iz prikaza
 							
 						\end{packed_enum}
@@ -436,7 +447,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Trener se predomisli o brisanju turnira
+							\item[3.a] Korisnik se predomisli o brisanju turnira
 							\item[] \begin{packed_enum}
 								
 								\item pritisak na gumb 'odustani' u dijaloškom okviru za potvrdu
@@ -451,16 +462,16 @@
 					\noindent \underbar{\textbf{UC12 - Stvaranje novog turnira}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener
+						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Stvoriti novi turnir
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Trener se nalazi na stranici pregleda turnira
+						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda turnira
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item klik na gumb za dodavanje novog turnira
-							\item prikaz dijaloškog okvira u koji trener unosi podatke o turniru kao vrijeme, naziv itd.
+							\item prikaz dijaloškog okvira u koji korisnik unosi podatke o turniru kao vrijeme, naziv, izvoditelj itd.
 							\item klik na gumb za stvaranje turnira
 							\item zatvara se dijaloški okvir i novi turnir dodaje se na stranicu
 							
@@ -469,7 +480,16 @@
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-	
+							
+							\item[2.a]Trener dodaj podatke
+							\item[] \begin{packed_enum}
+								
+								\item trener ne može birati izvoditelja nego je on sam zaključan kao izvoditelj prilikom stvaranja
+								
+								
+							\end{packed_enum}
+						
+						
 							\item[3.a] Odustajanje od stvaranja novog turnira
 							\item[] \begin{packed_enum}
 								
@@ -835,148 +855,8 @@
 	
 		\eject
 		
-		\noindent \underbar{\textbf{UC26 - Brisanje treninga}}
-		\begin{packed_item}
-			
-			\item \textbf{Glavni sudionik: } Administrator
-			\item  \textbf{Cilj: } Obrisati trening
-			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
-			\item  \textbf{Opis osnovnog tijeka:}
-			
-			\item[] \begin{packed_enum}
-				
-				\item Administrator se postavlja na listu zakazanih treninga
-				\item Administrator bira opciju "Obriši trening" pored treninga kojeg želi izbrisati
-				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
-			\end{packed_enum}
-			
-			\item  \textbf{Opis mogućih odstupanja:}
-			
-			\item[] \begin{packed_item}
-				
-				\item[2.a] Administrator odustaje od brisanja treninga
-				\item[] \begin{packed_enum}
-					
-					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
-					
-				\end{packed_enum}
-			\end{packed_item}
-			
-		\end{packed_item}
 	
-		\noindent \underbar{\textbf{UC27 - Dodavanje treninga}}
-		\begin{packed_item}
-			
-			\item \textbf{Glavni sudionik: } Administrator
-			\item  \textbf{Cilj: } Dodati termin treninga jednome od trenera
-			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
-			\item  \textbf{Opis osnovnog tijeka:}
-			
-			\item[] \begin{packed_enum}
-				
-				\item Administrator se postavlja na listu zakazanih treninga
-				\item Administrator bira opciju "Dodaj novi trening"
-				\item Otvara se novi dijaloški okvir s poljima za unos podataka te opcijama "Dodaj" i "Odustani"
-				\item Administrator unosi podatke o treningu u dijaloški okvir te trenera koji će ga održavati te odabire opciju "Dodaj"
-				\item Zatvara se dijaloški okvir i novi trening se dodaje u prikaz treninga
-			\end{packed_enum}
-			
-			\item  \textbf{Opis mogućih odstupanja:}
-			
-			\item[] \begin{packed_item}
-				
-				\item[3.a] Administrator odustaje od dodavanja novog treninga
-				\item[] \begin{packed_enum}
-					
-					\item Administrator odabire opciju "Odustani" u dijaloškom okviru za unos podataka o treningu
-					
-				\end{packed_enum}
-				\item[3.b] Uneseni podatci o treningu nisu važeći
-				\item[] \begin{packed_enum}
-					
-					\item Dijaloški okvir se ne zatvori, nego javlja grešku
-					
-				\end{packed_enum}
-			\end{packed_item}
-			
-		\end{packed_item}
-	
-		\eject
-	
-		\noindent \underbar{\textbf{UC28 - Dodavanje turnira}}
-		\begin{packed_item}
-			
-			\item \textbf{Glavni sudionik: } Administrator
-			\item  \textbf{Cilj: } Dodati turnir
-			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
-			\item  \textbf{Opis osnovnog tijeka:}
-			
-			\item[] \begin{packed_enum}
-				
-				\item Administrator se postavlja na listu zakazanih turnira
-				\item Administrator bira opciju "Dodaj novi turnir"
-				\item Otvara se novi dijaloški okvir s poljima za unos podataka te opcijama "Dodaj" i "Odustani"
-				\item Administrator unosi podatke o turniru u dijaloški okvir, odabire trenera kojeg će se smatrati organizatorom tog turnira te odabire opciju "Dodaj"
-				\item Zatvara se dijaloški okvir i novi turnir se dodaje u prikaz turnira
-			\end{packed_enum}
-			
-			\item  \textbf{Opis mogućih odstupanja:}
-			
-			\item[] \begin{packed_item}
-				
-				\item[4.a] Administrator odustaje od dodavanja novog turnira
-				\item[] \begin{packed_enum}
-					
-					\item Administrator odabire opciju "Odustani" u dijaloškom okviru za unos podataka o turniru
-					
-				\end{packed_enum}
-				\item[4.b] Uneseni podatci o turniru nisu važeći
-				\item[] \begin{packed_enum}
-					
-					\item Dijaloški okvir se ne zatvori, nego javlja grešku
-					
-				\end{packed_enum}
-			\end{packed_item}
-			
-		\end{packed_item}
-		
-	
-		\noindent \underbar{\textbf{UC29 - Brisanje turnira}}
-		\begin{packed_item}
-			
-			\item \textbf{Glavni sudionik: } Administrator
-			\item  \textbf{Cilj: } Obrisati turnir
-			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
-			\item  \textbf{Opis osnovnog tijeka:}
-			
-			\item[] \begin{packed_enum}
-				
-				\item Administrator se postavlja na listu zakazanih turnira
-				\item Administrator bira opciju "Obriši turnir" pored turnira kojeg želi izbrisati
-				\item Administrator odabire opciju "Da" u dijaloškom okviru za potvrdu
-			\end{packed_enum}
-			
-			\item  \textbf{Opis mogućih odstupanja:}
-			
-			\item[] \begin{packed_item}
-				
-				\item[3.a] Administrator odustaje od brisanja turnira
-				\item[] \begin{packed_enum}
-					
-					\item Administrator odabire opciju "Ne" u dijaloškom okviru za potvrdu
-					
-				\end{packed_enum}
-			\end{packed_item}
-			
-		\end{packed_item}
-	
-		\eject
-	
-		\noindent \underbar{\textbf{UC30 - Brisanje dnevne šahovske taktike}}
+		\noindent \underbar{\textbf{UC26 - Brisanje dnevne šahovske taktike}}
 		\begin{packed_item}
 			
 			\item \textbf{Glavni sudionik: } Administrator
