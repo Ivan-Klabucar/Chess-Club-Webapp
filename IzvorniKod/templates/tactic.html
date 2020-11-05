@@ -21,11 +21,41 @@
       </div>
     </div>
 </section>
+
+<div class="modal fade" id="wrongMoveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="exampleModalLongTitle">Krivi Potez!</h5>
+        </div>
+
+        <div class="modal-body d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zatvori</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pobjeda!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            Bravo, dobro si rješio taktiku!<br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js_import %} 
 
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
 
@@ -57,7 +87,9 @@ function onTacticSolved() {
     let end = new Date().getTime();
     let elapsed_seconds = (end - start) / 1000.0;
     console.log(elapsed_seconds);
-    alert(`bravo dobro si rjesio taktiku! I trebalo ti je ${elapsed_seconds} sekundi!`);
+    $('#elapsedSeconds').text(`${elapsed_seconds.toFixed(2)}`)
+    $('#victoryModal').modal()
+
 }
 
 function makeBlackMove () {
@@ -82,7 +114,7 @@ function onDrop (source, target) {
 
   if(move.san != white_moves[0]) {
     game.undo();
-    alert('ne radiš to!!');  
+    $('#wrongMoveModal').modal()
     return 'snapback';
   }
   white_moves.shift();
