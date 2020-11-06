@@ -23,6 +23,5 @@ class RegisterView(View):
             user = form.save()
             login(request, user)
             return render(request, 'homepage.html')
-        print(form.errors)
         context['form'] = form
         return render(request, 'registration/sign_up.html', context)
