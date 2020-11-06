@@ -227,7 +227,7 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightBlue} idČlana & INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idClana & INT & identifikacijski broj člana\\ \hline
 					\cellcolor{LightBlue} idTreninga & INT & identifikacijski broj treninga \\ \hline
 				
 				\end{longtabu}
@@ -243,9 +243,27 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightBlue} idČlana & INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idClana & INT & identifikacijski broj člana\\ \hline
 					\cellcolor{LightBlue} idTurnira & INT & identifikacijski broj turnira \\ \hline
 				
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Transakcija}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Transakcija}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTransakcije & INT & identifikacijski broj transakcije\\ \hline
+					\cellcolor{LightBlue} idClana & INT & identifikacijski broj člana\\ \hline
+					datumTransakcije & DATETIME & vrijeme i datum izvršavanja transakcije\\ \hline
+					iznosUplate & DECIMAL & uplaćen iznos\\ \hline
+
 				\end{longtabu}
 
 				
