@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import HomeView, DemoTacticView, sign_up, listaTaktika, obavijesti
+from .views import HomeView, DemoTacticView, sign_up, listaTaktika, novosti
 
 urlpatterns = [
     path('', HomeView.as_view()),
@@ -9,5 +9,5 @@ urlpatterns = [
     path('register', sign_up, name="sign-up"),
     path('dnevneTaktike', listaTaktika, name="listaTaktkika"),
     path('taktika', DemoTacticView.as_view()),
-    path('obavijesti', obavijesti, name="obavijesti")
+    path('novosti', novosti, name="novosti")
 ]

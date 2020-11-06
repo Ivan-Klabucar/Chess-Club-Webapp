@@ -43,9 +43,9 @@ def listaTaktika(request):
     }
     return render(request, 'listaDnevnihTaktika.html', context)
 
-def obavijesti(request):
+def novosti(request):
 	context = {
-		"listaObavijesti" : [
+		"listaNovosti" : [
 			{
                             "autor" : "Trener1",
                             "datum" : "10.12.2020",
@@ -66,7 +66,7 @@ def obavijesti(request):
 			}
                     ],
             }
-	return render(request, 'obavijesti.html', context)
+	return render(request, 'novosti.html', context)
 
 class DemoTacticView(View):
     def get(self, request):
