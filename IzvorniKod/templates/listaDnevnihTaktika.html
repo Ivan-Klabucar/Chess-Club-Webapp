@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container text-center">
+    <h1>Dnevne Taktike</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section id="about" class="pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            
+            <h2>Aktivne dnevne taktike</h2>
+            <div class="list-group mt-3 mb-4">
+            {% for taktikaIstaknuta in listaTaktikeIstaknute %}
+            <a class="bg-light list-group-item list-group-item-action" href="/taktika">
+                    Autor: {{ taktikaIstaknuta.autor }}<br/>
+                    Datum: {{ taktikaIstakunta.datum }}
+            </a>
+            {%endfor%}
+            </div>
+
+            
+            
+            <h2>Popis neaktivnih dnevnih taktika</h2>
+            <div class="list-group mt-3 mb-4">
+            {% for taktika in listaTaktika %}
+            <a class="bg-secondary text-white list-group-item list-group-item-action" href="/taktika">
+                Autor: {{ taktika.autor }}<br/>
+                Datum: {{ taktika.datum }}
+            </a>
+            {%endfor%}
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

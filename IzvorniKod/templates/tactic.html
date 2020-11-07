@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_import %}
+<link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="container text-center">
+    <h1>Dnevna Taktika</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<section id="tactic" class="pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <div id="myBoard" style="width: 500px"></div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<div class="modal fade" id="wrongMoveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="exampleModalLongTitle">Krivi Potez!</h5>
+        </div>
+
+        <div class="modal-body d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zatvori</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pobjeda!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            Bravo, dobro si rješio taktiku!<br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_import %} 
+
+<script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+
+{{ tactic_data|json_script:"hello-data" }}
+<script>
+// --- Begin Example JS --------------------------------------------------------
+// NOTE: this example uses the chess.js library:
+// https://github.com/jhlywa/chess.js
+
+var board = null
+var game = new Chess()
+
+const tactic_data = JSON.parse(document.getElementById('hello-data').textContent);
+let black_moves = tactic_data.black_moves;
+let white_moves = tactic_data.white_moves;
+let start = new Date().getTime();
+
+function onDragStart (source, piece, position, orientation) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false
+
+  // only pick up pieces for White
+  if (piece.search(/^b/) !== -1) return false
+}
+
+function onTacticSolved() {
+    game.clear();
+    board.clear();
+    let end = new Date().getTime();
+    let elapsed_seconds = (end - start) / 1000.0;
+    console.log(elapsed_seconds);
+    $('#elapsedSeconds').text(`${elapsed_seconds.toFixed(2)}`)
+    $('#victoryModal').modal()
+
+}
+
+function makeBlackMove () {
+  // game over
+  if (black_moves.length < 1) return
+
+  game.move(black_moves[0])
+  black_moves.shift();
+  board.position(game.fen())
+}
+
+function onDrop (source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  })
+
+  // illegal move
+  if (move === null) return 'snapback'
+
+  if(move.san != white_moves[0]) {
+    game.undo();
+    $('#wrongMoveModal').modal()
+    return 'snapback';
+  }
+  white_moves.shift();
+  if(white_moves.length < 1) {
+    window.setTimeout(onTacticSolved, 250);
+    return;
+  }
+
+  // make random legal move for black
+  window.setTimeout(makeBlackMove, 250)
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen())
+}
+
+var config = {
+  draggable: true,
+  position: tactic_data.start_position,
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+}
+board = Chessboard('myBoard', config)
+// --- End Example JS ----------------------------------------------------------
+</script>
+{% endblock %}
