@@ -1,15 +1,17 @@
 \chapter{Arhitektura i dizajn sustava}
-		\textit{ Izbor odgovarajuće arhitekture programske poruke jedan je od najbitnijih koraka u oblikovanju sustava jer ona predstavlja poveznicu između zahtjeva na sustav i same implementacije sustava. Dobra arhitektura povlači dobru fleksibilnost sustava, jednostavnu mogućnost nadogradnje i jeftino održavanje.}
+		 Izbor odgovarajuće arhitekture programske poruke jedan je od najbitnijih koraka u oblikovanju sustava jer ona predstavlja poveznicu između zahtjeva na sustav i same implementacije sustava. Dobra arhitektura povlači dobru fleksibilnost sustava, jednostavnu mogućnost nadogradnje i jeftino održavanje.
 		
-		\textit{ S obzirom da je zadatak ovog projekta napraviti aplikaciju za šahovski klub, logičan izbor je web aplikacija. Primarni razlog je to što web aplikacija ne ovisi o platformi, već radi na svakom sustavu koji ima web preglednik što znatno smanjuje vrijeme i troškove potrebne za razvoj za više platformi}
+
+\noindent S obzirom da je zadatak ovog projekta napraviti aplikaciju za šahovski klub, logičan izbor je web aplikacija. Primarni razlog je to što web aplikacija ne ovisi o platformi, već radi na svakom sustavu koji ima web preglednik što znatno smanjuje vrijeme i troškove potrebne za razvoj za više platformi
 		
-		\textit{ Radni okvir koji smo odabrali za arhitekturu je Django (pisan u i za jezik Python). S njime smo arhitekturu sustava odlučili temeljiti na MVT (Model-View-Template) konceptu kojeg on nativno podržava. Jedina bitna razlika između njega i poznatog MVC (Model-View-Controller) koncepta je to što u Django sam po sebi sređuje "controller" dio (programski kod koji kontrolira interakciju između modela i viewa) i daje nam na raspolaganje Template.}
+
+\noindent Radni okvir koji smo odabrali za arhitekturu je Django (pisan u i za jezik Python). S njime smo arhitekturu sustava odlučili temeljiti na MVT (Model-View-Template) konceptu kojeg on nativno podržava. Jedina bitna razlika između njega i poznatog MVC (Model-View-Controller) koncepta je to što u Django sam po sebi sređuje "controller" dio (programski kod koji kontrolira interakciju između modela i viewa) i daje nam na raspolaganje Template.
 		
-		\textit{ Dakle aplikacija se sastoji od 3 dijela: }
+		Dakle aplikacija se sastoji od 3 dijela:
 		\begin{itemize}
-			\item 	\textit{Model - Sređuje apstrakciju podataka, služi kao sučelje za podatke spremljene u bazu i dopušta upravljanje njima bez prevelikog razumijevanja kompleksnosti same baze }
-			\item 	\textit{View - funkcionalnosti slične controlleru u MVC konceptu. Sređuje svu logiku koja se treba prikazati na templateu i služi kao "most" između modela i templatea}
-			\item 	\textit{Template - funkcionalnosti slične Viewu u MVC konceptu. Služi kao sloj prikaza sadržaja i zadužen je za to kako i što će biti prikazano korisniku. Specifično za Django, Template je vrsta HTML datoteke koja može koristiti Django Template Language (DTL) što nam znatno olakšava komunikaciju između frontenda i backenda aplikacije.}		
+			\item 	Model - Sređuje apstrakciju podataka, služi kao sučelje za podatke spremljene u bazu i dopušta upravljanje njima bez prevelikog razumijevanja kompleksnosti same baze 
+			\item 	View - funkcionalnosti slične controlleru u MVC konceptu. Sređuje svu logiku koja se treba prikazati na templateu i služi kao "most" između modela i templatea
+			\item 	Template - funkcionalnosti slične Viewu u MVC konceptu. Služi kao sloj prikaza sadržaja i zadužen je za to kako i što će biti prikazano korisniku. Specifično za Django, Template je vrsta HTML datoteke koja može koristiti Django Template Language (DTL) što nam znatno olakšava komunikaciju između frontenda i backenda aplikacije.	
 		\end{itemize}
 		
 
@@ -21,31 +23,6 @@
 		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
 		
 			\subsection{Opis tablica}
-			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
-				
-				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
-					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
-					\endfirsthead
-					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
-					\endhead
-					
-					\hline 
-					\endlastfoot
-					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam 	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-					
-					
-				\end{longtabu}
-			
-			\subsection{Dijagram baze podataka}
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
