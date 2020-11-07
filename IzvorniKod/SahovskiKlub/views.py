@@ -26,51 +26,53 @@ class RegisterView(View):
         context['form'] = form
         return render(request, 'registration/sign_up.html', context)
 
-def listaTaktika(request):
-    context = {
-        "listaTaktika" : [
-            {
-                "autor" : "Marko",
-                "datum" : "17.8.2019"
-            },
-            {
-                "autor" : "Ivo",
-                "datum" : "19.10.2020"
-            }
-        ],
-        "listaTaktikeIstaknute" : [
-            {
-                "autor" : "Bruno",
-                "datum" : "19.10.2021"
-            }
-        ]
-    }
-    return render(request, 'listaDnevnihTaktika.html', context)
+class ListaTaktikaView(View):
+    def get(self, request):
+        context = {
+            "listaTaktika" : [
+                {
+                    "autor" : "Marko",
+                    "datum" : "17.8.2019"
+                },
+                {
+                    "autor" : "Ivo",
+                    "datum" : "19.10.2020"
+                }
+            ],
+            "listaTaktikeIstaknute" : [
+                {
+                    "autor" : "Bruno",
+                    "datum" : "19.10.2021"
+                }
+            ]
+        }
+        return render(request, 'listaDnevnihTaktika.html', context)
 
-def novosti(request):
-	context = {
-		"listaNovosti" : [
-			{
-                            "autor" : "Trener1",
-                            "datum" : "10.12.2020",
-                            "naslov": "Klub mijenja lokaciju",
-                            "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
-			},
-			{
-                            "autor" : "Trener2",
-                            "datum" : "5.12.2020",
-                            "naslov": "Otkazani treninzi Trenera2",
-                            "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
-			},
-			{
-                            "autor" : "Admin",
-                            "datum" : "1.12.2020",
-                            "naslov": "Uplata članarine",
-                            "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
-			}
-                    ],
-            }
-	return render(request, 'novosti.html', context)
+class NovostiView(View):
+    def get(self, request):
+        context = {
+            "listaNovosti" : [
+                {
+                                "autor" : "Trener1",
+                                "datum" : "10.12.2020",
+                                "naslov": "Klub mijenja lokaciju",
+                                "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+                },
+                {
+                                "autor" : "Trener2",
+                                "datum" : "5.12.2020",
+                                "naslov": "Otkazani treninzi Trenera2",
+                                "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+                },
+                {
+                                "autor" : "Admin",
+                                "datum" : "1.12.2020",
+                                "naslov": "Uplata članarine",
+                                "tekst" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex metus, dignissim eget mi nec, ullamcorper auctor diam. Donec tincidunt massa quis risus vulputate sollicitudin. Curabitur iaculis mattis tempor. Suspendisse finibus ante sit amet finibus sodales. Proin porttitor fringilla tellus vitae dignissim. Morbi eget massa metus. Proin mollis tellus quis dignissim pulvinar. Nam suscipit nisi mattis nisi euismod consectetur. Sed nec nisl placerat, imperdiet nunc a, ultricies mi. Morbi eget fermentum neque. Quisque et erat ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+                }
+                        ],
+                }
+        return render(request, 'novosti.html', context)
 
 class DemoTacticView(View):
     def get(self, request):
