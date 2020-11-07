@@ -890,10 +890,15 @@
 	
 		
 	
-				\subsubsection{Dijagrami obrazaca uporabe}
-					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
-				\eject		
+				\subsubsection{Dijagrami obrazaca uporabe}		
+				
+				\makeatletter
+                                                                        \newcommand*{\centerfloat}{%
+                                                                          \parindent \z@
+                                                                          \leftskip \z@ \@plus 1fil \@minus \textwidth
+                                                                          \rightskip\leftskip
+                                                                          \parfillskip \z@skip}
+                                                                   \makeatother
 				
 								
 				
@@ -929,19 +934,12 @@
 				Trener šalje zahtjev web aplikaciji za stvaranje novog treninga. Web aplikacija dohvaća iz baze podataka sve ostale treninge tog trenera i provjerava da se novi trening ne preklapa ni sa jednim postojećim treningom. Ako uistinu ne postoji preklapanje, novi trening se zapisuje u bazu podataka te se treneru šalje obavijest o uspjehu kreiranja novog treninga. Ukoliko postoji preklapanje s već postojećim treningom, treneru web aplikacija javlja informacije o preklapanju i nemogućnosti stvaranja zatraženog treninga.
 				\eject
 				
-				\makeatletter
-                                                                        \newcommand*{\centerfloat}{%
-                                                                          \parindent \z@
-                                                                          \leftskip \z@ \@plus 1fil \@minus \textwidth
-                                                                          \rightskip\leftskip
-                                                                          \parfillskip \z@skip}
-                                                                   \makeatother
 				
 				\begin{figure}[H]
 					\centerfloat
         					\includegraphics[scale=0.48]{dijagrami/StvaranjeNovogTreninga.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
-        					\label{fig:UC$<$broj obrasca$>$}
+        					\caption{Sekvencijski dijagram za UC9}
+        					\label{fig:UC9}
 				\end{figure}
 				
 				\eject
@@ -954,35 +952,36 @@
 				\begin{figure}[H]
 					\centerfloat
         					\includegraphics[scale=0.40]{dijagrami/RevidiranjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
-        					\label{fig:UC$<$broj obrasca$>$}
+        					\caption{Sekvencijski dijagram za UC15}
+        					\label{fig:UC15}
 				\end{figure}
 				
 				\eject
 	
-				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Objava taktike}\\
+				\textbf{Obrazac uporabe UC6 - Objava taktike}\\
 				\\Trener odabire kreaciju (objavu) nove taktike te mu web aplikacija vraća prikaz prazne ploče sa figuricama sa strane. Trener zatim kreće sa postavljanjem početnog stanja ploče. Mišem može povući željene figurice na njihovo mjesto te mu aplikacija to prikazuje. Postupak se ponavlja sve dok trener ne odluči da je početno stanje pripremljeno. To se javlja aplikaciji te se kreće u stanje rješavanja taktike. Trener odabire točne poteze bijelog i crnog igrača te se ti potezi prikazuju. Nakon što je unesen posljednji potez, trener zaključava unos poteza te objavljuje taktiku. Aplikacija šalje bazi podataka zahtjev za spremanjem taktike te prikazuje treneru poruku da je taktika objavljena.
 			
 
 				
 				\begin{figure}[H]
 					\centerfloat
-        					\includegraphics[scale=0.30]{dijagrami/ObjavaTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
-        					\label{fig:UC$<$broj obrasca$>$}
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.90]{dijagrami/ObjavaTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Sekvencijski dijagram za UC6}
+        					\label{fig:UC6}
 				\end{figure}
 				
 				\eject
 				
-				\textbf{Obrazac uporabe UC$<$broj obrasca$>$ - Riješavanje taktike}\\
+				\textbf{Obrazac uporabe UC3 - Riješavanje taktike}\\
 				\\Korisnik otvara taktiku koja se dohvaća iz baze podataka. Korisnik zatim rješava tu taktiku te se pokreće tajmer. U slučaju krivog poteza, korisnik je obaviješten. Ako korisnik smatra da je taktika pogrešna, može spremiti svoju taktiku koja se šalje u bazu podataka. Nakon točnog rješavanja taktike, aplikacija računa postignute bodove na temelju vremena rješavanja i težine taktike. Bodovi zajedno sa korisnikovim ID-om se spremaju u bazu podataka.
-				
+				\eject
 				
 				\begin{figure}[H]
 					\centerfloat
 					\includegraphics[scale=0.30]{dijagrami/RijesavanjeTaktike.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-					\caption{Sekvencijski dijagram za UC$<$broj obrasca$>$}
-					\label{fig:UC$<$broj obrasca$>$}
+					\caption{Sekvencijski dijagram za UC3}
+					\label{fig:UC3}
 				\end{figure}
 				
 				\eject
