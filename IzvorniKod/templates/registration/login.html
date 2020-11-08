@@ -10,6 +10,11 @@
     <div class="h-25 border border-primary rounded" style="padding: 4rem;box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3)">
         <form method="post">
             {% csrf_token %}
+
+            {% if form.errors %}
+                <p style="color: red"> Username or password not correct</p>
+            {% endif %}
+
             <label for="id_username" class="font-weight-light" style="font-size: 25px">
                 Username:
             </label>
