@@ -1,65 +1,353 @@
 \chapter{Arhitektura i dizajn sustava}
-		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
-	
+		 Izbor odgovarajuće arhitekture programske poruke jedan je od najbitnijih koraka u oblikovanju sustava jer ona predstavlja poveznicu između zahtjeva na sustav i same implementacije sustava. Dobra arhitektura povlači dobru fleksibilnost sustava, jednostavnu mogućnost nadogradnje i jeftino održavanje.
 		
 
+\noindent S obzirom na to da je zadatak ovog projekta napraviti aplikaciju za šahovski klub, logičan izbor je web aplikacija. Primarni razlog je to što web aplikacija ne ovisi o platformi, već radi na svakom sustavu koji ima web preglednik što znatno smanjuje vrijeme i troškove potrebne za razvoj za više platformi
+		
+
+\noindent Radni okvir koji smo odabrali za arhitekturu je Django (pisan u i za jezik Python). S njime smo arhitekturu sustava odlučili temeljiti na MVT (Model-View-Template) konceptu kojeg on nativno podržava. Jedina bitna razlika između njega i poznatog MVC (Model-View-Controller) koncepta je to što u Django sam po sebi sređuje "controller" dio (programski kod koji kontrolira interakciju između modela i viewa) i daje nam na raspolaganje Template.
+		
+		Dakle aplikacija se sastoji od 3 dijela:
+		\begin{itemize}
+			\item 	Model - Sređuje apstrakciju podataka, služi kao sučelje za podatke spremljene u bazu i dopušta upravljanje njima bez prevelikog razumijevanja kompleksnosti same baze 
+			\item 	View - funkcionalnosti slične controlleru u MVC konceptu. Sređuje svu logiku koja se treba prikazati na templateu i služi kao "most" između modela i templatea
+			\item 	Template - funkcionalnosti slične Viewu u MVC konceptu. Služi kao sloj prikaza sadržaja i zadužen je za to kako i što će biti prikazano korisniku. Specifično za Django, Template je vrsta HTML datoteke koja može koristiti Django Template Language (DTL) što nam znatno olakšava komunikaciju između frontenda i backenda aplikacije.	
+		\end{itemize}
 		
 
 				
 		\section{Baza podataka}
+		
+		Za sustav baza podataka za ovaj projekt smo odabrali PostgreSQL. 
+		
+		PostgreSQL je objektno-relacijski sustav upravljanja bazama podataka (ORDBMS) zasnovan na POSTGRES-u, inačica 4.2, razvijen na Kalifornijskom sveučilištu na Odjelu za računalne znanosti Berkeley. POSTGRES je pionir mnogih koncepata koji su tek kasnije postali dostupni u nekim komercijalnim sustavima baza podataka.
+		
+		PostgreSQL je "open-source" potomak ovog izvornog Berkeley koda. Podržava velik dio SQL standarda i nudi brojne moderne značajke poput:
+		\begin{packed_item}
+			\item složenih upita,
+			\item stranih ključeva,
+			\item okidača,
+			\item obnovljivih pogleda,
+			\item transakcijski integritet te
+			\item multiverzijski protokol kontrole istodobnog
+			pristupa
+		\end{packed_item}
+		
+		Također, korisnik može proširiti PostgreSQL na mnogo načina, na primjer dodavanjem novih:
+		\begin{packed_item}
+			\item vrsta podataka,
+			\item funkcija,
+			\item operatora,
+			\item agregatnih funkcija,
+			\item indeksnih metoda te
+			\item proceduralnih jezika.
+		\end{packed_item}
+		
+		
+		A zbog liberalne licence, PostgreSQL može koristiti, mijenjati i distribuirati bilo tko u bilo koju svrhu, bilo privatnu, komercijalnu ili akademsku.\footnote{\url{https://www.postgresql.org/docs/current/intro-whatis.html}}
+		
+		U relacijskim bazama podataka, osnovne gradivne jedinice su tablice. Tablice koje grade bazu podataka ovog projekta su:
+		\begin{packed_item}
+			\item taktika
+			\item rjesenjeTaktika
+			\item dojavaPogreske
+			\item view - rangLista
+			\item Korisnik
+			\item Grupa
+			\item Novost
+			\item Trening
+			\item turnir
+			\item PrijavaTrening
+			\item PrijavaTurnir
+			\item Transakcija
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		\end{packed_item}
+		
+		\eject
 		
 			\subsection{Opis tablica}
+			Primarni ključevi tablice označeni su sa slovom 'P', a strani ključevi sa slovom 'F'.\\
 			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
-				
+			\noindent Entitet \textbf{Taktika} u odnosu je \textit{One to Many} s entitetima \textbf{Rješenje taktika} i \textbf{Dojava pogreške}.
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{taktika}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{taktika}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam 	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\cellcolor{LightGreen}idTaktika P& INT	   &  identifikacijski broj taktike	\\ \hline
+					createdAt	& TIMESTAMP &   vrijeme stvaranja taktike, služi za kronološko sortiranje taktika	\\ \hline 
+					\cellcolor{LightBlue}idUser F& INT & identifikator trenera ili admina koji je stvorio taktiku  \\ \hline 
+					initConfig & VARCHAR (100)	&  string koji opisuje inicijalno stanje šahovske ploče	\\ \hline 
+					movesWhite & VARCHAR (3000) & string koji opisuje poteze bijelih figurica \\ \hline
+					movesBlack & VARCHAR (3000) & string koji opisuje poteze crnih figurica \\ \hline
+					tezina & DECIMAL & težina taktike, koristi se u računanju bodova, u rasponu od 1 do 3 \\ \hline
+					brojGlasova & INT & broj korisnika koji su glasali za neku težinu taktike \\ \hline
+
+				\end{longtabu}
+				
+				\noindent Entitet \textbf{Rješenje taktika} u odnosu je \textit{One to One} s entitetnom \textbf{Taktika}, te u odnosu  \textit{One to One} s entitetnom \textbf{Korisnik}.
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
+					\hline \multicolumn{3}{|c|}{\textbf{rjesenjeTaktika}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{rjesenjeTaktika}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idTaktika PF& INT	   &  identifikacijski broj taktike koja je rješena, foreign key	\\ \hline
+					\cellcolor{LightGreen}idUser PF& INT & identifikator člana koji je riješio taktiku, foreign key  \\ \hline 
+					vrijeme & DECIMAL & vrijeme rješavanja taktike u minutama \\ \hline
+					
+				\end{longtabu}
+				\eject
+				
+				\noindent Entitet \textbf{Dojava pogreške} u odnosu je \textit{One to One} s entitetnom \textbf{Taktika}, te u odnosu  \textit{One to One} s entitetnom \textbf{Korisnik} koji je prijavio taktiku. Također je u odnosu \textit{One to One} s entitetnom \textbf{Korisnik} koji predstavlja trenera koji je zadužen za revidiranje dojave.
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{dojavaPogreske}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{dojavaPogreske}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idDojava P& INT	   &  identifikacijski broj dojave o pogrešci	\\ \hline
+					\cellcolor{LightBlue}idTaktika F& INT	   &  identifikacijski broj prijavljene taktike	\\ \hline
+					\cellcolor{LightBlue}idUserDojavio F& INT & identifikator člana koji je dojavio pogrešku na taktiku  \\ \hline 
+					\cellcolor{LightBlue}idUserRevidira F& INT & identifikator trenera koji revidira dojavu  \\ \hline 
+					prihvacena & BOOLEAN	&  je li dojava prihvaćena ili odbačena, NULL znači da čeka na revidiranje	\\ \hline 
+					predlozeniTijek & VARCHAR (6000) & string koji opisuje poteze koje je predložio član koji je dojavio pogrešku \\ \hline
+					opisPoteza & TEXT & opis poteza koje je član unio \\ \hline
+					
+				\end{longtabu}
+				
+				\noindent Entiteti u tablici \textbf{rangLista} u odnosu su \textit{One to One} s entitetnom \textbf{Korisnik}.
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{view - rangLista}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{view - rangLista}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}idUser PF& INT	   &  identifikacijski broj člana	\\ \hline
+					username & VARCHAR	   &  korisničko ime člana	\\ \hline
+					bodovi & INT & broj bodova koje je član sveukupno osvojio \\ \hline 
 					
 				\end{longtabu}
 			
+				\noindent Entitet \textbf{Korisnik} u odnosu je \textit{One to Many} s entitetima \textbf{Rješenje taktika, Grupa} i \textbf{Dojava pogreške}, te u odnosu \textit{One to One} s entitetima iz tablice \textbf{rangLista}.
+				\begin{longtabu} to \textwidth {|X[6, l]|X[8, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idUser P& INT &  identifikacijski broj člana \\ \hline
+					\cellcolor{LightBlue} idGrupa F& INT & identifikacijski broj grupe \\ \hline
+					username & VARCHAR (20) &  korisničko ime člana \\ \hline 
+					password & VARCHAR (20) & lozinka člana \\ \hline 
+					email & VARCHAR (20) & mail adresa člana \\ \hline
+					ime & VARCHAR (20) & ime člana \\ \hline
+					prezime & VARCHAR (20) & prezime člana \\ \hline
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Grupa}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Grupa}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idGrupa P& INT & identifikacijski broj grupe \\ \hline
+					imeGrupe & VARCHAR (20) &  ime grupe \\ \hline
+				
+				\end{longtabu}
+				
+				\noindent Entitet \textbf{Novost} u odnosu je \textit{Many to One} s entitetom \textbf{Korisnik} 
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Novost}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Novost}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idUser PF& INT & identifikacijski broj autora \\ \hline
+					\cellcolor{LightGreen} vrijemeObjavljivanja P& DATETIME & vrijeme i datum objavljivanja \\ \hline
+					naslov & VARCHAR (50) & naslov novosti\\ \hline
+					tekst & TEXT & tekst novosti\\ \hline
+				
+				\end{longtabu}
+
+				\noindent Entitet \textbf{Trening} u odnosu je \textit{One to Many} s entitetom \textbf{PrijavaTrening}, te u odnosu \textit{Many to One}  s entitetom \textbf{Korisnik}.
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Trening}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTreninga P& INT & identifikacijski broj treninga\\ \hline
+					\cellcolor{LightBlue} idOrganizatora F& INT & identifikacijski broj organizatora treninga \\ \hline
+					vrijemePocetka & DATETIME & vrijeme i datum početka treninga\\ \hline
+					vrijemeZavrsetka & DATETIME & vrijeme i datum završetka treninga\\ \hline
+					opisTreninga & TEXT & opisan sadržaj treninga\\ \hline
+				
+				\end{longtabu}
+				
+				\noindent Entitet \textbf{Turnir} u odnosu je \textit{One to Many} s entitetom \textbf{PrijavaTurnir}.
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Turnir}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Turnir}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTurnira P& INT & identifikacijski broj turnira\\ \hline
+					formatTurnira & TEXT & opisan format turnira \\ \hline
+					vrijemePocetka & DATETIME & vrijeme i datum početka turnira\\ \hline
+					vrijemeZavrsetka & DATETIME & vrijeme i datum završetka turnira\\ \hline
+					brojSudionika & INT & maksimalan broj sudionika na turniru\\ \hline
+				
+				\end{longtabu}
+
+				\noindent Entitet \textbf{PrijavaTrening} u odnosu je \textit{Many to One} s entitetom \textbf{Trening}, te u odnosu \textit{One to One}  s entitetom \textbf{Korisnik}.
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTrening}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTrening}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} idClana PF& INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idTreninga PF & INT & identifikacijski broj treninga \\ \hline
+				
+				\end{longtabu}
+
+				\noindent Entitet \textbf{PrijavaTurnir} u odnosu je \textit{Many to One} s entitetom \textbf{Turnir}, te u odnosu \textit{One to One}  s entitetom \textbf{Korisnik}.
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTurnir}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{PrijavaTurnir}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} idClana PF& INT & identifikacijski broj člana\\ \hline
+					\cellcolor{LightBlue} idTurnira PF& INT & identifikacijski broj turnira \\ \hline
+				
+				\end{longtabu}
+	
+				\noindent Entitet \textbf{Transakcija} u odnosu je \textit{Many to One} s entitetom \textbf{Korisnik}.
+
+				\begin{longtabu} to \textwidth {|X[10, l]|X[8, l]|X[20, l]|}
+				
+					\hline \multicolumn{3}{|c|}{\textbf{Transakcija}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Transakcija}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen} idTransakcije P& INT & identifikacijski broj transakcije\\ \hline
+					\cellcolor{LightBlue} idClana F& INT & identifikacijski broj člana\\ \hline
+					datumTransakcije & DATETIME & vrijeme i datum izvršavanja transakcije\\ \hline
+					iznosUplate & DECIMAL & uplaćen iznos\\ \hline
+
+				\end{longtabu}
+
+				
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+			
+			\begin{figure}[H]
+					\centerfloat
+        					\includegraphics[scale=0.60]{dijagrami/dijagramBaze.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{E-R dijagram baze podataka}
+        					\label{fig:DBdiagram}
+				\end{figure}
 			
 			\eject
 			
 			
 		\section{Dijagram razreda}
-		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
+
+			\text{Dijagram modela potrebnih za funkcionalnosti autentikacije.}
+			\begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.45]{dijagrami/ModelsClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda modela generične funkcionalnosti}
+        					\label{fig:DijagramRazredaModel}
+			\end{figure}
 			
-			\textbf{\textit{dio 1. revizije}}\\
+			\begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.65]{dijagrami/ViewClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda view-ova generične funkcionalnosti}
+        					\label{fig:DijagramRazredaView}
+			\end{figure}
 			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
+			\eject
+			
+			\begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.35]{dijagrami/Classdiagram.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Idejni dijagram razreda}
+        					\label{fig:idejniDijagramRazreda}
+				\end{figure}
+
 			
 			\textbf{\textit{dio 2. revizije}}\\			
 			
