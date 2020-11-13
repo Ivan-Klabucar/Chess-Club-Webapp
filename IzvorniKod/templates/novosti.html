@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Novosti</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	{% for novost in listaNovosti %}
+		{% if forloop.counter|divisibleby:"2" %}
+			<section id="novost" class="bg-light">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 mx-auto">
+							<h2>{{ novost.naslov }}</h2>
+							<p class="lead">{{ novost.tekst }}</p>
+							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		{% else %}
+			<section id="novost">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 mx-auto">
+							<h2>{{ novost.naslov }}</h2>
+							<p class="lead">{{ novost.tekst }}</p>
+							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		{% endif %}
+	{%endfor%}
+{% endblock %}
