@@ -31,7 +31,7 @@
 					\item prijaviti se u aplikaciju putem korisničkog imena i lozinke
 					\item odjaviti se iz aplikacije
 					\item postavljati dnevne šahovske taktike
-					\item revidirati prijavljenje pogrešne taktike
+					\item revidirati prijavljene pogrešne taktike
 					\item slagati raspored vlastitih treninga
 					\item organizirati turnire
 					\item vidjeti rang liste članova
@@ -119,10 +119,7 @@
 				
 			\subsection{Obrasci uporabe}
 				
-				\textbf{\textit{dio 1. revizije}}
-				
 				\subsubsection{Opis obrazaca uporabe}
-					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
 					\noindent \underbar{\textbf{UC1 - Registracija}}
 					\begin{packed_item}
@@ -156,7 +153,6 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\eject
 
 					\noindent \underbar{\textbf{UC2 - Pregled dnevnih taktika}}
 					\begin{packed_item}
@@ -175,6 +171,7 @@
 							
 						\end{packed_enum}
 					\end{packed_item}
+			
 
 
 					\noindent \underbar{\textbf{UC3 - Rješavanje dnevne taktike}}
@@ -183,7 +180,7 @@
 						\item \textbf{Glavni sudionik: } Neregistrirani korisnik, član, administrator
 						\item  \textbf{Cilj: } Uspješno riješiti odabranu dnevnu taktiku
 						\item  \textbf{Sudionici: }-
-						\item  \textbf{Preduvjet: }Korisnik je prethodno odabrao taktiku
+						\item  \textbf{Preduvjet: }-
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -226,7 +223,6 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\eject
 
 					\noindent \underbar{\textbf{UC4 - Pregled rang liste}}
 					\begin{packed_item}
@@ -244,6 +240,7 @@
 							
 						\end{packed_enum}
 					\end{packed_item}
+				
 					
 					\noindent \underbar{\textbf{UC5 - Odjava}}
 					\begin{packed_item}
@@ -251,7 +248,7 @@
 						\item \textbf{Glavni sudionik: } Administrator, član, trener
 						\item  \textbf{Cilj: } Okončati aktivnu sjednicu
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Prijava u sustav
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -262,7 +259,8 @@
 						\end{packed_enum}
 					\end{packed_item}
 				
-					\eject
+				\vspace{\baselineskip}
+				
 					
 					\noindent \underbar{\textbf{UC6 - Objava dnevne šahovske taktike}}
 					\begin{packed_item}
@@ -277,8 +275,8 @@
 	
 							\item Otvaranje stranice za unos nove taktike
 							\item Trener unosi podatke o taktici poput imena, težine itd.
-							\item Trener namješta inicijalnu kofiguraciju ploče na interaktivnoj simulaciji
-							\item Trener potvrđuje inicijalnu kofiguraciju
+							\item Trener namješta inicijalnu konfiguraciju ploče na interaktivnoj simulaciji
+							\item Trener potvrđuje inicijalnu konfiguraciju
 							\item Trener naizmjence pomiče crne i bijele šahovske figurice i tako unosi poteze taktike
 							\item Trener potvrđuje korektan unos poteza i objavljuje dnevnu taktiku
 							
@@ -323,7 +321,6 @@
 						\end{packed_enum}
 					\end{packed_item}
 					
-					\eject
 					
 					\noindent \underbar{\textbf{UC8 - Brisanje treninga}}
 					\begin{packed_item}
@@ -331,7 +328,7 @@
 						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Obrisati postojeći trening
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -363,7 +360,7 @@
 						\item \textbf{Glavni sudionik: }Trener, Administrator
 						\item  \textbf{Cilj: } Stvoriti novi trening
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda vlastitih treninga
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -401,7 +398,6 @@
 						\end{packed_item}
 					\end{packed_item}
 				
-					\eject
 					
 					\noindent \underbar{\textbf{UC10 - Pregled turnira}}
 					\begin{packed_item}
@@ -422,10 +418,10 @@
 					\noindent \underbar{\textbf{UC11 - Brisanje turnira}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener, Administrator
+						\item \textbf{Glavni sudionik: }Trener, administrator
 						\item  \textbf{Cilj: } Obrisati postojeći turnir čiji je organizator prijavljeni korisnik
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda turnira, te je vlasnik turnira odabranog za brisanje
+						\item  \textbf{Preduvjet: } Ako je korisnik prijavljen kao trener, može brisati samo svoje turnire
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -450,12 +446,11 @@
 						\end{packed_item}
 					\end{packed_item}
 				
-					\eject
 					
 					\noindent \underbar{\textbf{UC12 - Stvaranje novog turnira}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Trener, Administrator
+						\item \textbf{Glavni sudionik: }Trener, administrator
 						\item  \textbf{Cilj: } Stvoriti novi turnir
 						\item  \textbf{Sudionici: } Baza podataka
 						\item  \textbf{Preduvjet: } Korisnik se nalazi na stranici pregleda turnira
@@ -512,7 +507,6 @@
 						
 					\end{packed_item}
 				
-					\eject
 					
 					\noindent \underbar{\textbf{UC14 - Objava novosti}}
 					\begin{packed_item}
@@ -520,7 +514,7 @@
 						\item \textbf{Glavni sudionik: }Trener, administrator
 						\item  \textbf{Cilj: } Objaviti novost na stranici novosti
 						\item  \textbf{Sudionici: } Baza podataka
-						\item  \textbf{Preduvjet: } Trener se nalazi na stranici novosti
+						\item  \textbf{Preduvjet: } -
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -558,7 +552,7 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item otvara se pregled sa detaljima o dojavi pogreške na taktici
+							\item otvara se pregled s detaljima o dojavi pogreške na taktici
 							\item Trener klikom na gumb potvrđuje da je dojava o pogrešci valjana
 							\item taktika u pitanju automatski se revidira te se ažuriraju i rang liste članova
 							
@@ -571,7 +565,7 @@
 							\item[2.a] Odbijanje dojave
 							\item[] \begin{packed_enum}
 								
-								\item pritisakom na gumb 'odbaci' dojava se zanemaruje
+								\item pritiskom na gumb 'odbaci' dojava se zanemaruje
 								
 							\end{packed_enum}
 							
@@ -579,7 +573,6 @@
 						\end{packed_item}
 					\end{packed_item}
 				
-					\eject
 					
 					\noindent \underbar{\textbf{UC16 - Pregled profila}}
 					\begin{packed_item}
@@ -630,7 +623,6 @@
 						\end{packed_item}
 					\end{packed_item}
 				
-					\eject
 				
 					\noindent \underbar{\textbf{UC18 - Uplata članarine}}
 				\begin{packed_item}
@@ -638,7 +630,7 @@
 					\item \textbf{Glavni sudionik: }Član
 					\item  \textbf{Cilj: } Uplatiti članarinu
 					\item  \textbf{Sudionici: } Baza podataka
-					\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun
+					\item  \textbf{Preduvjet: } -
 					\item  \textbf{Opis osnovnog tijeka:}
 					
 					\item[] \begin{packed_enum}
@@ -670,7 +662,7 @@
 				\item \textbf{Glavni sudionik: } Član
 				\item  \textbf{Cilj: } Pregledati treninge na koje se može prijaviti
 				\item  \textbf{Sudionici: } Baza podataka
-				\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+				\item  \textbf{Preduvjet: } Član ima tekuću članarinu
 				\item  \textbf{Opis osnovnog tijeka:}
 				
 				\item[] \begin{packed_enum}
@@ -681,7 +673,6 @@
 				\end{packed_enum}
 			\end{packed_item}
 		
-			\eject
 			
 			\noindent \underbar{\textbf{UC20 - Prijava na trening}}
 			\begin{packed_item}
@@ -689,7 +680,7 @@
 				\item \textbf{Glavni sudionik: } Član
 				\item  \textbf{Cilj: } Prijaviti se na trening kod odabranog trenera
 				\item  \textbf{Sudionici: } Baza podataka
-				\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+				\item  \textbf{Preduvjet: } Član ima tekuću članarinu
 				\item  \textbf{Opis osnovnog tijeka:}
 				
 				\item[] \begin{packed_enum}
@@ -709,7 +700,7 @@
 			\item \textbf{Glavni sudionik: } Član
 			\item  \textbf{Cilj: } Prijaviti se na turnir
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Član je prijavljen u korisnički račun i ima tekuću članarinu
+			\item  \textbf{Preduvjet: } Član ima tekuću članarinu
 			\item  \textbf{Opis osnovnog tijeka:}
 			
 			\item[] \begin{packed_enum}
@@ -735,15 +726,14 @@
 			\end{packed_item}
 		\end{packed_item}
 		
-		\eject
 		
 		\noindent \underbar{\textbf{UC22 - Brisanje novosti}}
 		\begin{packed_item}
 		
 			\item \textbf{Glavni sudionik: } Administrator
-			\item  \textbf{Cilj: } Obrisati novost s stranice novosti
+			\item  \textbf{Cilj: } Obrisati novost sa stranice novosti
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Preduvjet: } -
 			\item  \textbf{Opis osnovnog tijeka:}
 		
 			\item[] \begin{packed_enum}
@@ -773,7 +763,7 @@
 			\item \textbf{Glavni sudionik: } Administrator
 			\item  \textbf{Cilj: } Zabraniti pristup treneru ili članu
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Preduvjet: } -
 			\item  \textbf{Opis osnovnog tijeka:}
 		
 			\item[] \begin{packed_enum}
@@ -797,7 +787,6 @@
 		
 		\end{packed_item}
 	
-		\eject
 
 		\noindent \underbar{\textbf{UC24 - Pregled transakcija}}
 		\begin{packed_item}
@@ -805,12 +794,12 @@
 			\item \textbf{Glavni sudionik: } Administrator
 			\item  \textbf{Cilj: } Pregledati obavljene transakcije
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Preduvjet: } -
 			\item  \textbf{Opis osnovnog tijeka:}
 		
 			\item[] \begin{packed_enum}
 			
-				\item Administrator kilkne na karticu "Transakcije"
+				\item Administrator klikne na karticu "Transakcije"
 				\item Na stranici se prikažu sve transakcije
 			\end{packed_enum}
 		
@@ -822,7 +811,7 @@
 			\item \textbf{Glavni sudionik: } Administrator
 			\item  \textbf{Cilj: } Zabraniti pristup članu svemu osim plaćanju članarine
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Preduvjet: } -
 			\item  \textbf{Opis osnovnog tijeka:}
 			
 			\item[] \begin{packed_enum}
@@ -846,7 +835,6 @@
 			
 		\end{packed_item}
 	
-		\eject
 		
 	
 		\noindent \underbar{\textbf{UC26 - Brisanje dnevne šahovske taktike}}
@@ -855,7 +843,7 @@
 			\item \textbf{Glavni sudionik: } Administrator
 			\item  \textbf{Cilj: } Obrisati dnevnu šahovsku taktiku
 			\item  \textbf{Sudionici: } Baza podataka
-			\item  \textbf{Preduvjet: } Korisnik je prijavljen u administratorski korisnički račun
+			\item  \textbf{Preduvjet: } -
 			\item  \textbf{Opis osnovnog tijeka:}
 			
 			\item[] \begin{packed_enum}
@@ -924,7 +912,7 @@
 			
 			
 				\textbf{Obrazac uporabe UC9 - Stvaranje novog treninga}\\
-				Trener šalje zahtjev web aplikaciji za stvaranje novog treninga. Web aplikacija dohvaća iz baze podataka sve ostale treninge tog trenera i provjerava da se novi trening ne preklapa ni sa jednim postojećim treningom. Ako uistinu ne postoji preklapanje, novi trening se zapisuje u bazu podataka te se treneru šalje obavijest o uspjehu kreiranja novog treninga. Ukoliko postoji preklapanje s već postojećim treningom, treneru web aplikacija javlja informacije o preklapanju i nemogućnosti stvaranja zatraženog treninga.
+				Trener šalje zahtjev web aplikaciji za stvaranje novog treninga. Web aplikacija dohvaća iz baze podataka sve ostale treninge tog trenera i provjerava da se novi trening ne preklapa ni s jednim postojećim treningom. Ako uistinu ne postoji preklapanje, novi trening se zapisuje u bazu podataka te se treneru šalje obavijest o uspjehu kreiranja novog treninga. Ako postoji preklapanje s već postojećim treningom, treneru web aplikacija javlja informacije o preklapanju i nemogućnosti stvaranja zatraženog treninga.
 				\eject
 				
 				
@@ -938,7 +926,7 @@
 				\eject
 				
 				\textbf{Obrazac uporabe UC15 - Revidiranje pogreške u taktici}\\
-				\\Trener šalje zahtjev za prikaz određene dojave o pogrešci taktike kako bi ju mogao pobliže proučiti i odlučiti je li primjedba valjana. Poslužitelj zatraženu dojavu vadi iz baze podataka te ju prikazuje. Taj prikaz sastoji se od osnovnih informacija o dojavi poput ime prijavljenje taktike, težine prijavljenje taktike itd., ali se sastoji i od simulacije dvije šahovske ploče. Na prvoj ploča simulira se trenutni tijek taktike, a na drugoj se simulira novi tijek taktike koji je predložen u dojavi o pogrešci. Trener pritiskom na odgovarajuće gumbe šalje zahtjeve za sljedeći korak u simulaciji. Trener također može i poslati zahtjev za resetiranje simulacije i tako ju vratiti u početni položaj. Nakon što je proučio simulaciju trener šalje poslužitelju zahtjev za potvrdu ili odbacivanje dojave o pogrešci. Ako je trener potvrdio dojavu, poslužitelj ju tako mora obilježiti u bazi podataka, te zatim oduzeti odgovarajući broj bodova svim igračima koji su uspješno riješili 'zastarjelu' verziju taktike. Ako je trener odbacio dojavu, poslužitelj ju samo mora evidentirati kao odbačenu u bazi podataka.
+				\\Trener šalje zahtjev za prikaz određene dojave o pogrešci taktike kako bi ju mogao pobliže proučiti i odlučiti je li primjedba valjana. Poslužitelj zatraženu dojavu vadi iz baze podataka te ju prikazuje. Taj prikaz sastoji se od osnovnih informacija o dojavi poput ime prijavljene taktike, težine prijavljene taktike itd., ali se sastoji i od simulacije dvije šahovske ploče. Na prvoj ploča simulira se trenutni tijek taktike, a na drugoj se simulira novi tijek taktike koji je predložen u dojavi o pogrešci. Trener pritiskom na odgovarajuće gumbe šalje zahtjeve za sljedeći korak u simulaciji. Trener također može i poslati zahtjev za resetiranje simulacije i tako ju vratiti u početni položaj. Nakon što je proučio simulaciju trener šalje poslužitelju zahtjev za potvrdu ili odbacivanje dojave o pogrešci. Ako je trener potvrdio dojavu, poslužitelj ju tako mora obilježiti u bazi podataka, te zatim oduzeti odgovarajući broj bodova svim igračima koji su uspješno riješili 'zastarjelu' verziju taktike. Ako je trener odbacio dojavu, poslužitelj ju samo mora evidentirati kao odbačenu u bazi podataka.
 			
 
 				
@@ -952,7 +940,7 @@
 				\eject
 	
 				\textbf{Obrazac uporabe UC6 - Objava taktike}\\
-				\\Trener odabire kreaciju (objavu) nove taktike te mu web aplikacija vraća prikaz prazne ploče sa figuricama sa strane. Trener zatim kreće sa postavljanjem početnog stanja ploče. Mišem može povući željene figurice na njihovo mjesto te mu aplikacija to prikazuje. Postupak se ponavlja sve dok trener ne odluči da je početno stanje pripremljeno. To se javlja aplikaciji te se kreće u stanje rješavanja taktike. Trener odabire točne poteze bijelog i crnog igrača te se ti potezi prikazuju. Nakon što je unesen posljednji potez, trener zaključava unos poteza te objavljuje taktiku. Aplikacija šalje bazi podataka zahtjev za spremanjem taktike te prikazuje treneru poruku da je taktika objavljena.
+				\\Trener odabire kreaciju (objavu) nove taktike te mu web aplikacija vraća prikaz prazne ploče s figuricama sa strane. Trener zatim kreće s postavljanjem početnog stanja ploče. Mišem može povući željene figurice na njihovo mjesto te mu aplikacija to prikazuje. Postupak se ponavlja sve dok trener ne odluči da je početno stanje pripremljeno. To se javlja aplikaciji te se kreće u stanje rješavanja taktike. Trener odabire točne poteze bijelog i crnog igrača te se ti potezi prikazuju. Nakon što je unesen posljednji potez, trener zaključava unos poteza te objavljuje taktiku. Aplikacija šalje bazi podataka zahtjev za spremanjem taktike te prikazuje treneru poruku da je taktika objavljena.
 			
 
 				
@@ -966,8 +954,8 @@
 				
 				\eject
 				
-				\textbf{Obrazac uporabe UC3 - Riješavanje taktike}\\
-				\\Korisnik otvara taktiku koja se dohvaća iz baze podataka. Korisnik zatim rješava tu taktiku te se pokreće tajmer. U slučaju krivog poteza, korisnik je obaviješten. Ako korisnik smatra da je taktika pogrešna, može spremiti svoju taktiku koja se šalje u bazu podataka. Nakon točnog rješavanja taktike, aplikacija računa postignute bodove na temelju vremena rješavanja i težine taktike. Bodovi zajedno sa korisnikovim ID-om se spremaju u bazu podataka.
+				\textbf{Obrazac uporabe UC3 - Rješavanje taktike}\\
+				\\Korisnik otvara taktiku koja se dohvaća iz baze podataka. Korisnik zatim rješava tu taktiku te se pokreće tajmer. U slučaju krivog poteza, korisnik je obaviješten. Ako korisnik smatra da je taktika pogrešna, može spremiti svoju taktiku koja se šalje u bazu podataka. Nakon točnog rješavanja taktike, aplikacija računa postignute bodove na temelju vremena rješavanja i težine taktike. Bodovi zajedno s korisnikovim ID-om se spremaju u bazu podataka.
 				\eject
 				
 				\begin{figure}[H]
