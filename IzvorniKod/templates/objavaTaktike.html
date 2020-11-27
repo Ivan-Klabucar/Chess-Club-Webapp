@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_import %}
+<link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="container text-center">
+    <h1>Objavi Taktiku</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<section id="tactic" class="pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h3>Početno stanje ploče</h3>
+          <p>Namjestite početno stanje taktike povlačenjem</br>
+             figurica na odgovarajuće mjesto. Početnu šahovsku poziciju</br> 
+             možete dobiti klikom na gumb 'startna pozicija', a isto</br>
+             tako možete i resetirati ploču.</p>
+          <p>Kada ste gotovi sa početnom pozicijom stisnite 'Potvrdi konfiguraciju'</p>
+          
+          <h3>Potezi taktike</h3>
+          <p>Naizmjence unosite crne i bijele poteze taktike, a zadnji potez</br>
+             mora napraviti bijeli igrač.</p>
+          <p>Kada ste gotovi stisnite 'Objavi taktiku'.</p>
+        </div>
+        <div class ="col-8">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <div id="myBoard" style="width: 500px"></div>
+            </div>
+          </div>
+          <div class="row" id="initBtnRow">
+            <div class="col d-flex justify-content-center">
+              <button id="clearBtn" type="button" class="btn btn-primary m-2">Resetiraj ploču</button>
+              <button id="startPositionBtn" class="btn btn-primary m-2">Start Position</button>
+              <button id="initConfirmBtn" type="button" class="btn btn-primary m-2">Potvrdi inicijalnu konfiguraciju</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <div id="myBoard2" style="width: 500px"></div>
+            </div>
+          </div>
+          <div class="row recordRow">
+            <div class="col d-flex justify-content-center">
+              <button id="endRecordBtn" class="btn btn-primary m-2">Objavi taktiku</button>
+            </div>
+          </div>
+          <div class="row recordRow">
+            <div class="col d-flex justify-content-center">
+              <div class="card">
+                <div class="card-body p-1" id="status">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="badConfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Loša konfiguracija!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            Igra za ovakvu konfiguraciju već je završila, ispravi konfiguraciju!
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="whiteTurnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nepotpuna taktika!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        Zadnji potez taktike mora biti bijeli potez!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="creationSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center">
+        <h5 class="modal-title" id="exampleModalLongTitle">Taktika uspješno kreirana!</h5>
+      </div>
+
+      <div class="modal-body d-flex justify-content-center">
+        <a href="/objavaTaktike" type="button" role="button" class="btn btn-primary">Povratak</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js_import %} 
+
+<script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+
+{{ tactic_data|json_script:"hello-data" }}
+{% csrf_token %}
+<script>
+// --- Begin Example JS --------------------------------------------------------
+// NOTE: this example uses the chess.js library:
+// https://github.com/jhlywa/chess.js
+$('.recordRow').hide()
+$.ajaxSetup({
+   headers:{
+    "X-CSRFToken": '{{ csrf_token }}'
+   }
+});
+
+var board = null
+let init_config_string
+
+var recording_board = null
+game = Chess()
+var $status = $('#status')
+
+function onDragStart (source, piece, position, orientation) {
+  //do not pick up pieces if the game is over
+  if (game.game_over()) return false
+
+  // only pick up pieces for the side to move
+  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    return false
+  }
+}
+
+function onDrop (source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  })
+
+  console.log(game.ascii())
+
+  // illegal move
+  if (move === null) return 'snapback'
+
+  updateStatus()
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen())
+}
+
+function updateStatus () {
+  var status = ''
+
+  var moveColor = 'White'
+  if (game.turn() === 'b') {
+    moveColor = 'Black'
+  }
+
+  // checkmate?
+  if (game.in_checkmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.'
+  }
+
+  // draw?
+  else if (game.in_draw()) {
+    status = 'Game over, drawn position'
+  }
+
+  // game still on
+  else {
+    status = moveColor + ' to move'
+
+    // check?
+    if (game.in_check()) {
+      status += ', ' + moveColor + ' is in check'
+    }
+  }
+
+  $status.html(status)
+}
+
+function recordMoves() {
+  var move_recording_config = {
+    draggable: true,
+    position: init_config_string,
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onSnapEnd: onSnapEnd
+  }
+  recording_board = Chessboard('myBoard2', move_recording_config)
+  updateStatus()
+}
+
+function initConfirm() {
+    init_config_string = board.fen()
+    try {
+      game.load(init_config_string + ' w KQkq - 0 1')
+      if (!game.game_over()) {
+        $('#myBoard').hide()
+        $('#initBtnRow').hide()
+        $('.recordRow').show()
+        recordMoves()
+        return
+      }
+    } catch(e) {
+      //skip
+    }
+    $('#badConfigModal').modal()
+    return;
+    
+}
+
+function endRecordConfirm() {
+  if(game.turn() == 'w') {
+    $('#whiteTurnModal').modal()
+    return
+  }
+  white_moves = []
+  black_moves = []
+  game.history().forEach((elem, indx) => {
+    if(indx % 2 == 0) {
+      white_moves.push(elem)
+    } else {
+      black_moves.push(elem)
+    }
+  })
+  recording_board.clear()
+  const url = '/objavaTaktike';
+  const data = {
+    white_moves: white_moves.join(','),
+    black_moves: black_moves.join(','),
+    init_config: init_config_string,
+  }
+
+  $.post(url, data, function(data, status) {
+    $('#creationSuccessModal').modal()
+  })
+}
+
+var config = {
+  draggable: true,
+  dropOffBoard: 'trash',
+  sparePieces: true,
+}
+board = Chessboard('myBoard', config)
+$('#clearBtn').on('click', board.clear)
+$('#startPositionBtn').on('click', board.start)
+$('#initConfirmBtn').on('click', initConfirm)
+$('#endRecordBtn').on('click', endRecordConfirm)
+</script>
+{% endblock %}
