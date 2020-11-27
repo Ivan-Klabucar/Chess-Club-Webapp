@@ -17,15 +17,15 @@
       <div class="row">
         <div class="col-4">
           <h3>Početno stanje ploče</h3>
-          <p>Namjestite početno stanje taktike povlačenjem</br>
-             figurica na odgovarajuće mjesto. Početnu šahovsku poziciju</br> 
-             možete dobiti klikom na gumb 'startna pozicija', a isto</br>
+          <p>Namjestite početno stanje taktike povlačenjem
+             figurica na odgovarajuće mjesto. Početnu šahovsku poziciju
+             možete dobiti klikom na gumb 'startna pozicija', a isto
              tako možete i resetirati ploču.</p>
-          <p>Kada ste gotovi sa početnom pozicijom stisnite 'Potvrdi konfiguraciju'</p>
+          <p>Kada ste gotovi sa početnom pozicijom stisnite 'Potvrdi inicijalnu konfiguraciju'</p>
           
           <h3>Potezi taktike</h3>
-          <p>Naizmjence unosite crne i bijele poteze taktike, a zadnji potez</br>
-             mora napraviti bijeli igrač.</p>
+          <p>Nakon što ste unjeli početno stanje ploče trebate naizmjence unositi poteze crne i bijele strane.
+             Zadnji potez mora napraviti bijeli igrač.</p>
           <p>Kada ste gotovi stisnite 'Objavi taktiku'.</p>
         </div>
         <div class ="col-8">
@@ -169,7 +169,7 @@ function onDrop (source, target) {
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
 function onSnapEnd () {
-  board.position(game.fen())
+  recording_board.position(game.fen())
 }
 
 function updateStatus () {
