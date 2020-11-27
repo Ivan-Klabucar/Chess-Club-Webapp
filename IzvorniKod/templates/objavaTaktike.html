@@ -139,6 +139,11 @@ var recording_board = null
 game = Chess()
 var $status = $('#status')
 
+function bothKingsInFen(fen) {
+  if(fen.includes('k') && fen.includes('K')) return true;
+  return false;
+}
+
 function onDragStart (source, piece, position, orientation) {
   //do not pick up pieces if the game is over
   if (game.game_over()) return false
@@ -158,7 +163,7 @@ function onDrop (source, target) {
     promotion: 'q' // NOTE: always promote to a queen for example simplicity
   })
 
-  console.log(game.ascii())
+  //console.log(game.ascii()) ovo je za debugiranje u konzoli
 
   // illegal move
   if (move === null) return 'snapback'
@@ -219,7 +224,7 @@ function initConfirm() {
     init_config_string = board.fen()
     try {
       game.load(init_config_string + ' w KQkq - 0 1')
-      if (!game.game_over()) {
+      if (!game.game_over() && bothKingsInFen(init_config_string)) {
         $('#myBoard').hide()
         $('#initBtnRow').hide()
         $('.recordRow').show()
