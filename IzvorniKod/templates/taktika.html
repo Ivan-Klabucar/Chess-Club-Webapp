@@ -61,17 +61,12 @@
 
 {{ tactic_data|json_script:"hello-data" }}
 <script>
-// --- Begin Example JS --------------------------------------------------------
-// NOTE: this example uses the chess.js library:
-// https://github.com/jhlywa/chess.js
-
-var board = null
-var game = new Chess()
-
 const tactic_data = JSON.parse(document.getElementById('hello-data').textContent);
 let black_moves = tactic_data.black_moves;
 let white_moves = tactic_data.white_moves;
 let start = new Date().getTime();
+var board = null
+var game = new Chess(tactic_data.start_position + ' w KQkq - 0 1')
 
 function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over

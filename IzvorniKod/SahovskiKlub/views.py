@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.http import HttpResponse
 
 
 class HomeView(View):
@@ -78,9 +79,24 @@ class DemoTacticView(View):
     def get(self, request):
         context = {
             'tactic_data': {
-                'start_position': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+                'start_position': 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPPB/RNBQK1NR',
                 'white_moves': ['d4', 'e4', 'f4', 'exd5', 'Bxf4'],
                 'black_moves': ['d5', 'e5', 'f5', 'exf4']
             }
         }
-        return render(request, 'tactic.html', context)
+        return render(request, 'taktika.html', context)
+
+class TacticCreationView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'objavaTaktike.html', context)
+    
+    def post(self, request):
+      print("bijeli potezi:")
+      print(request.POST.get('white_moves', ''))
+      print("crni potezi:")
+      print(request.POST.get('black_moves', ''))
+      print("init config:")
+      print(request.POST.get('init_config', ''))
+      return HttpResponse('sve pet')
+
