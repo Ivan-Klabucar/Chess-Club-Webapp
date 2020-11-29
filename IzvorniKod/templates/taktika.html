@@ -59,14 +59,14 @@
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
 
-{{ tactic_data|json_script:"hello-data" }}
+{{ tactic_data|json_script:"tacticData" }}
 <script>
-const tactic_data = JSON.parse(document.getElementById('hello-data').textContent);
+const tactic_data = JSON.parse(document.getElementById('tacticData').textContent);
 let black_moves = tactic_data.black_moves;
 let white_moves = tactic_data.white_moves;
 let start = new Date().getTime();
 var board = null
-var game = new Chess(tactic_data.start_position + ' w KQkq - 0 1')
+var game = new Chess(tactic_data.start_position)
 
 function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over
@@ -108,6 +108,7 @@ function onDrop (source, target) {
   if (move === null) return 'snapback'
 
   if(move.san != white_moves[0]) {
+    console.log(move.san)
     game.undo();
     $('#wrongMoveModal').modal()
     return 'snapback';
