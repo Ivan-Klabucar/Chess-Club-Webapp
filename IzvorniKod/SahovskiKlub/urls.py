@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import HomeView, RegisterView, DemoTacticView, ListaTaktikaView, NovostiView, TacticCreationView
+from .views import HomeView, RegisterView, DemoTacticView, ListaTaktikaView, NovostiView, TacticCreationView, TacticRevisionView
 
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('dnevneTaktike', ListaTaktikaView.as_view()),
     path('taktika', DemoTacticView.as_view()),
     path('objavaTaktike', TacticCreationView.as_view()),
+    path('revidiranjeTaktike', TacticRevisionView.as_view()),
     path('novosti', NovostiView.as_view())
 ]

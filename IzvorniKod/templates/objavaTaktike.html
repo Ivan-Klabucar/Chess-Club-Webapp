@@ -119,7 +119,6 @@
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
 
-{{ tactic_data|json_script:"hello-data" }}
 {% csrf_token %}
 <script>
 // --- Begin Example JS --------------------------------------------------------
@@ -221,9 +220,9 @@ function recordMoves() {
 }
 
 function initConfirm() {
-    init_config_string = board.fen()
+    init_config_string = board.fen() + ' w KQkq - 0 1'
     try {
-      game.load(init_config_string + ' w KQkq - 0 1')
+      game.load(init_config_string)
       if (!game.game_over() && bothKingsInFen(init_config_string)) {
         $('#myBoard').hide()
         $('#initBtnRow').hide()
