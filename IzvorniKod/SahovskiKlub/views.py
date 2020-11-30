@@ -135,7 +135,6 @@ class TacticErrorReportView(View):
                 'start_position': current_tactic['start_position']
             }
         }
-        print(context)
         return render(request, 'dojavaGreske.html', context)
     
     def post(self, request):
