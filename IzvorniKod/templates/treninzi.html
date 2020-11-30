@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Treninzi</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	{% for trening in listaTreninga %}
+		{% if forloop.counter|divisibleby:"2" %}
+			<section id="trening" class="bg-light">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 mx-auto">
+							<!--<h2>{{ novost.naslov }}</h2>
+							<p class="lead">{{ novost.tekst }}</p>
+							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>-->
+							
+							<h2>{{ trening.organizator }}</h2>
+							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h3>
+							<p class="lead">{{ trening.opis }}</p>
+							<button type="submit" class="btn btn-primary btn-lg"
+									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
+									'homepage'))} {%endif%}>Prijavi me</button>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		{% else %}
+			<section id="trening">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 mx-auto">
+							<!--<h2>{{ novost.naslov }}</h2>
+							<p class="lead">{{ novost.tekst }}</p>
+							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>-->
+							
+							<h2>{{ trening.organizator }}</h2>
+							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h3>
+							<p class="lead">{{ trening.opis }}</p>
+							<button type="submit" class="btn btn-primary btn-lg"
+									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
+									'homepage'))} {%endif%}>Prijavi me</button>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		{% endif %}
+	{%endfor%}
+{% endblock %}
