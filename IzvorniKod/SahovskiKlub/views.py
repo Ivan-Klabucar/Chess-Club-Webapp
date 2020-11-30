@@ -152,3 +152,7 @@ class TreninziView(View):
                         ],
                 }
         return render(request, 'treninzi.html', context)
+
+class DodavanjeTreningaView(View):
+    def get(self, request):
+        return render(request, 'dodavanjeTreninga.html')
