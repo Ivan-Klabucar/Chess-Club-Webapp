@@ -1,52 +1,35 @@
 {% extends "base.html" %}
 {% block header %}
 	<div class="container text-center">
-		<h1>Treninzi</h1>
+		<h1>Treninzi</h1>	<!--if current_user==trener "moji treninzi" else "svi treninzi"-->
 	</div>
 {% endblock %}
 
 {% block content %}
+	<a class="btn btn-secondary" style="float:right" href="/dodavanjetreninga">Dodaj trening</a> 							<!--ovaj gumb prikazuj samo adminu i trenerima-->
 	{% for trening in listaTreninga %}
-		{% if forloop.counter|divisibleby:"2" %}
-			<section id="trening" class="bg-light">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<!--<h2>{{ novost.naslov }}</h2>
-							<p class="lead">{{ novost.tekst }}</p>
-							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>-->
-							
-							<h2>{{ trening.organizator }}</h2>
-							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h3>
-							<p class="lead">{{ trening.opis }}</p>
-							<button type="submit" class="btn btn-primary btn-lg"
-									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
-									'homepage'))} {%endif%}>Prijavi me</button>
-							
-						</div>
-					</div>
-				</div>
-			</section>
-		{% else %}
+			<!--if (current_user==clan||admin) || trening.organizator == current_user-->
 			<section id="trening">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 mx-auto">
-							<!--<h2>{{ novost.naslov }}</h2>
-							<p class="lead">{{ novost.tekst }}</p>
-							<span style="float:left">{{ novost.autor }}</span> <span style="float:right">{{ novost.datum }}</span>-->
-							
+
 							<h2>{{ trening.organizator }}</h2>
-							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h3>
+							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h5>
 							<p class="lead">{{ trening.opis }}</p>
-							<button type="submit" class="btn btn-primary btn-lg"
+							<button type="submit" class="btn btn-primary" style="float:left;"								
 									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
-									'homepage'))} {%endif%}>Prijavi me</button>
+									'homepage'))} {%endif%}>Prijavi me</button>												<!--ovaj gumb prikazuj clanovima-->
+									
+							<button type="submit" class="btn btn-secondary" style="background-color:red; float:right;"		
+									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
+									'homepage'))} {%endif%}>Obriši trening</button>											<!--ovaj gumb prikazuj adminu i trenerima-->
 							
 						</div>
 					</div>
 				</div>
 			</section>
-		{% endif %}
+			<hr>
+			<!--end if-->
 	{%endfor%}
 {% endblock %}
