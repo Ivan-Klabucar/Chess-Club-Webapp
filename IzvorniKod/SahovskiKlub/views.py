@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -121,4 +121,18 @@ class TacticRevisionView(View):
       else:
         print("Revision #{} was rejected".format(request.POST.get('id', '')))
       return HttpResponse('sve pet')
+
+class ObjavaNovostiView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'objavaNovosti.html', context)
+
+    def post(self, request):
+        print(request.POST.get('title'))
+        print(request.POST.get('text'))
+        return redirect('/novosti')
+
+
+
+
 
