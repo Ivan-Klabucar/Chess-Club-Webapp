@@ -56,3 +56,8 @@ class Transakcija(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     datumTransakcije = models.DateField()
     iznosUplate = models.DecimalField(max_digits=5, decimal_places=2)
+
+class Aktivnost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vrijemeAktivnosti = models.DateTimeField()
+    aktivnost = models.CharField(max_length=100)
