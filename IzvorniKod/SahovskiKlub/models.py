@@ -10,9 +10,12 @@ class Taktika(models.Model):
     movesBlack = models.CharField(max_length=3000)
     tezina = models.DecimalField(max_digits=5, decimal_places=2)
     brojGlasova = models.IntegerField()
+    validnost = models.BooleanField(default=1)
+    vidljivost = models.BooleanField(default=1)
 
 class RjesenjeTaktike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    taktika = models.ForeignKey(Taktika, on_delete=models.CASCADE)
     vrijeme = models.DecimalField(max_digits=5, decimal_places=2)
 
 class DojavaPogreske(models.Model):
@@ -20,7 +23,8 @@ class DojavaPogreske(models.Model):
     userDojave = models.ForeignKey(User, on_delete=models.CASCADE)
     userRevizija = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userDojave')
     prihvacena = models.BooleanField()
-    predlozeniTijek = models.CharField(max_length=6000)
+    predlozeniTijek = models.CharField(max_length=6000, default='')
+    opis = models.CharField(max_length=3000, default='')
 
 class RangLista(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -29,24 +33,27 @@ class RangLista(models.Model):
 class Novost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vrijemeObjave = models.DateTimeField()
-    naslov = models.CharField(max_length=100)
-    tekst = models.CharField(max_length=3000)
+    naslov = models.CharField(max_length=100, default='')
+    tekst = models.CharField(max_length=3000, default='')
+    vidljivost = models.BooleanField(default=1)
 
 class Trening(models.Model):
     organizator = models.ForeignKey(User, on_delete=models.CASCADE)
     vrijemePocetka = models.DateTimeField()
     vrijemeZavrsetka = models.DateTimeField()
-    opisTreninga = models.CharField(max_length=100)
+    opisTreninga = models.CharField(max_length=100, default='')
+    vidljivost = models.BooleanField(default=1)
 
 class PrijavaTrening(models.Model):
     trening = models.ForeignKey(Trening, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Turnir(models.Model):
-    formatTurnira = models.CharField(max_length=100)
+    formatTurnira = models.CharField(max_length=100, default='')
     vrijemePocetka = models.DateTimeField()
     vrijemeZavrsetka = models.DateTimeField()
     brojSudionika = models.IntegerField()
+    vidljivost = models.BooleanField(default=1)
 
 class PrijavaTurnir(models.Model):
     trening = models.ForeignKey(Turnir, on_delete=models.CASCADE)
@@ -60,4 +67,4 @@ class Transakcija(models.Model):
 class Aktivnost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vrijemeAktivnosti = models.DateTimeField()
-    aktivnost = models.CharField(max_length=100)
+    aktivnost = models.CharField(max_length=100, default='')
