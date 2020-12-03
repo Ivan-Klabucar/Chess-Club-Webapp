@@ -3,56 +3,56 @@ from django.contrib.auth.models import User
 
 
 class Taktika(models.Model):
-    createdAt = models.dateTimeField()
-    user = models.ForeignKey(User)
-    initConfig = models.charField(max_length=100)
-    movesWhite = models.charField(max_length=3000)
-    movesBlack = models.charField(max_length=3000)
-    tezina = models.DecimalField()
+    createdAt = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    initConfig = models.CharField(max_length=100)
+    movesWhite = models.CharField(max_length=3000)
+    movesBlack = models.CharField(max_length=3000)
+    tezina = models.DecimalField(max_digits=5, decimal_places=2)
     brojGlasova = models.IntegerField()
 
 class RjesenjeTaktike(models.Model):
-    user = models.ForeignKey(User)
-    vrijeme = models.DecimalField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vrijeme = models.DecimalField(max_digits=5, decimal_places=2)
 
 class DojavaPogreske(models.Model):
-    taktika = models.ForeignKey(Taktika)
-    userDojave = models.ForeignKey(User)
-    userRevizija = models.ForeignKey(User)
+    taktika = models.ForeignKey(Taktika, on_delete=models.CASCADE)
+    userDojave = models.ForeignKey(User, on_delete=models.CASCADE)
+    userRevizija = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userDojave')
     prihvacena = models.BooleanField()
-    predlozeniTijek = models.charField(max_length=6000)
+    predlozeniTijek = models.CharField(max_length=6000)
 
 class RangLista(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     bodovi = models.IntegerField()
 
 class Novost(models.Model):
-    user = models.ForeignKey(User)
-    vrijemeObjave = models.dateTimeField()
-    naslov = models.charField(max_length=100)
-    tekst = models.charField(max_length=3000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vrijemeObjave = models.DateTimeField()
+    naslov = models.CharField(max_length=100)
+    tekst = models.CharField(max_length=3000)
 
 class Trening(models.Model):
-    organizator = models.ForeignKey(User)
-    vrijemePocetka = models.dateTimeField()
-    vrijemeZavrsetka = models.dateTimeField()
-    opisTreninga = models.charField(max_length=100)
+    organizator = models.ForeignKey(User, on_delete=models.CASCADE)
+    vrijemePocetka = models.DateTimeField()
+    vrijemeZavrsetka = models.DateTimeField()
+    opisTreninga = models.CharField(max_length=100)
 
 class PrijavaTrening(models.Model):
-    trening = models.ForeignKey(Trening)
-    user = models.ForeignKey(User)
+    trening = models.ForeignKey(Trening, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Turnir(models.Model):
-    formatTurnira = models.charField(max_length=100)
-    vrijemePocetka = models.dateTimeField()
-    vrijemeZavrsetka = models.dateTimeField()
+    formatTurnira = models.CharField(max_length=100)
+    vrijemePocetka = models.DateTimeField()
+    vrijemeZavrsetka = models.DateTimeField()
     brojSudionika = models.IntegerField()
 
 class PrijavaTurnir(models.Model):
-    trening = models.ForeignKey(Turnir)
-    user = models.ForeignKey(User)
+    trening = models.ForeignKey(Turnir, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Transakcija(models.Model):
-    user = models.ForeignKey(User)
-    datumTransakcije = models.dateField()
-    iznosUplate = models.DecimalField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    datumTransakcije = models.DateField()
+    iznosUplate = models.DecimalField(max_digits=5, decimal_places=2)
