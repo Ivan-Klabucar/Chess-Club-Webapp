@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -154,5 +154,14 @@ class TreninziView(View):
         return render(request, 'treninzi.html', context)
 
 class DodavanjeTreningaView(View):
-    def get(self, request):
-        return render(request, 'dodavanjeTreninga.html')
+	def get(self, request):
+		context = {}
+		return render(request, 'dodavanjeTreninga.html', context)
+		
+	def post(self, request):
+		print(request.POST.get('userID'))
+		print(request.POST.get('date'))
+		print(request.POST.get('startTime'))
+		print(request.POST.get('endTime'))
+		print(request.POST.get('description'))
+		return redirect('/treninzi')

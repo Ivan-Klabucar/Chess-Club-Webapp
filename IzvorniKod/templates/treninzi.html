@@ -2,11 +2,12 @@
 {% block header %}
 	<div class="container text-center">
 		<h1>Treninzi</h1>	<!--if current_user==trener "moji treninzi" else "svi treninzi"-->
+		<a class="btn btn-primary" href="/dodavanjetreninga" role="button">Dodaj trening</a>	<!--ovaj gumb prikazuj samo adminu i trenerima-->
 	</div>
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-secondary" style="float:right" href="/dodavanjetreninga">Dodaj trening</a> 							<!--ovaj gumb prikazuj samo adminu i trenerima-->
+
 	{% for trening in listaTreninga %}
 			<!--if (current_user==clan||admin) || trening.organizator == current_user-->
 			<section id="trening">
