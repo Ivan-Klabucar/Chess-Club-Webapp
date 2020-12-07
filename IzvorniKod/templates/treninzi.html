@@ -2,7 +2,7 @@
 {% block header %}
 	<div class="container text-center">
 		<h1>Treninzi</h1>	<!--if current_user==trener "moji treninzi" else "svi treninzi"-->
-		<a class="btn btn-primary" href="/dodavanjetreninga" role="button">Dodaj trening</a>	<!--ovaj gumb prikazuj samo adminu i trenerima-->
+		<a class="btn btn-primary" href="/dodavanjeTreninga" role="button">Dodaj trening</a>	<!--ovaj gumb prikazuj samo adminu i trenerima-->
 	</div>
 {% endblock %}
 
@@ -18,13 +18,16 @@
 							<h2>{{ trening.organizator }}</h2>
 							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h5>
 							<p class="lead">{{ trening.opis }}</p>
-							<button type="submit" class="btn btn-primary" style="float:left;"								
-									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
-									'homepage'))} {%endif%}>Prijavi me</button>												<!--ovaj gumb prikazuj clanovima-->
-									
-							<button type="submit" class="btn btn-secondary" style="background-color:red; float:right;"		
-									onclick={% if user.is_authenticated %} {return redirect(self.request.GET.get(
-									'homepage'))} {%endif%}>Obriši trening</button>											<!--ovaj gumb prikazuj adminu i trenerima-->
+							<form method="post" onsubmit="return confirm('Jeste li sigurni da se želite prijaviti na ovaj trening?');">
+								{% csrf_token %}
+								<input class="form-control" type="hidden" name="idUsera" value="{{ request.user.id }}" readonly id="id_idUsera">
+								<input class="form-control" type="hidden" name="idTreninga" value="{{ trening.idTreninga }}" readonly id="id_idTreninga">
+								<button type="submit" class="btn btn-primary" style="float:left;" name="prijava" onclick="potvrdiPrijavu()" >Prijavi me</button><!--ovaj form prikazuj clanovima-->
+							</form>
+							
+							<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj trening?');">
+								<button type="submit" class="btn btn-danger" style="float:right;" name="brisanje">Obriši trening</button>	<!--ovaj gumb prikazuj adminu i trenerima-->
+							</form>
 							
 						</div>
 					</div>
