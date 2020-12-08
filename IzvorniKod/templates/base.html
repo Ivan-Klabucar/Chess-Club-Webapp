@@ -32,6 +32,8 @@
         <a class="navbar-brand js-scroll-trigger" href="/dnevneTaktike">Dnevne taktike</a>
 		<a class="navbar-brand js-scroll-trigger" href="/novosti">Novosti</a>
         {% if user.is_authenticated %}
+		<a class="navbar-brand js-scroll-trigger" href="/treninzi">Treninzi</a>
+		<a class="navbar-brand js-scroll-trigger" href="/turniri">Turniri</a>
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                 {{ request.user.username }}
@@ -39,6 +41,9 @@
             <ul class="dropdown-menu" style="text-align: center">
                 <li>
                     <a href="/logout">Odjava</a>
+                </li>
+                <li>
+                    <a href="/profil">Prikaz profila</a>
                 </li>
             </ul>
         </div>
