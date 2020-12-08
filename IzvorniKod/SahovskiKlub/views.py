@@ -49,6 +49,25 @@ class ListaTaktikaView(View):
 		}
 		return render(request, 'listaDnevnihTaktika.html', context)
 
+class ProfileView(View):
+    def get(self, request):
+        context = {
+            "uloga" : "Član kluba",
+            "listaAktivnosti" : [
+                {
+                    "tekstAktivnosti" : "30.11. Riješena taktika xy."
+                },
+                {
+                    "tekstAktivnosti" : "1.12. Prijavljen na trening xy."
+                },
+                {
+                    "tekstAktivnosti": "2.12. Riješena taktika z."
+                }
+            ]
+        }
+        return render(request, 'profil.html', context)
+
+
 class NovostiView(View):
 	def get(self, request):
 		context = {
