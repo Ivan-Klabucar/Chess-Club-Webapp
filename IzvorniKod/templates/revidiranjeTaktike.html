@@ -13,12 +13,20 @@
 
 {% block content %}
 <section id="tactic" class="pt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col">
+    <div class="container-fluid">
+      <div class="row justify-content-around">
+        <div class="col-3">
+          <h3 class="mb-3">Opis greške:</h3>
+          <p>
+            {{ tactic_data.opis_greske }}
+          </p>
+          <button id="prihvatiBtn" type="button" class="btn btn-lg btn-success m-2">Prihvati dojavu</button>
+          <button id="odbaciBtn" class="btn btn-lg btn-danger m-2">Odbaci dojavu</button>
+        </div>  
+        <div class="col-4">
           <div class="row">
             <div class="col">
-              <h3 class="text-center m-3">Trenutna verzija</h3>
+              <h3 class="text-center mb-3">Trenutna verzija</h3>
             </div>
           </div>
           <div class="row">
@@ -34,10 +42,10 @@
             </div>
         </div>
 
-        <div class ="col">
+        <div class ="col-4">
           <div class="row">
             <div class="col">
-              <h3 class="text-center m-3">Predložena verzija</h3>
+              <h3 class="text-center mb-3">Predložena verzija</h3>
             </div>
           </div>
           <div class="row">
@@ -51,13 +59,6 @@
               <button id="newResetBtn" class="btn btn-primary m-2">Resetiraj taktiku</button>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col d-flex justify-content-center">
-          <button id="prihvatiBtn" type="button" class="btn btn-lg btn-success m-2">Prihvati dojavu o pogrešci</button>
-          <button id="odbaciBtn" class="btn btn-lg btn-danger m-2">Odbaci dojavu o pogrešci</button>
         </div>
       </div>
     </div>
@@ -179,7 +180,7 @@ function resetOldTactic() {
   old_black_moves_indx = 0
   old_game.load(old_start_position)
   old_board.position(old_game.fen())
-  toggleOldButton()
+  if ($('#oldNextMoveBtn').prop('disabled')) toggleOldButton()
 }
 
 function resetNewTactic() {
@@ -187,7 +188,7 @@ function resetNewTactic() {
   new_black_moves_indx = 0
   new_game.load(new_start_position)
   new_board.position(new_game.fen())
-  toggleNewButton()
+  if ($('#newNextMoveBtn').prop('disabled')) toggleNewButton()
 }
 
 function acceptRevision() {

@@ -135,7 +135,8 @@ class TacticRevisionView(View):
                 'old_black_moves': ['d5', 'e5', 'f5', 'exf4'],
                 'new_start_position': 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPPB/RNBQK1NR w KQkq - 0 1',
                 'new_white_moves': ['d4', 'e4', 'f4', 'fxe5', 'Bh6'],
-                'new_black_moves': ['d5', 'e5', 'f5', 'fxe4']
+                'new_black_moves': ['d5', 'e5', 'f5', 'fxe4'],
+                'opis_greske': "Greska ovdje je ta sto lovac promasi pijuna kojeg zeli pojesti. Zapravo se skroz drukcije to treba sve obaviti. 4/10!"
             }
         }
         return render(request, 'revidiranjeTaktike.html', context)
