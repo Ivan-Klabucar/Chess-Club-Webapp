@@ -19,6 +19,11 @@
           <div id="myBoard" style="width: 500px"></div>
         </div>
       </div>
+      <div class="row m-4">
+        <div class="col d-flex justify-content-center">
+          <a href="/dojavaGreske" type="button" id="endRecordBtn" class="btn btn-primary m-2">Dojavi grešku u taktici</a>
+        </div>
+      </div>
     </div>
 </section>
 
@@ -59,9 +64,9 @@
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
 
-{{ tactic_data|json_script:"tacticData" }}
+{{ tactic_data|json_script:"tactic_data" }}
 <script>
-const tactic_data = JSON.parse(document.getElementById('tacticData').textContent);
+const tactic_data = JSON.parse(document.getElementById('tactic_data').textContent);
 let black_moves = tactic_data.black_moves;
 let white_moves = tactic_data.white_moves;
 let start = new Date().getTime();
