@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Turniri</h1>	<!--if current_user==trener "moji treninzi" else "svi treninzi"-->
+		<a class="btn btn-primary" href="/dodavanjeTurnira" role="button">Dodaj turnir</a>	<!--ovaj gumb prikazuj samo adminu i trenerima-->
+	</div>
+{% endblock %}
+
+{% block content %}
+
+	{% for turnir in listaTurnira %}
+			<!--if (current_user==clan||admin) || trening.organizator == current_user-->
+			<section id="turnir">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 mx-auto">
+
+							<h2>Turnir br. {{ turnir.idTurnira }}</h2>
+							<h5>Organizator: {{ turnir.organizator }}</h5>
+							<h5>Početak: {{ turnir.vrijemePocetka }}</h5>
+							<h5>Kraj: {{ turnir.vrijemeZavrsetka }}</h5>
+							<h5>Maksimalan broj sudionika: {{ turnir.brojSudionika }}</h5>
+							<p class="lead">{{ turnir.formatTurnira }}</p>
+							
+							<form method="post" onsubmit="return confirm('Jeste li sigurni da se želite prijaviti na ovaj turnir?');">
+								{% csrf_token %}
+								<input class="form-control" type="hidden" name="idUsera" value="{{ request.user.id }}" readonly id="id_idUsera">
+								<input class="form-control" type="hidden" name="idTurnira" value="{{ turnir.idTurnira }}" readonly id="id_idTurnira">
+								<button type="submit" class="btn btn-primary" style="float:left;" onclick="potvrdiPrijavu()">Prijavi me</button>	<!--ovaj form prikazuj clanovima-->
+							</form>	
+							
+							<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj turnir?');">
+							<button type="submit" class="btn btn-danger" style="float:right;" >Obriši turnir</button>	<!--ovaj form prikazuj adminu i trenerima-->
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+			<hr>
+			<!--end if-->
+	{%endfor%}
+{% endblock %}
