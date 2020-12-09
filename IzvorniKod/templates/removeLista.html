@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Neplaćene članarine</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+    <section id="info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <br/>
+                    <h3>Članovi koji nisu platili članarinu</h3>
+                    <br/>
+                </div>
+            </div>
+            {% for član in članovi %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 offset-lg-3">
+                        <h3>{{ član.ime }}</h3>
+                        Zadnji plaćeni mjesec: {{ član.zadnjaTransakcija }}
+                        <button class="btn btn-danger" type="button">
+                            Makni status člana
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
