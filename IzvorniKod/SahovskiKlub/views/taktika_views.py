@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from SahovskiKlub.models import Taktika, RjesenjeTaktike
+from SahovskiKlub.models import Taktika, RjesenjeTaktike, DojavaPogreske
 from datetime import datetime
 from django.core import serializers
 
@@ -21,7 +21,8 @@ class TacticView(View):
         context = {
             'tactic_data': serialized_taktika,
             'tezina': taktika.tezina,
-            'already_solved': vec_rijeseno
+            'already_solved': vec_rijeseno,
+            'taktika_id': taktika.id,
         }
         return render(request, 'taktika.html', context)
 
@@ -67,52 +68,76 @@ class TacticCreationView(View):
 
 class TacticRevisionView(View):
     def get(self, request):
+        dojava_id = request.GET.get('id', '')
+        if not dojava_id:
+            return HttpResponse("niste oznacili koju dojavu zelite revidirati", status=400)
+        dojava = DojavaPogreske.objects.get(id=dojava_id)
+        black_and_white_moves = dojava.predlozeniTijek.split('<W|B>')
+        taktika = dojava.taktika
         context = {
             'tactic_data': {
-                'id': 74,
-                'old_start_position': 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPPB/RNBQK1NR w KQkq - 0 1',
-                'old_white_moves': ['d4', 'e4', 'f4', 'exd5', 'Bcxf4'],
-                'old_black_moves': ['d5', 'e5', 'f5', 'exf4'],
-                'new_start_position': 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPPB/RNBQK1NR w KQkq - 0 1',
-                'new_white_moves': ['d4', 'e4', 'f4', 'fxe5', 'Bh6'],
-                'new_black_moves': ['d5', 'e5', 'f5', 'fxe4'],
-                'opis_greske': "Greska ovdje je ta sto lovac promasi pijuna kojeg zeli pojesti. Zapravo se skroz drukcije to treba sve obaviti. 4/10!"
+                'revision_id': dojava_id,
+                'tactic_id': taktika.id,
+                'old_start_position': taktika.initConfig,
+                'old_white_moves': taktika.movesWhite.split(','),
+                'old_black_moves': taktika.movesBlack.split(','),
+                'new_start_position': taktika.initConfig,
+                'new_white_moves': black_and_white_moves[0].split(','),
+                'new_black_moves': black_and_white_moves[1].split(','),
+                'opis_greske': dojava.opis
             }
         }
         return render(request, 'revidiranjeTaktike.html', context)
 
     def post(self, request):
-        if request.POST.get('confirmed', '') == 'true':
-            print("Revision #{} was confirmed".format(
-                request.POST.get('id', '')))
+        confirmed = request.POST.get('confirmed', '')
+        revision_id = request.POST.get('revision_id', '')
+        if not confirmed or not revision_id:
+            return HttpResponse("Nisu poslani svi podatci za potvrdu ili odbacivanje dojave", status=400)
+        dojava = DojavaPogreske.objects.get(id=revision_id)
+        taktika = dojava.taktika
+        black_and_white_moves = dojava.predlozeniTijek.split('<W|B>')
+        if confirmed == 'true':
+            taktika.movesWhite = black_and_white_moves[0]
+            taktika.movesBlack = black_and_white_moves[1]
+            dojava.prihvacena = True
+            taktika.save()
+            dojava.save()
+            invalid_solutions = RjesenjeTaktike.objects.filter(taktika_id=taktika.id)
+            invalid_solutions.delete()
         else:
-            print("Revision #{} was rejected".format(
-                request.POST.get('id', '')))
+            print("rejected")
+            dojava.prihvacena = False
+            dojava.save()
         return HttpResponse('sve pet')
 
 
 class TacticErrorReportView(View):
     def get(self, request):
-        current_tactic = {
-            'id': 74,
-            'start_position': 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPPB/RNBQK1NR w KQkq - 0 1',
-            'white_moves': ['d4', 'e4', 'f4', 'exd5', 'Bcxf4'],
-            'black_moves': ['d5', 'e5', 'f5', 'exf4'],
-        }
+        taktika_id = request.GET.get('id', '')
+        if not taktika_id:
+            return HttpResponse("niste oznacili na kojoj taktici zelite prijaviti gresku", status=400)
+        taktika_id = int(taktika_id)
+        taktika = Taktika.objects.get(id=taktika_id)
         context = {
             'revision_data': {
-                'start_position': current_tactic['start_position']
+                'start_position': taktika.initConfig,
+                'tactic_id': taktika.id
             }
         }
         return render(request, 'dojavaGreske.html', context)
 
     def post(self, request):
-        print("bijeli potezi:")
-        print(request.POST.get('white_moves', ''))
-        print("crni potezi:")
-        print(request.POST.get('black_moves', ''))
-        print("init config:")
-        print(request.POST.get('init_config', ''))
-        print("error desc:")
-        print(request.POST.get('error_description', ''))
-        return HttpResponse('sve pet')
+        movesWhite = request.POST.get('white_moves', '')
+        movesBlack = request.POST.get('black_moves', '')
+        initConfig = request.POST.get('init_config', '')
+        errDesc = request.POST.get('error_description', '')
+        tactic_id = request.POST.get('tactic_id', '')
+        if not movesWhite or not movesBlack or not initConfig or not errDesc or not tactic_id:
+            return HttpResponse("niste poslali neki od argumenata", status=400)
+        tactic = Taktika.objects.get(id=tactic_id)
+        tijek = "{}<W|B>{}".format(movesWhite, movesBlack)
+        dojava = DojavaPogreske(taktika=tactic, userDojave=request.user, userRevizija=tactic.user, predlozeniTijek=tijek, opis=errDesc, prihvacena=False)
+        dojava.save()
+        return HttpResponse("Success")
+        
