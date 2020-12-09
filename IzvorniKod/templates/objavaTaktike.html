@@ -27,6 +27,12 @@
           <p>Nakon što ste unjeli početno stanje ploče trebate naizmjence unositi poteze crne i bijele strane.
              Zadnji potez mora napraviti bijeli igrač.</p>
           <p>Kada ste gotovi stisnite 'Objavi taktiku'.</p>
+          <label class="font-weight-bold">Težina taktike:</label>
+          <select class="form-control" id="selectTezina">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
         </div>
         <div class ="col-8">
           <div class="row">
@@ -243,8 +249,9 @@ function endRecordConfirm() {
     $('#whiteTurnModal').modal()
     return
   }
-  white_moves = []
-  black_moves = []
+  let white_moves = []
+  let black_moves = []
+  let tezina = $('#selectTezina option:selected').text()
   game.history().forEach((elem, indx) => {
     if(indx % 2 == 0) {
       white_moves.push(elem)
@@ -258,6 +265,7 @@ function endRecordConfirm() {
     white_moves: white_moves.join(','),
     black_moves: black_moves.join(','),
     init_config: init_config_string,
+    tezina: tezina
   }
 
   $.post(url, data, function(data, status) {

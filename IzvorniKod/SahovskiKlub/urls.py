@@ -7,7 +7,7 @@ from .views import ListaTaktikaView
 from .views import ProfileView
 from .views import RemoveListView
 from .views import PregledTransakcijaView
-from .views import DemoTacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView
+from .views import TacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView
 
 urlpatterns = [
     path('', HomeView.as_view()),
@@ -15,7 +15,7 @@ urlpatterns = [
     path('login', views.LoginView.as_view()),
     path('register', RegisterView.as_view()),
     path('dnevneTaktike', ListaTaktikaView.as_view()),
-    path('taktika', DemoTacticView.as_view()),
+    path('taktika', TacticView.as_view()),
     path('objavaTaktike', TacticCreationView.as_view()),
     path('revidiranjeTaktike', TacticRevisionView.as_view()),
     path('novosti', NovostiView.as_view()),

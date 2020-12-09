@@ -16,12 +16,24 @@
     <div class="container">
       <div class="row">
         <div class="col d-flex justify-content-center">
+          <h4>Težina: {{ tezina }}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
           <div id="myBoard" style="width: 500px"></div>
         </div>
       </div>
       <div class="row m-4">
         <div class="col d-flex justify-content-center">
           <a href="/dojavaGreske" type="button" id="endRecordBtn" class="btn btn-primary m-2">Dojavi grešku u taktici</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-felx justify-content-center text-center">
+            {% if already_solved %}
+            <i>Ovu taktiku već ste rješili, rezultat ovog pokušaja neće biti zabilježen.</i>
+            {% endif %}
         </div>
       </div>
     </div>
@@ -42,17 +54,43 @@
 </div>
 
 <div class="modal fade" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Pobjeda!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
 
         <div class="modal-body">
-            Bravo, dobro si rješio taktiku!<br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.
+            Bravo, dobro si rješio taktiku! <br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.<br/><br/>
+            Težina ove taktike trebala bi biti: 
+            <select class="form-control" id="selectTezina">
+                <option>Ne želim glasati</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button id="storeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Evidentiraj!</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odbaci pokušaj</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="postSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Evidentirano!</h5>
+        </div>
+
+        <div class="modal-body">
+            Uspješno je evidentirano da si rješio taktiku.
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
         </div>
       </div>
     </div>
@@ -64,14 +102,22 @@
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
 
+{% csrf_token %}
 {{ tactic_data|json_script:"tactic_data" }}
 <script>
-const tactic_data = JSON.parse(document.getElementById('tactic_data').textContent);
-let black_moves = tactic_data.black_moves;
-let white_moves = tactic_data.white_moves;
+$.ajaxSetup({
+   headers:{
+    "X-CSRFToken": '{{ csrf_token }}'
+   }
+});
+const all_data = JSON.parse(JSON.parse(document.getElementById('tactic_data').textContent))[0]
+const tactic_data = all_data['fields'];
+let black_moves = tactic_data.movesBlack.split(',');
+let white_moves = tactic_data.movesWhite.split(',');
 let start = new Date().getTime();
+let elapsed_seconds
 var board = null
-var game = new Chess(tactic_data.start_position)
+var game = new Chess(tactic_data.initConfig)
 
 function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over
@@ -85,11 +131,27 @@ function onTacticSolved() {
     game.clear();
     board.clear();
     let end = new Date().getTime();
-    let elapsed_seconds = (end - start) / 1000.0;
+    elapsed_seconds = (end - start) / 1000.0;
     console.log(elapsed_seconds);
     $('#elapsedSeconds').text(`${elapsed_seconds.toFixed(2)}`)
     $('#victoryModal').modal()
+}
 
+function postSolved() {
+    const url = '/taktika';
+    let tezina = $('#selectTezina option:selected').text()
+    if (tezina == 'Ne želim glasati') {
+        tezina = ''
+    }
+    const data = {
+        sekunde: elapsed_seconds,
+        tezina: tezina,
+        taktika_id: all_data.pk,
+    }
+
+  $.post(url, data, function(data, status) {
+    $('#postSuccessModal').modal()
+  })
 }
 
 function makeBlackMove () {
@@ -136,12 +198,13 @@ function onSnapEnd () {
 
 var config = {
   draggable: true,
-  position: tactic_data.start_position,
+  position: tactic_data.initConfig,
   onDragStart: onDragStart,
   onDrop: onDrop,
   onSnapEnd: onSnapEnd
 }
 board = Chessboard('myBoard', config)
+$('#storeBtn').on('click', postSolved)
 // --- End Example JS ----------------------------------------------------------
 </script>
 {% endblock %}
