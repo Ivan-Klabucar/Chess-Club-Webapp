@@ -1,6 +1,13 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import HomeView, RegisterView, DemoTacticView, ListaTaktikaView, NovostiView, TacticCreationView, TacticRevisionView, TacticErrorReportView, TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView, ProfileView, ObjavaNovostiView, RemoveListView, PregledTransakcijaView
+from .views import HomeView, RegisterView
+from .views import TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView
+from .views import NovostiView, ObjavaNovostiView
+from .views import ListaTaktikaView
+from .views import ProfileView
+from .views import RemoveListView
+from .views import PregledTransakcijaView
+from .views import DemoTacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView
 
 urlpatterns = [
     path('', HomeView.as_view()),
@@ -14,10 +21,10 @@ urlpatterns = [
     path('novosti', NovostiView.as_view()),
     path('objavaNovosti', ObjavaNovostiView.as_view()),
     path('profil', ProfileView.as_view()),
-	path('treninzi', TreninziView.as_view()),
-	path('dodavanjeTreninga', DodavanjeTreningaView.as_view()),
-	path('turniri', TurniriView.as_view()),
-	path('dodavanjeTurnira', DodavanjeTurniraView.as_view()),
+    path('treninzi', TreninziView.as_view()),
+    path('dodavanjeTreninga', DodavanjeTreningaView.as_view()),
+    path('turniri', TurniriView.as_view()),
+    path('dodavanjeTurnira', DodavanjeTurniraView.as_view()),
     path('dojavaGreske', TacticErrorReportView.as_view()),
     path('removeLista', RemoveListView.as_view()),
     path('pregledTransakcija', PregledTransakcijaView.as_view())
