@@ -1,0 +1,5 @@
+Django
+django-extensions
+psycopg2
+pytz
+sqlparse

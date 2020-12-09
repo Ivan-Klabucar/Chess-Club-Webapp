@@ -1,7 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import HomeView, RegisterView, DemoTacticView, ListaTaktikaView, NovostiView, TacticCreationView, TacticRevisionView, TacticErrorReportView, TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView, ProfileView, ObjavaNovostiView, RemoveListView
-
+from .views import HomeView, RegisterView, DemoTacticView, ListaTaktikaView, NovostiView, TacticCreationView, TacticRevisionView, TacticErrorReportView, TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView, ProfileView, ObjavaNovostiView, RemoveListView, PregledTransakcijaView
 
 urlpatterns = [
     path('', HomeView.as_view()),
@@ -20,5 +19,6 @@ urlpatterns = [
 	path('turniri', TurniriView.as_view()),
 	path('dodavanjeTurnira', DodavanjeTurniraView.as_view()),
     path('dojavaGreske', TacticErrorReportView.as_view()),
-    path('removeLista', RemoveListView.as_view())
+    path('removeLista', RemoveListView.as_view()),
+    path('pregledTransakcija', PregledTransakcijaView.as_view())
 ]
