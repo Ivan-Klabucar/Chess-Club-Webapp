@@ -27,6 +27,22 @@ class RegisterView(View):
         context['form'] = form
         return render(request, 'registration/sign_up.html', context)
 
+class RemoveListView(View):
+    def get(self, request):
+        context = {
+            "članovi": [
+                {
+                    "ime": "Marko",
+                    "zadnjaTransakcija" : "11.2020."
+                },
+                {
+                    "ime": "Ivo",
+                    "zadnjaTransakcija" : "10.2020."
+                }
+            ]
+        }
+        return render(request, 'removeLista.html', context)
+
 
 class ListaTaktikaView(View):
     def get(self, request):
