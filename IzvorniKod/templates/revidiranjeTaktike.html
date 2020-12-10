@@ -96,7 +96,8 @@
 {% block js_import %} 
 
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
 
 {{ tactic_data|json_script:"tacticData" }}
 {% csrf_token %}
@@ -203,7 +204,7 @@ function acceptRevision() {
 
   $.post(url, data, function(data, status) {
     $('#revisionSuccessModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 function rejectRevision() {
@@ -216,7 +217,7 @@ function rejectRevision() {
 
   $.post(url, data, function(data, status) {
     $('#revisionRejectedModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 var old_config = {

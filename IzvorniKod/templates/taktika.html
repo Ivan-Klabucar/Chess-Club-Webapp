@@ -61,18 +61,28 @@
         </div>
 
         <div class="modal-body">
-            Bravo, dobro si rješio taktiku! <br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.<br/><br/>
-            Težina ove taktike trebala bi biti: 
-            <select class="form-control" id="selectTezina">
-                <option>Ne želim glasati</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-            </select>
+            Bravo, dobro si rješio taktiku! <br/>Trebalo ti je <span id="elapsedSeconds"></span> sekundi.
+            {% if request.user.is_authenticated and not request.user.profil.admin and not request.user.profil.trener %}
+              {% if not already_solved %}  
+                <br/><br/>Težina ove taktike trebala bi biti:
+                <select class="form-control" id="selectTezina">
+                    <option>Ne želim glasati</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+              {% endif %}
+            {% else %}
+                <br/><i>Rješenja trenera i admina ne evidentiraju se.</i>
+            {% endif %}
         </div>
         <div class="modal-footer justify-content-center">
-            <button id="storeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Evidentiraj!</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odbaci pokušaj</button>
+            {% if request.user.is_authenticated and not request.user.profil.admin and not request.user.profil.trener and not already_solved %}
+                <button id="storeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Evidentiraj!</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Odbaci pokušaj</button>
+            {% else %}
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Zatvori</button>
+            {% endif %}
         </div>
       </div>
     </div>
@@ -100,7 +110,8 @@
 {% block js_import %} 
 
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
 
 {% csrf_token %}
 {{ tactic_data|json_script:"tactic_data" }}
@@ -151,7 +162,7 @@ function postSolved() {
 
   $.post(url, data, function(data, status) {
     $('#postSuccessModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 function makeBlackMove () {
