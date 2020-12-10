@@ -204,8 +204,8 @@ function endRecordConfirm() {
     $('#descriptionTooShortModal').modal()  
     return
   }
-  white_moves = []
-  black_moves = []
+  let white_moves = []
+  let black_moves = []
   game.history().forEach((elem, indx) => {
     if(indx % 2 == 0) {
       white_moves.push(elem)
@@ -220,6 +220,7 @@ function endRecordConfirm() {
     black_moves: black_moves.join(','),
     init_config: init_config_string,
     error_description: error_description,
+    tactic_id: tactic_data.tactic_id
   }
 
   $.post(url, data, function(data, status) {
