@@ -13,7 +13,6 @@ class HomeView(View):
     def get(self, request):
         return render(request, 'homepage.html')
 
-
 class RegisterView(View):
     def get(self, request):
         context = {}
@@ -206,21 +205,6 @@ class TurniriView(View):
         print(request.POST.get('idUsera'))
         print(request.POST.get('idTurnira'))
         return redirect('/turniri')
-
-
-class ObjavaNovostiView(View):
-    def get(self, request):
-        user = request.user
-        if not (user.is_superuser or user.is_staff):
-            return render_error(request, "Nemate ovlasti za objavu", 400)
-        context = {}
-        return render(request, 'objavaNovosti.html', context)
-
-    def post(self, request):
-        user_curr = request.user
-        new_novost = Novost(user = user_curr, vrijemeObjave = datetime.now(), naslov = request.POST.get('title'), tekst = request.POST.get('text'))
-        new_novost.save()
-        return redirect('/novosti')
 
 class DodavanjeTurniraView(View):
     def get(self, request):
