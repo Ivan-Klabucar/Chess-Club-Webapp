@@ -360,18 +360,31 @@
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+				Na slici 4.5 prikazan je dijagram stanja za neregistriranog korisnika. Pri otvaranju aplikacije, korisniku se otvara početna stranica (Novosti) na kojoj može pročitati sve novosti koje su objavljene. Klikom na Login korisniku se otvara stranica na kojoj se može prijaviti upisivanjem korisničkog imena (Username) i lozinke (Password), no pošto nije registriran neće se moći prijaviti i koristiti dodatne mogućnosti aplikacije. Korisniku se klikom na „Register“ otvara stranica na kojoj može stvoriti korisnički račun unošenjem korisničkog imena (Username) i lozinke (Password). Ako korisnik zadovoljava sve uvjete vezane uz odabir korisničkog imena i lozinke pritiskom na Sign up korisnik stvara korisnički račun.
+				Također, klikom na „Dnevne taktike“ korisniku se otvara stranica na kojoj može odabrati dnevnu taktiku i započeti s njezinim rješavanjem. Rješavajući taktiku, u slučaju odabira krivog poteza, korisniku se javlja poruka „Krivi potez!“ te pritiskom na „Zatvori“ korisnik može nastaviti s rješavanjem dnevne taktike. U slučaju odabira posljednjeg traženog točnog poteza, korisniku se javlja poruka „Uspješno ste riješili dnevnu taktiku!“ i klikom na „Povratak na Dnevne taktike“ korisnik se vraća na stranicu „Dnevne taktike“ gdje može odabrati već riješenu ili neku drugu taktiku.
+				
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.21]{dijagrami/Dijagram stanja - Neregistriran korisnik.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram stanja za neregistriranog korisnika}
+				\label{fig:UC9}
+			\end{figure}
+			
+			\eject
 			
 			
-			\eject 
-		
 		\section{Dijagram aktivnosti}
+		
+		Na slici 4.6 prikazan je proces revidiranja pogreške u taktici. Trener otvara pregled s detaljima o dojavi pogreške u taktici i u ovisnosti o tome je li dojava o pogrešci valjana potvrđuje ili odbija dojavu. U slučaju da prihvati dojavu, taktika se automatski revidira te se rang liste članova također ažuriraju.
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+				\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.25]{dijagrami/Dijagram aktivnosti - Revidiranje dojave o pogrešci u taktici.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram aktivnosti za revidiranje dojave o pogrešci na taktici}
+				\label{fig:UC9}
+			\end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
