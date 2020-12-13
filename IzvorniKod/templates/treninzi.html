@@ -1,39 +1,44 @@
 {% extends "base.html" %}
 {% block header %}
 	<div class="container text-center">
-		<h1>Treninzi</h1>	<!--if current_user==trener "moji treninzi" else "svi treninzi"-->
-		<a class="btn btn-primary" href="/dodavanjeTreninga" role="button">Dodaj trening</a>	<!--ovaj gumb prikazuj samo adminu i trenerima-->
+		<h1>Treninzi</h1>
+        {% if request.user.is_authenticated and (request.user.profil.trener or request.user.profil.admin) %}
+            <a class="btn btn-primary" href="/dodavanjeTreninga" role="button">Dodaj trening</a>
+        {% endif %}
 	</div>
 {% endblock %}
 
 {% block content %}
 
 	{% for trening in listaTreninga %}
-			<!--if (current_user==clan||admin) || trening.organizator == current_user-->
+		{% if (request.user.is_authenticated and not request.user.profil.trener) or (request.user.is_authenticated and (request.user.id == request.trening.organizator_id ))%}
 			<section id="trening">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 mx-auto">
 
-							<h2>{{ trening.organizator }}</h2>
-							<h5>{{ trening.vrijemePocetka }} - {{ trening.vrijemeZavrsetka }} {{ trening.datum }}</h5>
+							<h2>{{ trening.org }}</h2>
+							<h5>{{ trening.vrijemeP }} - {{ trening.vrijemeZ }} </h5>
 							<p class="lead">{{ trening.opis }}</p>
-							<form method="post" onsubmit="return confirm('Jeste li sigurni da se želite prijaviti na ovaj trening?');">
-								{% csrf_token %}
-								<input class="form-control" type="hidden" name="idUsera" value="{{ request.user.id }}" readonly id="id_idUsera">
-								<input class="form-control" type="hidden" name="idTreninga" value="{{ trening.idTreninga }}" readonly id="id_idTreninga">
-								<button type="submit" class="btn btn-primary" style="float:left;" name="prijava" onclick="potvrdiPrijavu()" >Prijavi me</button><!--ovaj form prikazuj clanovima-->
-							</form>
-							
-							<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj trening?');">
-								<button type="submit" class="btn btn-danger" style="float:right;" name="brisanje">Obriši trening</button>	<!--ovaj gumb prikazuj adminu i trenerima-->
-							</form>
-							
+                            {% if request.user.is_authenticated and not request.user.profil.trener and not request.user.profil.admin %}
+                                <form method="post" onsubmit="return confirm('Jeste li sigurni da se želite prijaviti na ovaj trening?');">
+                                    {% csrf_token %}
+                                    <input class="form-control" type="hidden" name="idUsera" value="{{ request.user.id }}" readonly id="id_idUsera">
+                                    <input class="form-control" type="hidden" name="idTreninga" value="{{ trening.idTreninga }}" readonly id="id_idTreninga">
+                                    <button type="submit" class="btn btn-primary" style="float:left;" name="prijava" onclick="potvrdiPrijavu()" >Prijavi me</button>
+                                </form>
+							{% endif %}
+                            {% if request.user.is_authenticated and (request.user.profil.trener or request.user.profil.admin) %}
+                                <form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj trening?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" style="float:right;" name="brisanje">Obriši trening</button>
+                                </form>
+							{% endif %}
 						</div>
 					</div>
 				</div>
 			</section>
 			<hr>
-			<!--end if-->
+		{% endif %}
 	{%endfor%}
 {% endblock %}
