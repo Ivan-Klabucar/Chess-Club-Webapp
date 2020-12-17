@@ -20,6 +20,7 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profil.save()
 
 class Taktika(models.Model):
+    ime = models.CharField(max_length=50, default='default ime')
     createdAt = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     initConfig = models.CharField(max_length=100)
@@ -39,7 +40,7 @@ class DojavaPogreske(models.Model):
     taktika = models.ForeignKey(Taktika, on_delete=models.CASCADE)
     userDojave = models.ForeignKey(User, on_delete=models.CASCADE)
     userRevizija = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userDojave')
-    prihvacena = models.BooleanField()
+    prihvacena = models.BooleanField(null=True, blank=True)
     predlozeniTijek = models.CharField(max_length=6000, default='')
     opis = models.CharField(max_length=3000, default='')
 
@@ -55,6 +56,7 @@ class Novost(models.Model):
     vidljivost = models.BooleanField(default=1)
 
 class Trening(models.Model):
+    ime = models.CharField(max_length=50, default='default ime')
     organizator = models.ForeignKey(User, on_delete=models.CASCADE)
     vrijemePocetka = models.DateTimeField()
     vrijemeZavrsetka = models.DateTimeField()
@@ -66,6 +68,7 @@ class PrijavaTrening(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Turnir(models.Model):
+    ime = models.CharField(max_length=50, default='default ime')
     formatTurnira = models.CharField(max_length=100, default='')
     vrijemePocetka = models.DateTimeField()
     vrijemeZavrsetka = models.DateTimeField()
@@ -73,7 +76,7 @@ class Turnir(models.Model):
     vidljivost = models.BooleanField(default=1)
 
 class PrijavaTurnir(models.Model):
-    trening = models.ForeignKey(Turnir, on_delete=models.CASCADE)
+    turnir = models.ForeignKey(Turnir, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Transakcija(models.Model):
