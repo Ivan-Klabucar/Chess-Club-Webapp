@@ -31,22 +31,6 @@ class RegisterView(View):
         return render(request, 'registration/sign_up.html', context)
 
 
-class RemoveListView(View):
-    def get(self, request):
-        context = {
-            "članovi": [
-                {
-                    "ime": "Marko",
-                    "zadnjaTransakcija": "11.2020."
-                },
-                {
-                    "ime": "Ivo",
-                    "zadnjaTransakcija": "10.2020."
-                }
-            ]
-        }
-        return render(request, 'removeLista.html', context)
-
 
 class ListaTaktikaView(View):
     def get(self, request):
@@ -70,24 +54,6 @@ class ListaTaktikaView(View):
         }
         return render(request, 'listaDnevnihTaktika.html', context)
 
-
-class ProfileView(View):
-    def get(self, request):
-        context = {
-            "uloga": "Član kluba",
-            "listaAktivnosti": [
-                {
-                    "tekstAktivnosti": "30.11. Riješena taktika xy."
-                },
-                {
-                    "tekstAktivnosti": "1.12. Prijavljen na trening xy."
-                },
-                {
-                    "tekstAktivnosti": "2.12. Riješena taktika z."
-                }
-            ]
-        }
-        return render(request, 'profil.html', context)
 
 
 class NovostiView(View):

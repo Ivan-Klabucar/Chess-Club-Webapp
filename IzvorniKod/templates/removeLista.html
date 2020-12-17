@@ -1,3 +1,8 @@
+from django.template.defaulttags import register
+...
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 {% extends "base.html" %}
 {% block header %}
 	<div class="container text-center">
@@ -15,14 +20,17 @@
                     <br/>
                 </div>
             </div>
-            {% for član in članovi %}
+            {% for user, value in dictTransakcije.items %}
                 <div class="row justify-content-center">
                     <div class="col-lg-8 offset-lg-3">
-                        <h3>{{ član.ime }}</h3>
-                        Zadnji plaćeni mjesec: {{ član.zadnjaTransakcija }}
-                        <button class="btn btn-danger" type="button">
-                            Makni status člana
-                        </button>
+                        <h3>{{ user.user.username }}</h3>
+                        Zadnje plaćanje: {{ value }}
+                        <form method="post" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit" name ="status" value="{{ user.id }}">
+                                Makni status člana
+                            </button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}
