@@ -5,7 +5,7 @@ from ..models import *
 
 class ListaTaktikaView(View):
     def get(self, request):
-        taktike = Taktika.objects.order_by('id')
+        taktike = Taktika.objects.filter(vidljivost=True).order_by('id')
         lista_taktika = []
 
         for taktika in taktike:
