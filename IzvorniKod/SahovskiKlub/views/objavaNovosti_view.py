@@ -6,7 +6,6 @@ from django.http import HttpResponse
 from SahovskiKlub.models import DojavaPogreske, User, Novost
 from datetime import datetime
 
-
 class ObjavaNovostiView(View):
     def get(self, request):
         user = request.user
