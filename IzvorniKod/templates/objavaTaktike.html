@@ -27,6 +27,8 @@
           <p>Nakon što ste unjeli početno stanje ploče trebate naizmjence unositi poteze crne i bijele strane.
              Zadnji potez mora napraviti bijeli igrač.</p>
           <p>Kada ste gotovi stisnite 'Objavi taktiku'.</p>
+          <label class="font-weight-bold">Ime taktike:</label>
+          <input type="text" class="form-control" id="tacticName" /><br/>
           <label class="font-weight-bold">Težina taktike:</label>
           <select class="form-control" id="selectTezina">
             <option>1</option>
@@ -118,6 +120,19 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="noNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="exampleModalLongTitle">Niste unjeli ime taktike!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block js_import %} 
@@ -253,6 +268,11 @@ function endRecordConfirm() {
   let white_moves = []
   let black_moves = []
   let tezina = $('#selectTezina option:selected').text()
+  let tactic_name = $('#tacticName').val().trim()
+  if (tactic_name == "") {
+    $('#noNameModal').modal()
+    return
+  }
   game.history().forEach((elem, indx) => {
     if(indx % 2 == 0) {
       white_moves.push(elem)
@@ -266,11 +286,11 @@ function endRecordConfirm() {
     white_moves: white_moves.join(','),
     black_moves: black_moves.join(','),
     init_config: init_config_string,
-    tezina: tezina
+    tezina: tezina,
+    tactic_name: tactic_name
   }
 
   $.post(url, data, function(data, status) {
-    console.log(data)
     $('#creationSuccessModal').modal()
   }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }

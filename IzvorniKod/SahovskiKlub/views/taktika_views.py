@@ -84,12 +84,13 @@ class TacticCreationView(View):
         white_moves = request.POST.get('white_moves', '')
         black_moves = request.POST.get('black_moves', '')
         tezina = request.POST.get('tezina', '')
+        tactic_name = request.POST.get('tactic_name', '')
         curr_user = request.user
-        if not init_config or not white_moves or not tezina or not curr_user or not valid_moves(white_moves, black_moves):
+        if not tactic_name or not init_config or not white_moves or not tezina or not curr_user or not valid_moves(white_moves, black_moves):
             return render_error(request, 'Krivo zadana taktika', 400)
 
         new_tactic = Taktika(user=curr_user, initConfig=init_config,
-                             movesWhite=white_moves, movesBlack=black_moves, tezina=int(tezina), brojGlasova=1, createdAt=datetime.now())
+                             movesWhite=white_moves, movesBlack=black_moves, tezina=int(tezina), brojGlasova=1, createdAt=datetime.now(), ime=tactic_name)
         new_tactic.save()
         return redirect('/objavaTaktike')
 
@@ -182,7 +183,7 @@ class TacticErrorReportView(View):
             return render_error(request, 'Nisu poslani svi argumenti', 400)
         tactic = Taktika.objects.get(id=tactic_id)
         tijek = "{}<W|B>{}".format(movesWhite, movesBlack)
-        dojava = DojavaPogreske(taktika=tactic, userDojave=request.user, userRevizija=tactic.user, predlozeniTijek=tijek, opis=errDesc, prihvacena=False)
+        dojava = DojavaPogreske(taktika=tactic, userDojave=request.user, userRevizija=tactic.user, predlozeniTijek=tijek, opis=errDesc)
         dojava.save()
         return HttpResponse("Success")
         
