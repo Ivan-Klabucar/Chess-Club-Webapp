@@ -12,31 +12,17 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
             
-            <h2>Aktivne dnevne taktike</h2>
-            <div class="list-group mt-3 mb-4">
-            {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-            <a class="bg-light list-group-item list-group-item-action" href="/taktika">
-                    Autor: {{ taktikaIstaknuta.autor }}<br/>
-                    Datum: {{ taktikaIstakunta.datum }}
-            </a>
-            {%endfor%}
-            </div>
-
-            
-            
-            <h2>Popis neaktivnih dnevnih taktika</h2>
+            <h2>Dnevne taktike</h2>
             <div class="list-group mt-3 mb-4">
             {% for taktika in listaTaktika %}
-            <a class="bg-secondary text-white list-group-item list-group-item-action" href="/taktika">
-                Autor: {{ taktika.autor }}<br/>
-                Datum: {{ taktika.datum }}
+            <a class="{% if taktika.rjeseno %}bg-success text-light {% else %} bg-light {% endif %} list-group-item list-group-item-action border border-dark" href="/taktika?id={{ taktika.idTaktika }}">
+                    Autor: {{ taktika.autor }}<br/>
+                    Datum: {{ taktika.datum }}<br/>
+                    Ime: {{ taktika.ime }}
+                    {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
             </a>
             {%endfor%}
             </div>
-        </div>
-      </div>
-    </div>
-</section>
 
 
 
