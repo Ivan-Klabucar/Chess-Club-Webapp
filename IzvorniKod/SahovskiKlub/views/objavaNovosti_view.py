@@ -3,13 +3,16 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
-from SahovskiKlub.models import DojavaPogreske, User, Novost
+from SahovskiKlub.models import User, Novost
 from datetime import datetime
+
+def render_error(request, message, status_code):
+    return render(request, 'error.html', {'err_desc': message}, status=status_code)
 
 class ObjavaNovostiView(View):
     def get(self, request):
-        user = request.user
-        if not (user.is_superuser or user.is_staff):
+        user_curr = request.user
+        if not (user_curr.is_superuser or user_curr.is_staff):
             return render_error(request, "Nemate ovlasti za objavu", 400)
         context = {}
         return render(request, 'objavaNovosti.html', context)
