@@ -16,10 +16,13 @@
             <div class="list-group mt-3 mb-4">
             {% for taktika in listaTaktika %}
             <a class="{% if taktika.rjeseno %}bg-success text-light {% else %} bg-light {% endif %} list-group-item list-group-item-action border border-dark" href="/taktika?id={{ taktika.idTaktika }}">
+                    Ime: {{ taktika.ime }}<br/>
                     Autor: {{ taktika.autor }}<br/>
-                    Datum: {{ taktika.datum }}<br/>
-                    Ime: {{ taktika.ime }}
+                    Datum: {{ taktika.datum }}
                     {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
+            </a>
+            <a class="list-group-item list-group-item-action border border-dark bg-danger text-light" href="/deleteTaktika?id={{ taktika.idTaktika }}">
+                Delete {{ taktika.ime }}
             </a>
             {%endfor%}
             </div>

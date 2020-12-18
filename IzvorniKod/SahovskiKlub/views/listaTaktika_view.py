@@ -31,3 +31,17 @@ class ListaTaktikaView(View):
             "listaTaktika": lista_taktika
         }
         return render(request, 'listaDnevnihTaktika.html', context)
+
+class ObrisiTaktikuView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Morate se prijaviti kako bi brisali taktike', 400)
+        if not request.user.profil.admin:
+            return render_error(request, 'Samo admini imaju pristup brisanju liste taktika', 400)
+        taktika_id = request.GET.get('id', '')
+        if not taktika_id:
+            return render_error(request, 'Niste označili taktiku koju želite obrsiati', 400)
+        taktika = Taktika.objects.get(id=taktika_id)
+        taktika.vidljivost = False
+        taktika.save()
+        return redirect('/dnevneTaktike')
