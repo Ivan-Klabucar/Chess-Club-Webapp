@@ -21,9 +21,11 @@
                     Datum: {{ taktika.datum }}
                     {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
             </a>
+            {% if user.profil.admin %}
             <a class="list-group-item list-group-item-action border border-dark bg-danger text-light" href="/deleteTaktika?id={{ taktika.idTaktika }}">
                 Delete {{ taktika.ime }}
             </a>
+            {% endif %}
             {%endfor%}
             </div>
 
