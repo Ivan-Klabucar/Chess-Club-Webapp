@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
 from django.http import HttpResponse
-from SahovskiKlub.models import User, Trening, PrijavaTrening
+from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost
 from datetime import datetime
 from datetime import time
 import operator
@@ -16,6 +16,10 @@ def render_error(request, message, status_code):
 
 class TreninziView(View):
     def get(self, request):
+        context = {}
+        if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
+            #return render(request, 'placanjeClanarine.html', context)
+            a = 0
         treninziNesortirani = Trening.objects.filter(vidljivost=True)
         treninzi = sorted(treninziNesortirani, key=operator.attrgetter('vrijemePocetka'))
         treninziObj = []
@@ -37,9 +41,6 @@ class TreninziView(View):
                             "vrijemeP": trening.vrijemePocetka.strftime("%H:%M"),
                             "vrijemeZ": trening.vrijemeZavrsetka.strftime("%H:%M"),
                             "datum": trening.vrijemePocetka.strftime("%d.%m.%Y"),
-                            "godina": trening.vrijemePocetka.year,
-                            "mjesec": trening.vrijemePocetka.month,
-                            "dan": trening.vrijemePocetka.day,
                             "opis": trening.opisTreninga,
                             "prijavljen": prijavljen
                             }
@@ -57,17 +58,23 @@ class TreninziView(View):
 
         if(vrstaSubmita == "prijava"):
             novaPrijava = PrijavaTrening(user=User.objects.get(id=idUser), trening=Trening.objects.get(id=idTrening))
+            novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Prijava na trening "+idTrening)
+            novaAktivnost.save()
             novaPrijava.save()
         elif(vrstaSubmita == "brisanje"):
             treningDel = Trening.objects.get(id=idTrening)
             treningDel.vidljivost = False
+            novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Brisanje treninga "+idTrening)
+            novaAktivnost.save()
             treningDel.save()
         elif(vrstaSubmita == "odjava"):
             prijavaDel = PrijavaTrening.objects.get(user_id=idUser, trening_id=idTrening)
+            novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Odjava s treninga "+idTrening)
+            novaAktivnost.save()
             prijavaDel.delete()
         else:
             return render_error(request, "Vrsta formulara ne postoji.", 400)
-            
+
         return redirect('/treninzi')
 
 
@@ -99,10 +106,12 @@ class DodavanjeTreningaView(View):
                 if((vrijemePocetkaStari < vrijemePocetkaNovi < vrijemeZavrsetkaStari) 
                     or (vrijemePocetkaStari < vrijemeZavrsetkaNovi < vrijemeZavrsetkaStari)
                     or (vrijemePocetkaNovi <= vrijemePocetkaStari < vrijemeZavrsetkaStari <= vrijemeZavrsetkaNovi)
-                    or (vrijemePocetkaNovi > vrijemeZavrsetkaNovi)):
+                    or (vrijemePocetkaNovi >= vrijemeZavrsetkaNovi)):
                     brojPreklapanja = brojPreklapanja + 1
         if(brojPreklapanja != 0):
             return render_error(request, "Nemoguće stvoriti trening. Postoji preklapanje s postojećim treninzima ili je vrijeme početka veće od vremena završetka.", 400)
         else:
             noviTrening.save()
+            novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Stvaranje treninga "+str(noviTrening.id))
+            novaAktivnost.save()
         return redirect('/treninzi')
