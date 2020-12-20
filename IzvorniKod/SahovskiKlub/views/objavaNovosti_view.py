@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
-from SahovskiKlub.models import User, Novost
+from ..models import User, Novost
 from datetime import datetime
 
 def render_error(request, message, status_code):

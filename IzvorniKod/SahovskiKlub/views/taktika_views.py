@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from SahovskiKlub.models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost
+from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost
 from datetime import datetime
 from django.core import serializers
 

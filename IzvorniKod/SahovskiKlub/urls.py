@@ -1,14 +1,10 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import HomeView, RegisterView
+from .views import HomeView, RegisterView, NovostiView, PregledTransakcijaView, RemoveListView, ProfileView
 from .views import TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView
-from .views import NovostiView, ObjavaNovostiView
-from .views import ListaTaktikaView
-from .views import ProfileView
-from .views import RemoveListView
-from .views import PregledTransakcijaView
-from .views import PlacanjeClanarineView
-from .views import TacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView
+from .views.objavaNovosti_view import ObjavaNovostiView
+from .views.placanjeClanarine_view import PlacanjeClanarineView
+from .views import TacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView, ListaTaktikaView
 
 urlpatterns = [
     path('', HomeView.as_view()),

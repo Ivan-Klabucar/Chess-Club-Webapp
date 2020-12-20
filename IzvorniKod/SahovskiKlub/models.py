@@ -69,6 +69,7 @@ class PrijavaTrening(models.Model):
 
 class Turnir(models.Model):
     ime = models.CharField(max_length=50, default='default ime')
+    organizator = models.ForeignKey(User, on_delete=models.CASCADE, default='fejkJuzer')
     formatTurnira = models.CharField(max_length=100, default='')
     vrijemePocetka = models.DateTimeField()
     vrijemeZavrsetka = models.DateTimeField()
