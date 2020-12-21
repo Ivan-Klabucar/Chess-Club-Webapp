@@ -8,6 +8,9 @@
 {% block content %}
 
 <section id="about" class="pt-5">
+    {% if user.profil.admin or user.profil.trener %}
+    <a class="border border-dark bg-white position-fixed btn btn-light" style="right: 1%; bottom: 1%" href="/objavaTaktike">Dodaj taktiku</a>
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -21,7 +24,7 @@
                     Datum: {{ taktika.datum }}
                     {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
             </a>
-            {% if user.profil.admin %}
+            {% if user.profil.trener and taktika.autor_id == user.id or user.profil.admin %}
             <a class="list-group-item list-group-item-action border border-dark bg-danger text-light" href="/deleteTaktika?id={{ taktika.idTaktika }}">
                 Delete {{ taktika.ime }}
             </a>

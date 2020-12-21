@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth import views
 from .views import HomeView, RegisterView, NovostiView, PregledTransakcijaView, RemoveListView, ProfileView
 from .views import TreninziView, DodavanjeTreningaView, TurniriView, DodavanjeTurniraView
-from .views import NovostiView, ObjavaNovostiView
+from .views import NovostiView
 from .views import ListaTaktikaView, ObrisiTaktikuView
 from .views import ProfileView
 from .views import RemoveListView

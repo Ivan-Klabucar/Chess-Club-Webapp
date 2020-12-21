@@ -40,7 +40,7 @@ class PregledTransakcijaView(View):
             else:
                 lista_transakcija_ostalih.append(transakcija_obj)
 
-        users = Profil.objects.filter(trener=False).filter(admin=False).filter(placenaClanarina=True)
+        users = Profil.objects.filter(trener=False).filter(admin=False).filter(placenaClanarina=True).filter(zabranjenPristup=True)
 
         for user in users:
             if user.user.id not in lista_clanova_koji_su_platili:
@@ -67,7 +67,16 @@ class ZabraniPristupView(View):
         userid = request.GET.get('id', '')
         if not userid:
             return render_error(request, 'Niste označili korisnika kojemu želite zabraniti pristup', 400)
-        user = Profil.objects.get(id=userid)
+
+        user = Profil.objects.get(user=User.objects.get(id=userid))
         user.placenaClanarina = False
         user.save()
+
+        akivnost_string = request.user.username + " je zabranio pristup korisniku \"" + Profil.objects.get(user=User.objects.get(id=userid)).user.username + "\""
+        if len(akivnost_string) > 100:
+            aktivnost_string = aktivnost_string[0:96] + "..."
+
+        aktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost=aktivnost_string)
+        aktivnost.save()
+
         return redirect('/pregledTransakcija')

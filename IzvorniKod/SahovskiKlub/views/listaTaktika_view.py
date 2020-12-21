@@ -12,6 +12,7 @@ class ListaTaktikaView(View):
             if RjesenjeTaktike.objects.filter(taktika=taktika, user=request.user).exists():
                 taktika_obj = {
                     "autor": taktika.user.username,
+                    "autor_id": taktika.user.id,
                     "datum": taktika.createdAt,
                     "idTaktika": taktika.id,
                     "ime": taktika.ime,
@@ -21,6 +22,7 @@ class ListaTaktikaView(View):
             else:
                 taktika_obj = {
                     "autor": taktika.user.username,
+                    "autor_id": taktika.user.id,
                     "datum": taktika.createdAt,
                     "idTaktika": taktika.id,
                     "ime": taktika.ime
@@ -44,4 +46,12 @@ class ObrisiTaktikuView(View):
         taktika = Taktika.objects.get(id=taktika_id)
         taktika.vidljivost = False
         taktika.save()
+
+        akivnost_string=request.user.username + " je obrisao taktiku \"" + Taktika.objects.get(id=taktika_id).ime + "\""
+        if len(akivnost_string) > 100:
+            aktivnost_string = aktivnost_string[0:96] + "..."
+
+        aktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost=aktivnost_string)
+        aktivnost.save()
+
         return redirect('/dnevneTaktike')
