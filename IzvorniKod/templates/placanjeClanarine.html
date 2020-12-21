@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container text-center">
+	<h1>Placanje clanarine</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="centered-container" style="padding: 4rem;box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3)">
+    
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style:"display: inline;font-weight: bold;">
+                        Payment Details
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="cardNumber">
+                            CARD NUMBER</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name= "cardNumber" placeholder="Valid Card Number"
+                                required autofocus />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                    EXPIRY DATE</label>
+                                <div class="col-xs-6 col-lg-6 pl-ziro" style:"padding-left: 0px;">
+                                    <input type="text" class="form-control" name="expMonth" placeholder="MM" required />
+                                </div>
+                                <div class="col-xs-6 col-lg-6 pl-ziro" style:"padding-left: 0px;">
+                                    <input type="text" class="form-control" name="expYear" placeholder="YY" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CV CODE</label>
+                                <input type="password" class="form-control" name='cvCode' placeholder="CV" required />
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><span class="badge pull-right">100HRK</span>
+                        </li>
+                    </ul>
+                    <button type="submit" onclick = {return redirect(self.request.GET.get('profil'))} class="btn btn-success btn-lg btn-block" >Pay</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

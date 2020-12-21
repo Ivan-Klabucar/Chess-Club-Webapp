@@ -3,12 +3,15 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
+from ..models import DojavaPogreske, User, Novost
+from datetime import datetime
 
+def render_error(request, message, status_code):
+    return render(request, 'error.html', {'err_desc': message}, status=status_code)
 
 class HomeView(View):
     def get(self, request):
         return render(request, 'homepage.html')
-
 
 class RegisterView(View):
     def get(self, request):
@@ -179,18 +182,6 @@ class TurniriView(View):
         print(request.POST.get('idUsera'))
         print(request.POST.get('idTurnira'))
         return redirect('/turniri')
-
-
-class ObjavaNovostiView(View):
-    def get(self, request):
-        context = {}
-        return render(request, 'objavaNovosti.html', context)
-
-    def post(self, request):
-        print(request.POST.get('title'))
-        print(request.POST.get('text'))
-        return redirect('/novosti')
-
 
 class DodavanjeTurniraView(View):
     def get(self, request):

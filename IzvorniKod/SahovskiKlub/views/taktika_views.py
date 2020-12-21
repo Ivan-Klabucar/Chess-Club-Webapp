@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from SahovskiKlub.models import Taktika, RjesenjeTaktike, DojavaPogreske
+from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost
 from datetime import datetime
 from django.core import serializers
 
@@ -18,6 +18,10 @@ def valid_moves(white_moves, black_moves):
         return True
     else:
         return False
+
+def log_activity(user, description):
+    new_activity = Aktivnost(user=user, aktivnost=description, vrijemeAktivnosti=datetime.now())
+    new_activity.save()
 
 class TacticView(View):
     def get(self, request):
@@ -56,12 +60,14 @@ class TacticView(View):
         if not proslost_rjesavanja:
             rjesenje = RjesenjeTaktike(user=request.user, taktika=taktika, vrijeme=float(sekunde))
             rjesenje.save()
+            log_activity(request.user, "Rješena taktika #{}, {}".format(taktika.id, taktika.ime))
 
             if glas_tezina:
                 nova_tezina = ((taktika.tezina * taktika.brojGlasova) + int(glas_tezina)) / (taktika.brojGlasova + 1)
                 taktika.brojGlasova = taktika.brojGlasova + 1
                 taktika.tezina = nova_tezina
                 taktika.save()
+                log_activity(request.user, "Glasanje za težinu taktike #{}, glasana težina: {}".format(taktika.id, glas_tezina))
         return HttpResponse("Success")
 
 
@@ -84,13 +90,15 @@ class TacticCreationView(View):
         white_moves = request.POST.get('white_moves', '')
         black_moves = request.POST.get('black_moves', '')
         tezina = request.POST.get('tezina', '')
+        tactic_name = request.POST.get('tactic_name', '')
         curr_user = request.user
-        if not init_config or not white_moves or not tezina or not curr_user or not valid_moves(white_moves, black_moves):
+        if not tactic_name or not init_config or not white_moves or not tezina or not curr_user or not valid_moves(white_moves, black_moves):
             return render_error(request, 'Krivo zadana taktika', 400)
 
         new_tactic = Taktika(user=curr_user, initConfig=init_config,
-                             movesWhite=white_moves, movesBlack=black_moves, tezina=int(tezina), brojGlasova=1, createdAt=datetime.now())
+                             movesWhite=white_moves, movesBlack=black_moves, tezina=int(tezina), brojGlasova=1, createdAt=datetime.now(), ime=tactic_name)
         new_tactic.save()
+        log_activity(request.user, "Kreirana taktika #{}, {}".format(new_tactic.id, new_tactic.ime))
         return redirect('/objavaTaktike')
 
 
@@ -144,10 +152,11 @@ class TacticRevisionView(View):
             dojava.save()
             invalid_solutions = RjesenjeTaktike.objects.filter(taktika_id=taktika.id)
             invalid_solutions.delete()
+            log_activity(request.user, "Prihvaćena dojava o grešci #{}".format(dojava.id))
         else:
-            print("rejected")
             dojava.prihvacena = False
             dojava.save()
+            log_activity(request.user, "Odbijena dojava o grešci #{}".format(dojava.id))
         return HttpResponse('sve pet')
 
 
@@ -182,7 +191,8 @@ class TacticErrorReportView(View):
             return render_error(request, 'Nisu poslani svi argumenti', 400)
         tactic = Taktika.objects.get(id=tactic_id)
         tijek = "{}<W|B>{}".format(movesWhite, movesBlack)
-        dojava = DojavaPogreske(taktika=tactic, userDojave=request.user, userRevizija=tactic.user, predlozeniTijek=tijek, opis=errDesc, prihvacena=False)
+        dojava = DojavaPogreske(taktika=tactic, userDojave=request.user, userRevizija=tactic.user, predlozeniTijek=tijek, opis=errDesc)
         dojava.save()
+        log_activity(request.user, "Dojavljena greška u taktici #{}, id dojave: {}".format(tactic.id, dojava.id))
         return HttpResponse("Success")
         
