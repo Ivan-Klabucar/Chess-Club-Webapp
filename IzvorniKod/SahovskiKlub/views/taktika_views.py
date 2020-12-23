@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost
+from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost, Bodovi
 from datetime import datetime
 from django.core import serializers
 
@@ -195,4 +195,14 @@ class TacticErrorReportView(View):
         dojava.save()
         log_activity(request.user, "Dojavljena greška u taktici #{}, id dojave: {}".format(tactic.id, dojava.id))
         return HttpResponse("Success")
+
+class RangListaView(View):
+    def get(self, request):
+        rang_lista = Bodovi.objects.all()
+        response = ""
+        for zapis in rang_lista:
+            zapis_str = " - username: {}, bodovi: {}<br/><br/>".format(zapis.username, zapis.bodovi)
+            print(zapis_str)
+            response += zapis_str
+        return HttpResponse(response)
         
