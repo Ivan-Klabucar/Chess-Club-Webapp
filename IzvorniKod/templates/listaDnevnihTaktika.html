@@ -8,35 +8,29 @@
 {% block content %}
 
 <section id="about" class="pt-5">
+    {% if user.profil.admin or user.profil.trener %}
+    <a class="border border-dark bg-white position-fixed btn btn-light" style="right: 1%; bottom: 1%" href="/objavaTaktike">Dodaj taktiku</a>
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
             
-            <h2>Aktivne dnevne taktike</h2>
-            <div class="list-group mt-3 mb-4">
-            {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-            <a class="bg-light list-group-item list-group-item-action" href="/taktika">
-                    Autor: {{ taktikaIstaknuta.autor }}<br/>
-                    Datum: {{ taktikaIstakunta.datum }}
-            </a>
-            {%endfor%}
-            </div>
-
-            
-            
-            <h2>Popis neaktivnih dnevnih taktika</h2>
+            <h2>Dnevne taktike</h2>
             <div class="list-group mt-3 mb-4">
             {% for taktika in listaTaktika %}
-            <a class="bg-secondary text-white list-group-item list-group-item-action" href="/taktika">
-                Autor: {{ taktika.autor }}<br/>
-                Datum: {{ taktika.datum }}
+            <a class="{% if taktika.rjeseno %}bg-success text-light {% else %} bg-light {% endif %} list-group-item list-group-item-action border border-dark" href="/taktika?id={{ taktika.idTaktika }}">
+                    Ime: {{ taktika.ime }}<br/>
+                    Autor: {{ taktika.autor }}<br/>
+                    Datum: {{ taktika.datum }}
+                    {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
             </a>
+            {% if user.profil.trener and taktika.autor_id == user.id or user.profil.admin %}
+            <a class="list-group-item list-group-item-action border border-dark bg-danger text-light" href="/deleteTaktika?id={{ taktika.idTaktika }}">
+                Delete {{ taktika.ime }}
+            </a>
+            {% endif %}
             {%endfor%}
             </div>
-        </div>
-      </div>
-    </div>
-</section>
 
 
 
