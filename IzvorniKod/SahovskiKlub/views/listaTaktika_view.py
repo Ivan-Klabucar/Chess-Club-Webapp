@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from ..models import *
+from datetime import datetime
 
 class ListaTaktikaView(View):
     def get(self, request):
@@ -47,8 +48,8 @@ class ObrisiTaktikuView(View):
         taktika.vidljivost = False
         taktika.save()
 
-        akivnost_string=request.user.username + " je obrisao taktiku \"" + Taktika.objects.get(id=taktika_id).ime + "\""
-        if len(akivnost_string) > 100:
+        aktivnost_string="Brisanje taktike \"" + Taktika.objects.get(id=taktika_id).ime + "\""
+        if len(aktivnost_string) > 100:
             aktivnost_string = aktivnost_string[0:96] + "..."
 
         aktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost=aktivnost_string)

@@ -40,13 +40,13 @@ class PregledTransakcijaView(View):
             else:
                 lista_transakcija_ostalih.append(transakcija_obj)
 
-        users = Profil.objects.filter(trener=False).filter(admin=False).filter(placenaClanarina=True).filter(zabranjenPristup=True)
+        users = Profil.objects.filter(trener=False).filter(admin=False).filter(placenaClanarina=True).filter(zabranjenPristup=False)
 
         for user in users:
             if user.user.id not in lista_clanova_koji_su_platili:
                 duznik_obj = {
                     "username": user.user.username,
-                    "userid": user.id
+                    "userid": user.user.id
                 }
                 lista_duznika.append(duznik_obj)
 
@@ -72,8 +72,9 @@ class ZabraniPristupView(View):
         user.placenaClanarina = False
         user.save()
 
-        akivnost_string = request.user.username + " je zabranio pristup korisniku \"" + Profil.objects.get(user=User.objects.get(id=userid)).user.username + "\""
-        if len(akivnost_string) > 100:
+        aktivnost_string = "Zabranjen pristup korisniku \"" + Profil.objects.get(user=User.objects.get(id=userid)).user.username + "\""
+
+        if len(aktivnost_string) > 100:
             aktivnost_string = aktivnost_string[0:96] + "..."
 
         aktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost=aktivnost_string)

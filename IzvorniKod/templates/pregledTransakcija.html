@@ -8,7 +8,7 @@
 {% block content %}
 
 <section id="about" class="pt-5">
-    <div class="border border-dark bg-white position-fixed" style="right: 0px;">
+    <div class="{% if listaDuznika %} border border-dark {% endif %} bg-white position-fixed" style="right: 0px;">
         </br>
         {% for duznik in listaDuznika %}
         <p class="text-danger text-right">{{ duznik.username }} <span><a class="btn btn-danger btn-sm" href="/zabrani?id={{ duznik.userid }}">Zabrani</a></span></p>
