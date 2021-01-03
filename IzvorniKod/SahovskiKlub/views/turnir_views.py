@@ -116,9 +116,3 @@ class DodavanjeTurniraView(View):
             novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Stvaranje turnira "+str(noviTurnir.id))
             novaAktivnost.save()
         return redirect('/turniri')
-        
-        
-class PlacanjeClanarineView(View):
-    def get(self, request):
-        context = {}
-        return render(request, 'placanjeClanarine.html', context)
