@@ -17,14 +17,14 @@ class TurniriView(View):
     def get(self, request):
         context = {}
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
-            #return render(request, 'placanjeClanarine.html', context)
+            return render(request, 'placanjeClanarine.html', context)
             a = 0
         turniriNesortirani = Turnir.objects.filter(vidljivost=True)
         turniri = sorted(turniriNesortirani, key=operator.attrgetter('vrijemePocetka'))
         turniriObj = []
         
         for turnir in turniri:
-            #organizator = User.objects.get(id=turnir.organizator_id)
+            organizator = User.objects.get(id=turnir.organizator_id)
             prijavljen = False
             svePrijave = PrijavaTurnir.objects.all()
             brojSudionika = 0
@@ -37,8 +37,8 @@ class TurniriView(View):
 
             turnirObj = {  
                             "id": turnir.id,
-                            "orgId": "organizatorId",
-                            "org": "organizator",
+                            "orgId": organizator.id,
+                            "org": organizator.username,
                             "vrijemeP": turnir.vrijemePocetka.strftime("%H:%M"),
                             "vrijemeZ": turnir.vrijemeZavrsetka.strftime("%H:%M"),
                             "datumP": turnir.vrijemePocetka.strftime("%d.%m.%Y"),
@@ -61,7 +61,7 @@ class TurniriView(View):
         idTurnir = request.POST.get('idTurnira')
 
         if(vrstaSubmita == "prijava"):
-            novaPrijava = PrijavaTurnir(user=User.objects.get(id=idUser), trening=Turnir.objects.get(id=idTurnir))
+            novaPrijava = PrijavaTurnir(user=User.objects.get(id=idUser), turnir=Turnir.objects.get(id=idTurnir))
             novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Prijava na turnir "+idTurnir)
             novaAktivnost.save()
             novaPrijava.save()
@@ -72,7 +72,7 @@ class TurniriView(View):
             novaAktivnost.save()
             turnirDel.save()
         elif(vrstaSubmita == "odjava"):
-            prijavaDel = PrijavaTurnir.objects.get(user_id=idUser, trening_id=idTurnir)
+            prijavaDel = PrijavaTurnir.objects.get(user_id=idUser, turnir_id=idTurnir)
             novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Odjava s turnira "+idTurnir)
             novaAktivnost.save()
             prijavaDel.delete()
@@ -118,4 +118,7 @@ class DodavanjeTurniraView(View):
         return redirect('/turniri')
         
         
-        
+class PlacanjeClanarineView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'placanjeClanarine.html', context)

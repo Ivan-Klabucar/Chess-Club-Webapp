@@ -18,7 +18,7 @@ class TreninziView(View):
     def get(self, request):
         context = {}
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
-            #return render(request, 'placanjeClanarine.html', context)
+            return render(request, 'placanjeClanarine.html', context)
             a = 0
         treninziNesortirani = Trening.objects.filter(vidljivost=True)
         treninzi = sorted(treninziNesortirani, key=operator.attrgetter('vrijemePocetka'))
