@@ -96,7 +96,8 @@
 {% block js_import %} 
 
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
 
 {{ tactic_data|json_script:"tacticData" }}
 {% csrf_token %}
@@ -118,7 +119,8 @@ let new_black_moves = tactic_data.new_black_moves
 let new_white_moves = tactic_data.new_white_moves
 let old_start_position = tactic_data.old_start_position
 let new_start_position = tactic_data.new_start_position
-let revision_id = tactic_data.id
+let revision_id = tactic_data.revision_id
+let tactic_id = tactic_data.tactic_id
 
 var old_game = new Chess(old_start_position)
 var new_game = new Chess(new_start_position)
@@ -194,25 +196,28 @@ function resetNewTactic() {
 function acceptRevision() {
   const url = '/revidiranjeTaktike';
   const data = {
-    id: revision_id,
+    revision_id: revision_id,
+    tactic_id: tactic_id,
     confirmed: true,
   }
+  console.log(data)
 
   $.post(url, data, function(data, status) {
     $('#revisionSuccessModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 function rejectRevision() {
   const url = '/revidiranjeTaktike';
   const data = {
-    id: revision_id,
+    revision_id: revision_id,
+    tactic_id: tactic_id,
     confirmed: false,
   }
 
   $.post(url, data, function(data, status) {
     $('#revisionRejectedModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 var old_config = {

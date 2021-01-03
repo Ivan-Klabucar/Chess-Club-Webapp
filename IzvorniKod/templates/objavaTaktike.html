@@ -27,6 +27,14 @@
           <p>Nakon što ste unjeli početno stanje ploče trebate naizmjence unositi poteze crne i bijele strane.
              Zadnji potez mora napraviti bijeli igrač.</p>
           <p>Kada ste gotovi stisnite 'Objavi taktiku'.</p>
+          <label class="font-weight-bold">Ime taktike:</label>
+          <input type="text" class="form-control" id="tacticName" /><br/>
+          <label class="font-weight-bold">Težina taktike:</label>
+          <select class="form-control" id="selectTezina">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
         </div>
         <div class ="col-8">
           <div class="row">
@@ -112,12 +120,26 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="noNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <h5 class="modal-title" id="exampleModalLongTitle">Niste unjeli ime taktike!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block js_import %} 
 
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
 
 {% csrf_token %}
 <script>
@@ -243,8 +265,14 @@ function endRecordConfirm() {
     $('#whiteTurnModal').modal()
     return
   }
-  white_moves = []
-  black_moves = []
+  let white_moves = []
+  let black_moves = []
+  let tezina = $('#selectTezina option:selected').text()
+  let tactic_name = $('#tacticName').val().trim()
+  if (tactic_name == "") {
+    $('#noNameModal').modal()
+    return
+  }
   game.history().forEach((elem, indx) => {
     if(indx % 2 == 0) {
       white_moves.push(elem)
@@ -258,11 +286,13 @@ function endRecordConfirm() {
     white_moves: white_moves.join(','),
     black_moves: black_moves.join(','),
     init_config: init_config_string,
+    tezina: tezina,
+    tactic_name: tactic_name
   }
 
   $.post(url, data, function(data, status) {
     $('#creationSuccessModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 var config = {

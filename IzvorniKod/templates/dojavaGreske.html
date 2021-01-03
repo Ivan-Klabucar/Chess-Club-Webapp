@@ -100,7 +100,8 @@
 {% block js_import %} 
 
 <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
 
 {{ revision_data|json_script:"revision_data" }}
 {% csrf_token %}
@@ -204,8 +205,8 @@ function endRecordConfirm() {
     $('#descriptionTooShortModal').modal()  
     return
   }
-  white_moves = []
-  black_moves = []
+  let white_moves = []
+  let black_moves = []
   game.history().forEach((elem, indx) => {
     if(indx % 2 == 0) {
       white_moves.push(elem)
@@ -220,11 +221,12 @@ function endRecordConfirm() {
     black_moves: black_moves.join(','),
     init_config: init_config_string,
     error_description: error_description,
+    tactic_id: tactic_data.tactic_id
   }
 
   $.post(url, data, function(data, status) {
     $('#creationSuccessModal').modal()
-  })
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
 }
 
 $('#endRecordBtn').on('click', endRecordConfirm)

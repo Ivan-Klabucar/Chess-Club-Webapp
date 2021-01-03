@@ -3,12 +3,15 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
+from ..models import DojavaPogreske, User, Novost
+from datetime import datetime
 
+def render_error(request, message, status_code):
+    return render(request, 'error.html', {'err_desc': message}, status=status_code)
 
 class HomeView(View):
     def get(self, request):
         return render(request, 'homepage.html')
-
 
 class RegisterView(View):
     def get(self, request):
@@ -43,29 +46,6 @@ class RemoveListView(View):
             ]
         }
         return render(request, 'removeLista.html', context)
-
-
-class ListaTaktikaView(View):
-    def get(self, request):
-        context = {
-            "listaTaktika": [
-                {
-                    "autor": "Marko",
-                    "datum": "17.8.2019"
-                },
-                {
-                    "autor": "Ivo",
-                    "datum": "19.10.2020"
-                }
-            ],
-            "listaTaktikeIstaknute": [
-                {
-                    "autor": "Bruno",
-                    "datum": "19.10.2021"
-                }
-            ]
-        }
-        return render(request, 'listaDnevnihTaktika.html', context)
 
 
 class ProfileView(View):
@@ -127,47 +107,4 @@ class ObjavaNovostiView(View):
 
 
 
-class PregledTransakcijaView(View):
-    def get(self, request):
-        context = {
-            "listaTransakcijaPrije": [
-                {
-                    "platitelj": "Marko",
-                    "datum": "17.8.2019",
-                    "iznos": "175"
-                },
-                {
-                    "platitelj": "Ivo",
-                    "datum": "19.10.2020",
-                    "iznos": "175"
-                },
-                {
-                    "platitelj": "Bruno",
-                    "datum": "4.11.2020",
-                    "iznos": "175"
-                }
-            ],
-            "listaTransakcijaMjesec": [
-                {
-                    "platitelj": "Ana",
-                    "datum": "11.11.2020",
-                    "iznos": "175"
-                },
-                {
-                    "platitelj": "Hrvoje",
-                    "datum": "15.11.2020",
-                    "iznos": "175"
-                },
-                {
-                    "platitelj": "Bruno",
-                    "datum": "7.12.2020",
-                    "iznos": "175"
-                },
-                {
-                    "platitelj": "Petar",
-                    "datum": "25.11.2020",
-                    "iznos": "175"
-                }
-            ]
-        }
-        return render(request, 'pregledTransakcija.html', context)
+
