@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
+
+from . import render_error
 from ..models import *
 from datetime import datetime
 
 class ListaTaktikaView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
+
         taktike = Taktika.objects.filter(vidljivost=True).order_by('id')
         lista_taktika = []
 
@@ -37,6 +44,10 @@ class ListaTaktikaView(View):
 
 class ObrisiTaktikuView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
         if not request.user.is_authenticated:
             return render_error(request, 'Morate se prijaviti kako bi brisali taktike', 400)
         if not request.user.profil.admin:
