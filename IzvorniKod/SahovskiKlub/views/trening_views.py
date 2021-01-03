@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost
 from datetime import datetime
 from datetime import time
@@ -17,8 +17,10 @@ def render_error(request, message, status_code):
 class TreninziView(View):
     def get(self, request):
         context = {}
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
-            return render(request, 'placanjeClanarine.html', context)
+            return redirect('/placanjeClanarine')
             a = 0
         treninziNesortirani = Trening.objects.filter(vidljivost=True)
         treninzi = sorted(treninziNesortirani, key=operator.attrgetter('vrijemePocetka'))
@@ -83,6 +85,8 @@ class DodavanjeTreningaView(View):
     def get(self, request):
         context = {}
         user = request.user
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         if not (user.is_superuser or user.is_staff):
             return render_error(request, "Nemate ovlasti za stvaranje treninga.", 400)
         else:

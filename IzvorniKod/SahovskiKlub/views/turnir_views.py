@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from SahovskiKlub.models import User, Turnir, PrijavaTurnir, Aktivnost
 from datetime import datetime
 from datetime import time
@@ -16,8 +16,10 @@ def render_error(request, message, status_code):
 class TurniriView(View):
     def get(self, request):
         context = {}
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
-            return render(request, 'placanjeClanarine.html', context)
+            return redirect('/placanjeClanarine')
             a = 0
         turniriNesortirani = Turnir.objects.filter(vidljivost=True)
         turniri = sorted(turniriNesortirani, key=operator.attrgetter('vrijemePocetka'))
@@ -86,7 +88,12 @@ class TurniriView(View):
 class DodavanjeTurniraView(View):
     def get(self, request):
         context = {}
-        return render(request, 'dodavanjeTurnira.html', context)
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not (user.is_superuser or user.is_staff):
+            return render_error(request, "Nemate ovlasti za stvaranje turnira.", 400)
+        else:
+            return render(request, 'dodavanjeTurnira.html', context)
 
     def post(self, request):
         orgId = request.POST.get('orgId')
@@ -116,3 +123,8 @@ class DodavanjeTurniraView(View):
             novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Stvaranje turnira "+str(noviTurnir.id))
             novaAktivnost.save()
         return redirect('/turniri')
+
+class PlacanjeClanarineView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'placanjeClanarine.html', context)
