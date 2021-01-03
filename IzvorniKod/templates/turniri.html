@@ -44,7 +44,7 @@
                                     {% endif %}
                                 {% endif %}
                             {% endif %}
-                            {% if request.user.is_authenticated and request.user.profil.trener and turnir.idOrganizatora == request.user.id or request.user.is_authenticated and request.user.profil.admin %}
+                            {% if request.user.is_authenticated and request.user.profil.trener and turnir.orgId == request.user.id or request.user.is_authenticated and request.user.profil.admin %}
                                 <form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj turnir?');">
                                     {% csrf_token %}
                                     <input class="form-control" type="hidden" name="vrstaSubmita" value="brisanje" readonly id="id_vrsta">
