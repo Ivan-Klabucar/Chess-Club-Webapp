@@ -32,7 +32,7 @@ class TurniriView(View):
             brojSudionika = 0
             if(svePrijave):
                 for prijava in svePrijave:
-                    if(prijava.trening_id == turnir.id):
+                    if(prijava.turnir_id == turnir.id):
                         brojSudionika = brojSudionika + 1
                         if(prijava.user_id == request.user.id):
                             prijavljen = True
@@ -90,7 +90,7 @@ class DodavanjeTurniraView(View):
         context = {}
         if request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
-        if not (user.is_superuser or user.is_staff):
+        if not (request.user.is_superuser or request.user.is_staff):
             return render_error(request, "Nemate ovlasti za stvaranje turnira.", 400)
         else:
             return render(request, 'dodavanjeTurnira.html', context)
@@ -101,7 +101,7 @@ class DodavanjeTurniraView(View):
         vrijemeZ = request.POST.get('vrijemeZ')
         formatTurnira = request.POST.get('formatTurnira')
         maxBrojSudionika = request.POST.get('brojSudionika')
-        noviTurnir = Turnir(vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, formatTurnira=formatTurnira, brojSudionika=maxBrojSudionika)
+        noviTurnir = Turnir(vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, formatTurnira=formatTurnira, brojSudionika=maxBrojSudionika, organizator_id=orgId)
         vrijemePocetkaNovi = datetime.strptime(vrijemeP, "%Y-%m-%dT%H:%M")
         vrijemeZavrsetkaNovi = datetime.strptime(vrijemeZ, "%Y-%m-%dT%H:%M")
         sviTurniri = Turnir.objects.filter(vidljivost=True)
@@ -123,8 +123,3 @@ class DodavanjeTurniraView(View):
             novaAktivnost = Aktivnost(user=request.user, vrijemeAktivnosti=datetime.now(), aktivnost="Stvaranje turnira "+str(noviTurnir.id))
             novaAktivnost.save()
         return redirect('/turniri')
-
-class PlacanjeClanarineView(View):
-    def get(self, request):
-        context = {}
-        return render(request, 'placanjeClanarine.html', context)
