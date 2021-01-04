@@ -376,8 +376,7 @@
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-			Bla Bla tu ide opis.
+			Dijagram komponenti prikazan dolje ilustrira međuodnose i ovisnosti komponenta aplikacije Sahovski Klub. Korisnici sustavu pristupaju u web pregledniku putem standardnog REST api-ja. HTTP REST zahtjeve djangov interni ruter preusmjerava na odgovarajući view koji onda izvršava potrebnu logiku. Kada za izvršavanje te logike view mora raditi sa podatcima iz baze podataka on to obavlja preko DTO (data transfer objects). DTO su python objekti koji opisuju Modele objekata u bazi, a komunikaciju s bazom ostvaruju preko psycopg2 drivera koji Django aplikaciji omogućava komunikaciju sa PostgreSQL bazom podataka. Django middleware moduli pružaju razne funkcionalnosti o kojima su ovisne gotovo sve ostale komponente. Na primjer, Modeli koriste gotova rješenja za autentikaciju Usera kao sigurno spremanje šifri (hash, salt itd.), Template-ovi koriste CSRF tokene za sprječavanje cross site request forgery-ja, te View-ovi koriste session middleware za obavljanje logike o sesijama. Na kraju, view predaje sve potrebne informacije odgovarajućem template-u na renderiranje kojim se generiraju svi potrebni HTML dokumenti koji se zajedno sa CSS i Javascript datotekama šalju kao odgovor na REST upit web preglednika. Također trebaju se istaknuti Chessboard.js i Chess.js Javascript biblioteke koje omogućuju igranje šaha unutar korisnikovog web preglednika. Chessboard.js zadužen je za izgled šahovske ploče a za svu potrebnu šahovsku logiku oslanja se na Chess.js biblioteku. Za početak rada Chessboard.js biblioteci potrebne su određene šahovske informacije poput početnog stanja ploče koje je web preglednik dobio u sklopu odgovora na svoj REST upit.
 			 
 			 \begin{figure}[H]
 					\centerfloat
