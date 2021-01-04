@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.http import HttpResponse
-from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost, Bodovi
+from django.http import HttpResponse, HttpResponseForbidden
+from ..models import Taktika, RjesenjeTaktike, DojavaPogreske, Aktivnost, Bodovi, User
 from datetime import datetime
 from django.core import serializers
 
@@ -25,6 +25,10 @@ def log_activity(user, description):
 
 class TacticView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
         taktika_id = request.GET.get('id', '')
         if not taktika_id:
             return render_error(request, 'Niste označili koju taktiku želite rješiti', 400)
@@ -44,6 +48,10 @@ class TacticView(View):
         return render(request, 'taktika.html', context)
 
     def post(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
         if not request.user.is_authenticated:
             return render_error(request, 'Morate se prijaviti kako bi evidentirali rješenja taktike', 400)
         if request.user.profil.admin or request.user.profil.trener:
@@ -198,11 +206,29 @@ class TacticErrorReportView(View):
 
 class RangListaView(View):
     def get(self, request):
-        rang_lista = Bodovi.objects.all()
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
+        rang_lista = Bodovi.objects.all().order_by('-bodovi')
         response = ""
+        i = 1
+        rang_lista_obj = []
         for zapis in rang_lista:
-            zapis_str = " - username: {}, bodovi: {}<br/><br/>".format(zapis.username, zapis.bodovi)
-            print(zapis_str)
-            response += zapis_str
-        return HttpResponse(response)
+            user = User.objects.get(username=zapis.username)
+            zapis_obj = {
+                "username": zapis.username,
+                "bodovi": zapis.bodovi,
+                "pozicija": i,
+                "userId": user.id
+            }
+            i += 1
+            rang_lista_obj.append(zapis_obj)
+        #    zapis_str = " - username: {}, bodovi: {}<br/><br/>".format(zapis.username, zapis.bodovi)
+        #    print(zapis_str)
+        #    response += zapis_str
+        context = {
+            "rangLista": rang_lista_obj
+        }
+        return render(request, 'rangLista.html', context)
         
