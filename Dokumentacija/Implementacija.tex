@@ -67,12 +67,15 @@
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
+			\noindent Za početak potrebno je otići na stranicu \url{https://www.heroku.com/}, registrirati se i prijaviti se s vlastitim korisničkim podacima koji su kreirani putem registracije. 
 			
+			\noindent U sljedećem koraku treba otvoriti Command Prompt i pozicionirati se u mapu IzvorniKod unutar projekta.
 			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
+			\noindent Potom se upisuje naredba „heroku create“ pri čijem izvršavanju se dobije ime ime servera, a nakon nje „heroku git:remote -a“, i uz ovu naredbu se navodi ime heroku servera koji je dobiven u prethodnom koraku npr. „young-thicket-48718“.
+			
+			\noindent Nakon toga u datoteku settings.py u ALLOWED\texttt{\char`_}HOSTS treba staviti ime heroku servera i završiti sa ''.herokuapp.com'' npr. ''young-thicket-48718.herokuapp.com''. 
+			
+			\noindent Nakon što je to napravljeno u Command Promptu upisuje se naredba „git add .“, a poslije nje „git push heroku master“, te je time aplikacija namještena.
 			
 			
 			\eject 
