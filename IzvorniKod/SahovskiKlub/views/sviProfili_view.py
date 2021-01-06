@@ -40,8 +40,10 @@ class DetaljanProfilView(View):
         if not Profil.objects.filter(id=user_id).exists():
             return render_error(request, 'Profil s zadanim id-om ne postoji', 400)
         user = Profil.objects.get(id=user_id)
+        activityList = list(Aktivnost.objects.filter(user_id=user_id).order_by('vrijemeAktivnosti'))
         context = {
-            "detaljan_user": user
+            "detaljan_user": user,
+            "listaAktivnosti": activityList
         }
         return render(request, 'detaljanProfil.html', context)
 

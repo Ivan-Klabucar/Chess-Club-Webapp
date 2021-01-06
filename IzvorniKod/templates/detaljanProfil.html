@@ -35,7 +35,24 @@
                             </button>
                         </form>
                     {% endif %}
-                <br/>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto text-center">
+                                <br/>
+                                <h3>Aktivnosti</h3>
+                            </div>
+                        </div>
+                    {% for aktivnost in listaAktivnosti %}
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 offset-lg-2 text-left">
+                            {{ aktivnost.vrijemeAktivnosti }}
+                            -
+                            {{ aktivnost.aktivnost }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    <br/>
                     <div>
                         Datum stvaranja korisničkog računa: {{ detaljan_user.user.date_joined }}
                     </div>
