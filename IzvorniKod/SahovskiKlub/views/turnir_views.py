@@ -21,7 +21,8 @@ class TurniriView(View):
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
             return redirect('/placanjeClanarine')
             a = 0
-        turniriNesortirani = Turnir.objects.filter(vidljivost=True)
+        trenutnoVrijeme = datetime.now()
+        turniriNesortirani = Turnir.objects.filter(vidljivost=True, vrijemePocetka__gte=trenutnoVrijeme)
         turniri = sorted(turniriNesortirani, key=operator.attrgetter('vrijemePocetka'))
         turniriObj = []
         
@@ -43,8 +44,8 @@ class TurniriView(View):
                             "org": organizator.username,
                             "vrijemeP": turnir.vrijemePocetka.strftime("%H:%M"),
                             "vrijemeZ": turnir.vrijemeZavrsetka.strftime("%H:%M"),
-                            "datumP": turnir.vrijemePocetka.strftime("%d.%m.%Y"),
-                            "datumZ": turnir.vrijemeZavrsetka.strftime("%d.%m.%Y"),
+                            "datumP": turnir.vrijemePocetka.strftime("%d.%m.%Y."),
+                            "datumZ": turnir.vrijemeZavrsetka.strftime("%d.%m.%Y."),
                             "formatTurnira": turnir.formatTurnira,
                             "maxBrojSudionika": turnir.brojSudionika,
                             "brojSudionika": brojSudionika,

@@ -22,7 +22,8 @@ class TreninziView(View):
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
             return redirect('/placanjeClanarine')
             a = 0
-        treninziNesortirani = Trening.objects.filter(vidljivost=True)
+        trenutnoVrijeme = datetime.now()
+        treninziNesortirani = Trening.objects.filter(vidljivost=True, vrijemePocetka__gte=trenutnoVrijeme)
         treninzi = sorted(treninziNesortirani, key=operator.attrgetter('vrijemePocetka'))
         treninziObj = []
         
