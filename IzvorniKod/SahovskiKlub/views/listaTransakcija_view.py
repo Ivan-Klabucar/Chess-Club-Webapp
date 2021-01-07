@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from ..models import *
 from datetime import datetime, date
 from django.core import serializers
@@ -11,6 +11,10 @@ def render_error(request, message, status_code):
 
 class PregledTransakcijaView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
         if not request.user.is_authenticated:
             return render_error(request, 'Morate se prijaviti kako bi pregledali transakcije', 400)
         if not request.user.profil.admin:
@@ -18,7 +22,7 @@ class PregledTransakcijaView(View):
         transakcije = Transakcija.objects.order_by("-datumTransakcije")
         danasnji_datum = datetime.now()
 
-        if danasnji_datum.strftime("%m") == "1":
+        if danasnji_datum.strftime("%m") == "01":
             prijasnji_mjesec = 12
         else:
             prijasnji_mjesec = int(danasnji_datum.strftime("%m")) - 1
@@ -37,6 +41,10 @@ class PregledTransakcijaView(View):
             if transakcija.datumTransakcije >= zadnji_priznati_dan.date():
                 lista_transakcija_ovaj_mjesec.append(transakcija_obj)
                 lista_clanova_koji_su_platili.append(transakcija.user.id)
+            elif transakcija.datumTransakcije.strftime("%m") == "12" and danasnji_datum.strftime("%m") == "01":
+                if int(transakcija.datumTransakcije.strftime("%d")) >= int(danasnji_datum.strftime("%d")):
+                    lista_transakcija_ovaj_mjesec.append(transakcija_obj)
+                    lista_clanova_koji_su_platili.append(transakcija.user.id);
             else:
                 lista_transakcija_ostalih.append(transakcija_obj)
 
@@ -60,6 +68,10 @@ class PregledTransakcijaView(View):
 
 class ZabraniPristupView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
+        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+            return redirect('/placanjeClanarine')
         if not request.user.is_authenticated:
             return render_error(request, 'Morate se prijaviti kako bi pregledali transakcije', 400)
         if not request.user.profil.admin:
