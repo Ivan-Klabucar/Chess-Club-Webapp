@@ -8,62 +8,54 @@
 {% block content %}
 <div class="d-flex justify-content-center" style="padding: 2rem">
     <div class="h-25 w-25 border border-primary rounded" style="padding: 4rem;box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3)">
-        <form method="post">
+        <form method="post" onsubmit="return confirm('Jeste li sigurni da želite stvoriti ovaj trening?');">
 			{% csrf_token %}
 
             {% if form.errors %}
                 <p style="color: red"> Neispravan unos </p>
             {% endif %}
 
+
+
             <div class="input-group input-group-lg" style="padding-bottom: 2rem">
-				<input class="form-control" type="hidden" name="userID" value="{{ request.user.id }}" readonly id="id_userID">
+				<input class="form-control" type="hidden" name="orgId" value="{{ request.user.id }}" readonly id="id_userID">
             </div>
-			
-			
-            <label for="datetime" class="font-weight-light" style="font-size: 25px">
-                Datum:
-            </label>
-            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
-                <input class="form-control" type="date" name="date" required id="id_date">
-            </div>
-						
-			
+
+
+
 			<label for="startTime" class="font-weight-light" style="font-size: 25px">
                 Od:
             </label>
             <div class="input-group input-group-lg" style="padding-bottom: 2rem">
-                <input class="form-control" type="time" name="startTime" required id="id_startTime">
+                <input class="form-control" type="datetime-local" name="vrijemeP" required id="id_startTime">
             </div>
-						
-			
+
+
+
 			<label for="endTime" class="font-weight-light" style="font-size: 25px">
                 Do:
             </label>
             <div class="input-group input-group-lg" style="padding-bottom: 2rem">
-                <input class="form-control" type="time" name="endTime" required id="id_endTime">
+                <input class="form-control" type="datetime-local" name="vrijemeZ" required id="id_endTime">
             </div>
-						
-			
-			<label for="date" class="font-weight-light" style="font-size: 25px">
+
+
+
+			<label for="description" class="font-weight-light" style="font-size: 25px">
                 Opis treninga:
             </label>
             <div class="input-group input-group-lg" style="padding-bottom: 2rem">
-                <textarea class="form-control" name="description" required id="id_description" rows="5" cols="30"></textarea>
+                <textarea class="form-control" name="opis" required id="id_description" rows="5" cols="30"></textarea>
             </div>
-						
-			
+
+
+
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg"
-                        onclick="potvrdi()">Stvori trening</button>
+                <button type="submit" class="btn btn-primary btn-lg">Stvori trening</button>
             </div>
 			
         </form>
     </div>
 </div>
-<script>
-function potvrdi(){
-	confirm("Jeste li sigurni da želite stvoriti ovaj trening?");
-	{return redirect(self.request.GET.get('treninzi'))}
-}
-</script>
+
 {% endblock %}

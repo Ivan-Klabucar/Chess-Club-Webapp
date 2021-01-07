@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
-from SahovskiKlub.models import User, Novost
+from ..models import User, Novost, Aktivnost
 from datetime import datetime
 
 def render_error(request, message, status_code):
@@ -21,4 +21,6 @@ class ObjavaNovostiView(View):
         user_curr = request.user
         new_novost = Novost(user = user_curr, vrijemeObjave = datetime.now(), naslov = request.POST.get('title'), tekst = request.POST.get('text'))
         new_novost.save()
+        new_aktivnost = Aktivnost(user = user_curr, vrijemeAktivnosti = datetime.now(), aktivnost="Kreiranje novosti")
+        new_aktivnost.save()
         return redirect('/novosti')

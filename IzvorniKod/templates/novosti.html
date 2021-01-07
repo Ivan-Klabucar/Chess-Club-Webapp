@@ -12,6 +12,12 @@
 			<section id="novost" class="bg-light">
 				<div class="container">
 					<div class="row">
+						{% if request.user.profil.admin %}
+						<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovu novost?');">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-danger" style="top:0;right:0" name="brisanje" value="{{novost.id}}">Obriši novost</button>
+						</form>
+						{%endif%}
 						<div class="col-lg-8 mx-auto">
 							<h2>{{ novost.naslov }}</h2>
 							<p class="lead">{{ novost.tekst }}</p>
@@ -24,6 +30,12 @@
 			<section id="novost">
 				<div class="container">
 					<div class="row">
+						{% if request.user.profil.admin %}
+						<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovu novost?');">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-danger" style="top:0;right:0" name="brisanje" value="{{novost.id}}">Obriši novost</button>
+						</form>
+						{%endif%}
 						<div class="col-lg-8 mx-auto">
 							<h2>{{ novost.naslov }}</h2>
 							<p class="lead">{{ novost.tekst }}</p>
