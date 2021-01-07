@@ -29,9 +29,11 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand js-scroll-trigger" href="/">Početna</a>
         <a class="navbar-brand js-scroll-trigger" href="/dnevneTaktike">Dnevne taktike</a>
 		<a class="navbar-brand js-scroll-trigger" href="/novosti">Novosti</a>
         {% if user.is_authenticated %}
+        <a class="navbar-brand js-scroll-trigger" href="/rangLista">Rang lista</a>
 		<a class="navbar-brand js-scroll-trigger" href="/treninzi">Treninzi</a>
 		<a class="navbar-brand js-scroll-trigger" href="/turniri">Turniri</a>
         {% if user.profil.admin %}
@@ -49,16 +51,18 @@
                 <li>
                     <a href="/profil">Prikaz profila</a>
                 </li>
+                {% if request.user.profil.admin %}
                 <li>
-                    <a href="/placanjeClanarine">Placanje clanarine</a>
+                    <a href="/removeLista">Neplaćene članarine</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         {% else %}
         <a class="navbar-brand js-scroll-trigger" href="/login">Login</a>
         <a class="navbar-brand js-scroll-trigger" href="/register">Register</a>
         {% endif %}
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <!--<div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#about">About</a>
@@ -70,7 +74,7 @@
                     <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                 </li>
             </ul>
-        </div>
+        </div>-->
     </div>
 </nav>
 <header class="bg-primary text-white">
