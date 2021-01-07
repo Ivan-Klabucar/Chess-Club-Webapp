@@ -50,9 +50,11 @@
                 <li>
                     <a href="/profil">Prikaz profila</a>
                 </li>
+                {% if request.user.profil.admin %}
                 <li>
-                    <a href="/placanjeClanarine">Placanje clanarine</a>
+                    <a href="/removeLista">Neplaćene članarine</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         {% else %}
