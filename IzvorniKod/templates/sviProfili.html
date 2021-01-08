@@ -16,9 +16,12 @@
                 </div>
             </div>
             {% for user in users %}
+                <br/>
                 <div class="row justify-content-center">
-                    <div class="col-lg-8 offset-lg-3">
+                    <div class="col-lg-4 offset-lg-3">
                         {{ user.user.username }}
+                    </div>
+                    <div class="col-lg-4">
                         <form method="post" style="display:inline-block;">
                             {% csrf_token %}
                             <a href="/detaljanProfil?id={{ user.user_id }}" class="btn btn-primary" type="button" name ="userId" value="{{ user.user_id  }}">
