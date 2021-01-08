@@ -11,7 +11,7 @@ def render_error(request, message, status_code):
 
 class ProfileView(View):
     def get(self, request):
-        if request.user.profil.zabranjenPristup:
+        if request.user.is_authenticated and request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         if not request.user.is_authenticated:
             return render_error(request, 'Niste prijavljeni', 400)

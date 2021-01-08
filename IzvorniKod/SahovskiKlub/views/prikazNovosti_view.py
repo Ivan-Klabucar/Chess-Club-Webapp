@@ -6,7 +6,7 @@ from datetime import datetime
 
 class NovostiView(View):
     def get(self, request):
-        if request.user.profil.zabranjenPristup:
+        if request.user.is_authenticated and request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         novosti = Novost.objects.filter(vidljivost=True).order_by('-vrijemeObjave')
         lista_novosti = []
