@@ -32,8 +32,8 @@
         <a class="navbar-brand js-scroll-trigger" href="/">Početna</a>
         <a class="navbar-brand js-scroll-trigger" href="/dnevneTaktike">Dnevne taktike</a>
 		<a class="navbar-brand js-scroll-trigger" href="/novosti">Novosti</a>
-        {% if user.is_authenticated %}
         <a class="navbar-brand js-scroll-trigger" href="/rangLista">Rang lista</a>
+        {% if user.is_authenticated %}
 		<a class="navbar-brand js-scroll-trigger" href="/treninzi">Treninzi</a>
 		<a class="navbar-brand js-scroll-trigger" href="/turniri">Turniri</a>
         {% if user.profil.admin %}
