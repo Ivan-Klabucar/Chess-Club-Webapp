@@ -38,7 +38,7 @@ urlpatterns = [
     path('deleteTaktika', ObrisiTaktikuView.as_view()),
     path('pregledTransakcija', PregledTransakcijaView.as_view()),
     path('rangLista', RangListaView.as_view()),
-    path('listaDojavaPogreski', DojavaPogreskiView.as_view())
+    path('listaDojavaPogreski', DojavaPogreskiView.as_view()),
     path('sviProfili', SviProfiliView.as_view()),
     path('detaljanProfil', DetaljanProfilView.as_view())
 ]
