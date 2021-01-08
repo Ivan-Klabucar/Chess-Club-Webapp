@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from ..models import DojavaPogreske, User, Novost
 from datetime import datetime
 
@@ -11,6 +11,8 @@ def render_error(request, message, status_code):
 
 class HomeView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         return render(request, 'homepage.html')
 
 class RegisterView(View):
