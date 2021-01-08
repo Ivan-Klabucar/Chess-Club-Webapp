@@ -4,6 +4,10 @@
         <h1>Dnevne Taktike</h1>
         {% if request.user.is_authenticated and request.user.profil.trener %}
                 <a class="btn btn-primary" href="/listaDojavaPogreski" role="button">Pregled dojava pogreški</a>
+                <br/>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user.profil.admin or request.user.profil.trener %}
+            <a class="btn btn-primary" href="/objavaTaktike">Dodaj taktiku</a>
         {% endif %}
     </div>
 {% endblock %}
@@ -11,13 +15,9 @@
 {% block content %}
 
 <section id="about" class="pt-5">
-    {% if user.profil.admin or user.profil.trener %}
-    <a class="border border-dark bg-white position-fixed btn btn-light" style="right: 1%; bottom: 1%" href="/objavaTaktike">Dodaj taktiku</a>
-    {% endif %}
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-            
             <h2>Dnevne taktike</h2>
             <div class="list-group mt-3 mb-4">
             {% for taktika in listaTaktika %}
