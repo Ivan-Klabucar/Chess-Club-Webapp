@@ -38,6 +38,7 @@
 		<a class="navbar-brand js-scroll-trigger" href="/turniri">Turniri</a>
         {% if user.profil.admin %}
 		<a class="navbar-brand js-scroll-trigger" href="/pregledTransakcija">Pregled transakcija</a>
+        <a class="navbar-brand js-scroll-trigger" href="/sviProfili">Lista profila</a>
         {% endif %}
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -50,9 +51,11 @@
                 <li>
                     <a href="/profil">Prikaz profila</a>
                 </li>
+                {% if request.user.profil.admin %}
                 <li>
-                    <a href="/placanjeClanarine">Placanje clanarine</a>
+                    <a href="/removeLista">Neplaćene članarine</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         {% else %}

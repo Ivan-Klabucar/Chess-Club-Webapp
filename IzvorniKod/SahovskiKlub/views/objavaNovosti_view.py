@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
-from ..models import User, Novost, Aktivnost
+from ..models import User, Novost, Aktivnost, Profil
 from datetime import datetime
 
 def render_error(request, message, status_code):
@@ -11,10 +11,10 @@ def render_error(request, message, status_code):
 
 class ObjavaNovostiView(View):
     def get(self, request):
-        user_curr = request.user
-        if not (user_curr.is_superuser or user_curr.is_staff):
-            return render_error(request, "Nemate ovlasti za objavu", 400)
         context = {}
+        user_curr = Profil.objects.get(user=request.user)
+        if not (user_curr.trener or user_curr.admin and not user_curr.zabranjenPristup):
+            return render_error(request, "Nemate ovlasti za objavu", 400)
         return render(request, 'objavaNovosti.html', context)
 
     def post(self, request):

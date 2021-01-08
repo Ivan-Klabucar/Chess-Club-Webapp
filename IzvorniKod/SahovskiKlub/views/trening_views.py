@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
 from django.http import HttpResponse, HttpResponseForbidden
-from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost
+from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost, Profil
 from datetime import datetime
 from datetime import time
 import operator
@@ -22,7 +22,8 @@ class TreninziView(View):
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
             return redirect('/placanjeClanarine')
             a = 0
-        treninziNesortirani = Trening.objects.filter(vidljivost=True)
+        trenutnoVrijeme = datetime.now()
+        treninziNesortirani = Trening.objects.filter(vidljivost=True, vrijemePocetka__gte=trenutnoVrijeme)
         treninzi = sorted(treninziNesortirani, key=operator.attrgetter('vrijemePocetka'))
         treninziObj = []
         
@@ -84,11 +85,9 @@ class TreninziView(View):
 class DodavanjeTreningaView(View):
     def get(self, request):
         context = {}
-        user = request.user
-        if request.user.profil.zabranjenPristup:
-            return HttpResponseForbidden()
-        if not (user.is_superuser or user.is_staff):
-            return render_error(request, "Nemate ovlasti za stvaranje treninga.", 400)
+        user_curr = Profil.objects.get(user=request.user)
+        if not (user_curr.trener or user_curr.admin and not user_curr.zabranjenPristup):
+            return render_error(request, "Nemate ovlasti za objavu", 400)
         else:
             return render(request, 'dodavanjeTreninga.html', context)
 

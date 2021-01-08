@@ -28,8 +28,50 @@
             </div>
             {% for aktivnost in listaAktivnosti %}
                 <div class="row justify-content-center">
-                    <div class="col-lg-4 offset-lg-1">
-                        {{ aktivnost.tekstAktivnosti }}
+                    <div class="col-lg-4 text-right">
+                        {{ aktivnost.vrijemeAktivnosti }}
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        {{ aktivnost.aktivnost }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <br/>
+                    <h3>Prijave</h3>
+                </div>
+            </div>
+            {% for prijava in prijaveTrening %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        {{ prijava.trening.opisTreninga }}
+                        <form method="post" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTrening" value="{{ prijava.id }}"
+                                onclick="return confirm('Želite li se odjaviti s treninga?')">
+                                Odjavi se
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+         {% for prijava in prijaveTurnir %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        {{ prijava.trening.formatTurnira }}
+                        -
+                        {{ prijava.trening.brojSudionika }} Sudionika
+                        <form method="post" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTurnir" value="{{ prijava.id }}"
+                                onclick="return confirm('Želite li se odjaviti s turnira?')">
+                                Odjavi se
+                            </button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}

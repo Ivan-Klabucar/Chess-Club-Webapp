@@ -1,12 +1,7 @@
-from django.template.defaulttags import register
-...
-@register.filter
-def get_item(dictionary, key):
-    return dictionary.get(key)
 {% extends "base.html" %}
 {% block header %}
 	<div class="container text-center">
-		<h1>Neplaćene članarine</h1>
+		<h1>Lista svih profila</h1>
 	</div>
 {% endblock %}
 
@@ -16,23 +11,26 @@ def get_item(dictionary, key):
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
                     <br/>
-                    <h3>Članovi koji nisu platili članarinu</h3>
+                    <h3>Profili</h3>
                     <br/>
                 </div>
             </div>
-            {% for user, value in dictTransakcije.items %}
+            {% for user in users %}
+                <br/>
                 <div class="row justify-content-center">
-                    <div class="col-lg-8 offset-lg-3">
-                        <h3>{{ user.user.username }}</h3>
-                        Zadnje plaćanje: {{ value }}
+                    <div class="col-lg-4 offset-lg-3">
+                        {{ user.user.username }}
+                    </div>
+                    <div class="col-lg-4">
                         <form method="post" style="display:inline-block;">
                             {% csrf_token %}
-                            <button class="btn btn-danger" type="submit" name ="status" value="{{ user.id }}">
-                                Makni status člana
-                            </button>
+                            <a href="/detaljanProfil?id={{ user.user_id }}" class="btn btn-primary" type="button" name ="userId" value="{{ user.user_id  }}">
+                                Detaljan prikaz
+                            </a>
                         </form>
                     </div>
                 </div>
+                <br/>
             {% endfor %}
         </div>
     </section>
