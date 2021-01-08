@@ -28,9 +28,10 @@
             </div>
             {% for aktivnost in listaAktivnosti %}
                 <div class="row justify-content-center">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 text-right">
                         {{ aktivnost.vrijemeAktivnosti }}
-                        -
+                    </div>
+                    <div class="col-lg-4 text-left">
                         {{ aktivnost.aktivnost }}
                     </div>
                 </div>
