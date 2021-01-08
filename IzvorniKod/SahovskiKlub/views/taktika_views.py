@@ -25,7 +25,7 @@ def log_activity(user, description):
 
 class TacticView(View):
     def get(self, request):
-        if request.user.profil.zabranjenPristup:
+        if request.user.is_authenticated and request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
             return redirect('/placanjeClanarine')
