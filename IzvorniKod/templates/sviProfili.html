@@ -21,7 +21,7 @@
                         {{ user.user.username }}
                         <form method="post" style="display:inline-block;">
                             {% csrf_token %}
-                            <a href="/detaljanProfil?id={{ user.id }}" class="btn btn-primary" type="button" name ="userId" value="{{ user.id }}">
+                            <a href="/detaljanProfil?id={{ user.user_id }}" class="btn btn-primary" type="button" name ="userId" value="{{ user.user_id  }}">
                                 Detaljan prikaz
                             </a>
                         </form>
