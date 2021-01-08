@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
 from django.http import HttpResponse, HttpResponseForbidden
-from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost
+from SahovskiKlub.models import User, Trening, PrijavaTrening, Aktivnost, Profil
 from datetime import datetime
 from datetime import time
 import operator
