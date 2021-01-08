@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block header %}
-<div class="container text-center">
-    <h1>Dnevne Taktike</h1>
-</div>
+    <div class="container text-center">
+        <h1>Dnevne Taktike</h1>
+        {% if request.user.is_authenticated and request.user.profil.trener %}
+                <a class="btn btn-primary" href="/listaDojavaPogreski" role="button">Pregled dojava pogreški</a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block content %}
