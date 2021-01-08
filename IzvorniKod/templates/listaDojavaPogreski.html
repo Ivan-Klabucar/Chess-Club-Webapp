@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Prijave pogreški u taktikama</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+    {% if listaDojava %}
+        {% for dojava in listaDojava %}
+            <section id="dojava">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <h2>Ime taktike: {{ dojava.imeTaktike }}</h2>
+                            <h5>Pogrešku dojavio/la: {{ dojava.posiljatelj }}</h5>
+                            <p class="lead">Opis: {{ dojava.opis }}</p>
+                            <form method="post" onsubmit="return confirm('Jeste li sigurni da želite revidirati ovu dojavu?');">
+                                {% csrf_token %}
+                                <input class="form-control" type="hidden" name="idDojave" value="{{ dojava.id }}" readonly id="id_idDojave">
+                                <button type="submit" class="btn btn-primary" style="float:left;" name="prijava">Revidiraj</button>
+                            </form>	
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+        {%endfor%}
+    {% else %}
+        <section class="pt-5">
+        <div class="container">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h4>Trenutno nema dojavljenih pogrešaka.</h4>
+            </div>
+          </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
