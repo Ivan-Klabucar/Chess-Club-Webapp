@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views import View
 from django.http import HttpResponse, HttpResponseForbidden
-from SahovskiKlub.models import User, Turnir, PrijavaTurnir, Aktivnost
+from SahovskiKlub.models import User, Turnir, PrijavaTurnir, Aktivnost, Profil
 from datetime import datetime
 from datetime import time
 import operator
@@ -21,7 +21,8 @@ class TurniriView(View):
         if(not request.user.profil.trener and not request.user.profil.admin and not request.user.profil.placenaClanarina):
             return redirect('/placanjeClanarine')
             a = 0
-        turniriNesortirani = Turnir.objects.filter(vidljivost=True)
+        trenutnoVrijeme = datetime.now()
+        turniriNesortirani = Turnir.objects.filter(vidljivost=True, vrijemePocetka__gte=trenutnoVrijeme)
         turniri = sorted(turniriNesortirani, key=operator.attrgetter('vrijemePocetka'))
         turniriObj = []
         
@@ -43,8 +44,8 @@ class TurniriView(View):
                             "org": organizator.username,
                             "vrijemeP": turnir.vrijemePocetka.strftime("%H:%M"),
                             "vrijemeZ": turnir.vrijemeZavrsetka.strftime("%H:%M"),
-                            "datumP": turnir.vrijemePocetka.strftime("%d.%m.%Y"),
-                            "datumZ": turnir.vrijemeZavrsetka.strftime("%d.%m.%Y"),
+                            "datumP": turnir.vrijemePocetka.strftime("%d.%m.%Y."),
+                            "datumZ": turnir.vrijemeZavrsetka.strftime("%d.%m.%Y."),
                             "formatTurnira": turnir.formatTurnira,
                             "maxBrojSudionika": turnir.brojSudionika,
                             "brojSudionika": brojSudionika,
@@ -88,10 +89,9 @@ class TurniriView(View):
 class DodavanjeTurniraView(View):
     def get(self, request):
         context = {}
-        if request.user.profil.zabranjenPristup:
-            return HttpResponseForbidden()
-        if not (request.user.is_superuser or request.user.is_staff):
-            return render_error(request, "Nemate ovlasti za stvaranje turnira.", 400)
+        user_curr = Profil.objects.get(user=request.user)
+        if not (user_curr.trener or user_curr.admin and not user_curr.zabranjenPristup):
+            return render_error(request, "Nemate ovlasti za objavu", 400)
         else:
             return render(request, 'dodavanjeTurnira.html', context)
 
