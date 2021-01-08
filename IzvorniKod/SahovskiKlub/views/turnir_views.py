@@ -89,10 +89,9 @@ class TurniriView(View):
 class DodavanjeTurniraView(View):
     def get(self, request):
         context = {}
-        if request.user.profil.zabranjenPristup:
-            return HttpResponseForbidden()
-        if not (request.user.is_superuser or request.user.is_staff):
-            return render_error(request, "Nemate ovlasti za stvaranje turnira.", 400)
+        user_curr = Profil.objects.get(user=request.user)
+        if not (user_curr.trener or user_curr.admin and not user_curr.zabranjenPristup):
+            return render_error(request, "Nemate ovlasti za objavu", 400)
         else:
             return render(request, 'dodavanjeTurnira.html', context)
 
