@@ -44,6 +44,7 @@ class TacticView(View):
             'tezina': taktika.tezina,
             'already_solved': vec_rijeseno,
             'taktika_id': taktika.id,
+            'taktika_ime': taktika.ime
         }
         return render(request, 'taktika.html', context)
 
