@@ -12,6 +12,7 @@ from .views.placanjeClanarine_view import PlacanjeClanarineView
 from .views.sviProfili_view import SviProfiliView, DetaljanProfilView
 from .views.prikazNovosti_view import NovostiView
 from .views import TacticView, TacticCreationView, TacticRevisionView, TacticErrorReportView, ListaTaktikaView, RangListaView
+from .views.dojavaPogreski_views import DojavaPogreskiView
 
 urlpatterns = [
     path('', HomeView.as_view()),
@@ -37,6 +38,7 @@ urlpatterns = [
     path('deleteTaktika', ObrisiTaktikuView.as_view()),
     path('pregledTransakcija', PregledTransakcijaView.as_view()),
     path('rangLista', RangListaView.as_view()),
+    path('listaDojavaPogreski', DojavaPogreskiView.as_view())
     path('sviProfili', SviProfiliView.as_view()),
     path('detaljanProfil', DetaljanProfilView.as_view())
 ]
