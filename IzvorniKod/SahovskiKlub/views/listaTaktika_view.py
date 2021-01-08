@@ -17,16 +17,25 @@ class ListaTaktikaView(View):
         lista_taktika = []
 
         for taktika in taktike:
-            if RjesenjeTaktike.objects.filter(taktika=taktika, user=request.user).exists():
-                taktika_obj = {
-                    "autor": taktika.user.username,
-                    "autor_id": taktika.user.id,
-                    "datum": taktika.createdAt,
-                    "idTaktika": taktika.id,
-                    "ime": taktika.ime,
-                    "vrijeme": RjesenjeTaktike.objects.filter(taktika=taktika, user=request.user).first().vrijeme,
-                    "rjeseno": "1"
-                }
+            if request.user.is_authenticated:
+                if RjesenjeTaktike.objects.filter(taktika=taktika, user=request.user).exists():
+                    taktika_obj = {
+                        "autor": taktika.user.username,
+                        "autor_id": taktika.user.id,
+                        "datum": taktika.createdAt,
+                        "idTaktika": taktika.id,
+                        "ime": taktika.ime,
+                        "vrijeme": RjesenjeTaktike.objects.filter(taktika=taktika, user=request.user).first().vrijeme,
+                        "rjeseno": "1"
+                    }
+                else:
+                    taktika_obj = {
+                        "autor": taktika.user.username,
+                        "autor_id": taktika.user.id,
+                        "datum": taktika.createdAt,
+                        "idTaktika": taktika.id,
+                        "ime": taktika.ime
+                    }
             else:
                 taktika_obj = {
                     "autor": taktika.user.username,
@@ -44,14 +53,14 @@ class ListaTaktikaView(View):
 
 class ObrisiTaktikuView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Samo admini imaju pristup brisanju taktika', 400)
         if request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
             return redirect('/placanjeClanarine')
-        if not request.user.is_authenticated:
-            return render_error(request, 'Morate se prijaviti kako bi brisali taktike', 400)
         if not request.user.profil.admin:
-            return render_error(request, 'Samo admini imaju pristup brisanju liste taktika', 400)
+            return render_error(request, 'Samo admini imaju pristup brisanju taktika', 400)
         taktika_id = request.GET.get('id', '')
         if not taktika_id:
             return render_error(request, 'Niste označili taktiku koju želite obrsiati', 400)
