@@ -11,12 +11,12 @@ def render_error(request, message, status_code):
 
 class PregledTransakcijaView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Samo admini imaju pristup listi transakcija', 400)
         if request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
             return redirect('/placanjeClanarine')
-        if not request.user.is_authenticated:
-            return render_error(request, 'Morate se prijaviti kako bi pregledali transakcije', 400)
         if not request.user.profil.admin:
             return render_error(request, 'Samo admini imaju pristup listi transakcija', 400)
         transakcije = Transakcija.objects.order_by("-datumTransakcije")
@@ -68,12 +68,12 @@ class PregledTransakcijaView(View):
 
 class ZabraniPristupView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Samo admini imaju pristup zabrani pristupa', 400)
         if request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
         if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
             return redirect('/placanjeClanarine')
-        if not request.user.is_authenticated:
-            return render_error(request, 'Morate se prijaviti kako bi pregledali transakcije', 400)
         if not request.user.profil.admin:
             return render_error(request, 'Samo admini imaju pristup listi transakcija', 400)
         userid = request.GET.get('id', '')

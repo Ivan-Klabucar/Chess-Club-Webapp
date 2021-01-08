@@ -11,6 +11,8 @@ def render_error(request, message, status_code):
 
 class ObjavaNovostiView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Samo admini imaju pristup objavi novosti', 400)
         context = {}
         user_curr = Profil.objects.get(user=request.user)
         if not (user_curr.trener or user_curr.admin and not user_curr.zabranjenPristup):
