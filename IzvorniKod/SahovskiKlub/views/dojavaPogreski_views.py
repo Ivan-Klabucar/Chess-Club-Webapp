@@ -28,7 +28,7 @@ class DojavaPogreskiView(View):
             dojavaObj = {   
                             "id": dojava.id,
                             "imeTaktike": taktika.ime,
-                            "posiljatelj": dojava.userPrijava,
+                            "posiljatelj": dojava.userDojave,
                             "opis": dojava.opis
                             }
             dojaveObj.append(dojavaObj)
