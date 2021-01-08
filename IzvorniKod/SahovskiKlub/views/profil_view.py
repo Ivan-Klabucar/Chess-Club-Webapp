@@ -13,7 +13,7 @@ class ProfileView(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return render_error(request, 'Niste prijavljeni', 400)
-        user = Profil.objects.get(id=request.user.id)
+        user = Profil.objects.get(user_id=request.user.id)
         if user.admin:
             role = "Admin"
         elif user.trener:
