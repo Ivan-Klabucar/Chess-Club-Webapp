@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.models import User
 from SahovskiKlub.models import Aktivnost, PrijavaTrening, PrijavaTurnir, Profil
 
@@ -11,6 +11,8 @@ def render_error(request, message, status_code):
 
 class ProfileView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         if not request.user.is_authenticated:
             return render_error(request, 'Niste prijavljeni', 400)
         user = Profil.objects.get(user_id=request.user.id)

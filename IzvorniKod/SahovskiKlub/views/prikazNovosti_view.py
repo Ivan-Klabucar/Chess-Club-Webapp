@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from ..models import DojavaPogreske, Profil, User, Novost, Aktivnost
 from datetime import datetime
 
 class NovostiView(View):
     def get(self, request):
+        if request.user.profil.zabranjenPristup:
+            return HttpResponseForbidden()
         novosti = Novost.objects.filter(vidljivost=True).order_by('-vrijemeObjave')
         lista_novosti = []
         for novost in novosti:
