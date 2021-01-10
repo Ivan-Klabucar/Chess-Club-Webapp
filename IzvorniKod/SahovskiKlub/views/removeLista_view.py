@@ -21,6 +21,9 @@ class RemoveListView(View):
         dict = {}
         for user in userList:
             transakcije = Transakcija.objects.filter(user_id=user.id)
+            if transakcije is None:
+                dict[user] = "Korisnik nema transakcije"
+                continue
             zadnjaTransakcija = Transakcija.objects.filter(user_id=user.id).first()
             for transakcija in transakcije:
                 if transakcija.datumTransakcije.isoformat() > zadnjaTransakcija.datumTransakcije.isoformat():
