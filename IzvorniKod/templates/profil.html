@@ -43,12 +43,15 @@
                 <div class="col-lg-8 mx-auto text-center">
                     <br/>
                     <h3>Prijave</h3>
+                    <br/>
                 </div>
             </div>
             {% for prijava in prijaveTrening %}
                 <div class="row justify-content-center">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 text-right">
                         {{ prijava.trening.opisTreninga }}
+                    </div>
+                    <div class="col-lg-4 text-left">
                         <form method="post" style="display:inline-block;">
                             {% csrf_token %}
                             <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTrening" value="{{ prijava.id }}"
@@ -58,13 +61,17 @@
                         </form>
                     </div>
                 </div>
+                <br/>
             {% endfor %}
          {% for prijava in prijaveTurnir %}
                 <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        {{ prijava.trening.formatTurnira }}
+                    <div class="col-lg-4 text-right">
+                        Turnir br. {{ prijava.turnir.id }}
+                        {{ prijava.turnir.formatTurnira }}
                         -
-                        {{ prijava.trening.brojSudionika }} Sudionika
+                        {{ prijava.turnir.brojSudionika }} Sudionika
+                    </div>
+                    <div class="col-lg-4 text-left">
                         <form method="post" style="display:inline-block;">
                             {% csrf_token %}
                             <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTurnir" value="{{ prijava.id }}"
@@ -74,6 +81,7 @@
                         </form>
                     </div>
                 </div>
+             <br/>
             {% endfor %}
         </div>
     </section>
