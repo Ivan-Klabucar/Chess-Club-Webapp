@@ -22,7 +22,7 @@ class DojavaPogreskiView(View):
             return HttpResponseForbidden()
         if not request.user.profil.trener or request.user.profil.admin:
             return render_error(request, 'Samo treneri i admini imaju pristup listi dojava pogreški', 400)
-        dojave = DojavaPogreske.objects.filter(userRevizija=request.user)
+        dojave = DojavaPogreske.objects.filter(userRevizija=request.user, prihvacena__isnull=True)
         dojaveObj = []
         
         for dojava in dojave:
