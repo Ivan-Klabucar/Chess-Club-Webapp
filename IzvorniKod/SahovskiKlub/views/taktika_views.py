@@ -25,10 +25,11 @@ def log_activity(user, description):
 
 class TacticView(View):
     def get(self, request):
-        if request.user.is_authenticated and request.user.profil.zabranjenPristup:
-            return HttpResponseForbidden()
-        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
-            return redirect('/placanjeClanarine')
+        if request.user.is_authenticated:
+            if request.user.profil.zabranjenPristup:
+                return HttpResponseForbidden()
+            if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+                return redirect('/placanjeClanarine')
         taktika_id = request.GET.get('id', '')
         if not taktika_id:
             return render_error(request, 'Niste označili koju taktiku želite rješiti', 400)
@@ -206,10 +207,11 @@ class TacticErrorReportView(View):
 
 class RangListaView(View):
     def get(self, request):
-        if request.user.profil.zabranjenPristup:
-            return HttpResponseForbidden()
-        if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
-            return redirect('/placanjeClanarine')
+        if request.user.is_authenticated:
+            if request.user.profil.zabranjenPristup:
+                return HttpResponseForbidden()
+            if not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
+                return redirect('/placanjeClanarine')
         rang_lista = Bodovi.objects.all().order_by('-bodovi')
         response = ""
         i = 1

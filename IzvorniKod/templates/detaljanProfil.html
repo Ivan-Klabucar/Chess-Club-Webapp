@@ -18,6 +18,8 @@
                     {% elif detaljan_user.trener %}
                         <h5>Trener</h5>
                         <br/>
+                    {% else %}
+                        <h5>Član</h5>
                     {% endif %}
                     {% if detaljan_user.zabranjenPristup %}
                         <h5>Zabranjen pristup</h5>
@@ -27,6 +29,7 @@
                                 Omogući pristup
                             </button>
                         </form>
+                        <br>
                     {% else %}
                         <form method="post">
                             {% csrf_token %}
@@ -34,6 +37,38 @@
                                 Onemogući pristup
                             </button>
                         </form>
+                        <br>
+                        <div class="container">
+                            {% if not detaljan_user.trener and not detaljan_user.admin%}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit" name ="promoteTrener" value="{{ detaljan_user.user_id }}">
+                                        Dodijeli ulogu trenera
+                                    </button>
+                                </form>
+                                <br>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit" name ="promoteAdmin" value="{{ detaljan_user.user_id }}">
+                                        Dodijeli ulogu administratora
+                                    </button>
+                                </form>
+                            {% elif detaljan_user.trener %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit" name ="demoteTrener" value="{{ detaljan_user.user_id }}">
+                                        Oduzmi ulogu trenera
+                                    </button>
+                                </form>
+                            {% elif detaljan_user.admin %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit" name ="demoteAdmin" value="{{ detaljan_user.user_id }}">
+                                        Oduzmi ulogu administratora
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </div>
                     {% endif %}
                     <div class="container">
                         <div class="row">

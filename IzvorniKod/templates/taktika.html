@@ -73,7 +73,11 @@
                 </select>
               {% endif %}
             {% else %}
-                <br/><i>Rješenja trenera i admina ne evidentiraju se.</i>
+                {% if not request.user.is_authenticated %}
+                    <br/><i>Rješenja neregistriranih članova ne evidentiraju se.</i>
+                {% else %}
+                    <br/><i>Rješenja trenera i admina ne evidentiraju se.</i>
+                {% endif %}
             {% endif %}
         </div>
         <div class="modal-footer justify-content-center">
