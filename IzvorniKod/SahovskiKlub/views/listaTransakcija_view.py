@@ -44,7 +44,15 @@ class PregledTransakcijaView(View):
             elif transakcija.datumTransakcije.strftime("%m") == "12" and danasnji_datum.strftime("%m") == "01":
                 if int(transakcija.datumTransakcije.strftime("%d")) >= int(danasnji_datum.strftime("%d")):
                     lista_transakcija_ovaj_mjesec.append(transakcija_obj)
-                    lista_clanova_koji_su_platili.append(transakcija.user.id);
+                    lista_clanova_koji_su_platili.append(transakcija.user.id)
+                else:
+                    lista_transakcija_ostalih.append(transakcija_obj)
+            elif zadnji_priznati_dan.strftime("%m") == "12" and danasnji_datum.strftime("%m") == "01":
+                if int(transakcija.datumTransakcije.strftime("%d")) <= int(danasnji_datum.strftime("%d")):
+                    lista_transakcija_ovaj_mjesec.append(transakcija_obj)
+                    lista_clanova_koji_su_platili.append(transakcija.user.id)
+                else:
+                    lista_transakcija_ostalih.append(transakcija_obj)
             else:
                 lista_transakcija_ostalih.append(transakcija_obj)
 
