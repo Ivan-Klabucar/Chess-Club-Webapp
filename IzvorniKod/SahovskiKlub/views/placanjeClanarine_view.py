@@ -11,6 +11,8 @@ def render_error(request, message, status_code):
 
 class PlacanjeClanarineView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Morate biti prijavljeni za uplatu članarine', 400)
         context = {}
         user_profil = Profil.objects.get(user=request.user)
         if (user_profil.placenaClanarina):

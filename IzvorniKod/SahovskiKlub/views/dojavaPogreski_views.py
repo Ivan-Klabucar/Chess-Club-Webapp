@@ -15,9 +15,13 @@ def render_error(request, message, status_code):
 
 class DojavaPogreskiView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return render_error(request, 'Samo treneri i admini imaju pristup listi dojava pogreški', 400)
         context = {}
         if request.user.profil.zabranjenPristup:
             return HttpResponseForbidden()
+        if not request.user.profil.trener or request.user.profil.admin:
+            return render_error(request, 'Samo treneri i admini imaju pristup listi dojava pogreški', 400)
         dojave = DojavaPogreske.objects.filter(userRevizija=request.user)
         dojaveObj = []
         
