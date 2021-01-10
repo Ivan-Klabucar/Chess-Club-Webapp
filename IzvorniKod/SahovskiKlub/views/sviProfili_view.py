@@ -54,6 +54,19 @@ class DetaljanProfilView(View):
         elif request.POST.get('disable'):
             detaljan_id = request.POST.get('disable')
             Profil.objects.filter(user_id=detaljan_id).update(zabranjenPristup=True)
+        elif request.POST.get('promoteTrener'):
+            detaljan_id = request.POST.get('promoteTrener')
+            Profil.objects.filter(user_id=detaljan_id).update(trener=True)
+        elif request.POST.get('demoteTrener'):
+            detaljan_id = request.POST.get('demoteTrener')
+            Profil.objects.filter(user_id=detaljan_id).update(trener=False)
+        elif request.POST.get('promoteAdmin'):
+            detaljan_id = request.POST.get('promoteAdmin')
+            Profil.objects.filter(user_id=detaljan_id).update(admin=True)
+        elif request.POST.get('demoteAdmin'):
+            detaljan_id = request.POST.get('demoteAdmin')
+            Profil.objects.filter(user_id=detaljan_id).update(admin=False)
+            
         return redirect('/detaljanProfil?id=' + detaljan_id)
 
 
