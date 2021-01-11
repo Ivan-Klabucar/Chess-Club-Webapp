@@ -42,6 +42,7 @@ class TurniriView(View):
 
             turnirObj = {  
                             "id": turnir.id,
+                            "ime": turnir.ime,
                             "orgId": organizator.id,
                             "org": organizator.username,
                             "vrijemeP": turnir.vrijemePocetka.strftime("%H:%M"),
@@ -100,12 +101,13 @@ class DodavanjeTurniraView(View):
             return render(request, 'dodavanjeTurnira.html', context)
 
     def post(self, request):
+        imeTurnira = request.POST.get('ime')
         orgId = request.POST.get('orgId')
         vrijemeP = request.POST.get('vrijemeP')
         vrijemeZ = request.POST.get('vrijemeZ')
         formatTurnira = request.POST.get('formatTurnira')
         maxBrojSudionika = request.POST.get('brojSudionika')
-        noviTurnir = Turnir(vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, formatTurnira=formatTurnira, brojSudionika=maxBrojSudionika, organizator_id=orgId)
+        noviTurnir = Turnir(ime=imeTurnira, vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, formatTurnira=formatTurnira, brojSudionika=maxBrojSudionika, organizator_id=orgId)
         vrijemePocetkaNovi = datetime.strptime(vrijemeP, "%Y-%m-%dT%H:%M")
         vrijemeZavrsetkaNovi = datetime.strptime(vrijemeZ, "%Y-%m-%dT%H:%M")
         sviTurniri = Turnir.objects.filter(vidljivost=True)
