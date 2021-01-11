@@ -17,9 +17,10 @@
 					<div class="row">
 						<div class="col-lg-8 mx-auto">
 
-							<h2>{{ trening.org }}</h2>
-                            <h5></h5>
-                            <h5>{{ trening.datum }} {{ trening.vrijemeP }} - {{ trening.vrijemeZ }}</h5>
+							<h2>{{ trening.ime }}</h2>
+                            <h5>Trener: {{ trening.org }}</h5>
+                            <h5>Vrijeme: {{ trening.vrijemeP }} - {{ trening.vrijemeZ }}</h5>
+                            <h5>Dan: {{ trening.datum }}</h5>
 							<p class="lead">{{ trening.opis }}</p>
                             {% if not trening.prijavljen %}
                                 {% if request.user.is_authenticated and not request.user.profil.trener and not request.user.profil.admin  %}
