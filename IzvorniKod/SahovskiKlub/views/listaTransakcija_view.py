@@ -27,6 +27,10 @@ class PregledTransakcijaView(View):
         else:
             prijasnji_mjesec = int(danasnji_datum.strftime("%m")) - 1
         zadnji_priznati_dan = danasnji_datum.replace(month=prijasnji_mjesec)
+
+        if (prijasnji_mjesec == 12):
+            zadnji_priznati_dan = zadnji_priznati_dan.replace(year=int(danasnji_datum.date().strftime("%Y")) - 1)
+
         lista_transakcija_ovaj_mjesec = []
         lista_transakcija_ostalih =[]
         lista_clanova_koji_su_platili = []
@@ -41,18 +45,6 @@ class PregledTransakcijaView(View):
             if transakcija.datumTransakcije >= zadnji_priznati_dan.date():
                 lista_transakcija_ovaj_mjesec.append(transakcija_obj)
                 lista_clanova_koji_su_platili.append(transakcija.user.id)
-            elif transakcija.datumTransakcije.strftime("%m") == "12" and danasnji_datum.strftime("%m") == "01":
-                if int(transakcija.datumTransakcije.strftime("%d")) >= int(danasnji_datum.strftime("%d")):
-                    lista_transakcija_ovaj_mjesec.append(transakcija_obj)
-                    lista_clanova_koji_su_platili.append(transakcija.user.id)
-                else:
-                    lista_transakcija_ostalih.append(transakcija_obj)
-            elif zadnji_priznati_dan.strftime("%m") == "12" and danasnji_datum.strftime("%m") == "01":
-                if int(transakcija.datumTransakcije.strftime("%d")) <= int(danasnji_datum.strftime("%d")):
-                    lista_transakcija_ovaj_mjesec.append(transakcija_obj)
-                    lista_clanova_koji_su_platili.append(transakcija.user.id)
-                else:
-                    lista_transakcija_ostalih.append(transakcija_obj)
             else:
                 lista_transakcija_ostalih.append(transakcija_obj)
 

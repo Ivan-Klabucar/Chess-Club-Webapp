@@ -13,7 +13,7 @@ class ListaTaktikaView(View):
         if request.user.is_authenticated and not request.user.profil.admin and not request.user.profil.trener and not request.user.profil.placenaClanarina and not request.user.profil.zabranjenPristup:
             return redirect('/placanjeClanarine')
 
-        taktike = Taktika.objects.filter(vidljivost=True).order_by('id')
+        taktike = Taktika.objects.filter(vidljivost=True).order_by('-createdAt')
         lista_taktika = []
 
         for taktika in taktike:
