@@ -41,11 +41,12 @@ class TreninziView(View):
                         
             treningObj = {  
                             "id": trening.id,
+                            "ime": trening.ime,
                             "orgId": organizator.id,
                             "org": organizator.username,
                             "vrijemeP": trening.vrijemePocetka.strftime("%H:%M"),
                             "vrijemeZ": trening.vrijemeZavrsetka.strftime("%H:%M"),
-                            "datum": trening.vrijemePocetka.strftime("%d.%m.%Y"),
+                            "datum": trening.vrijemePocetka.strftime("%d.%m.%Y."),
                             "opis": trening.opisTreninga,
                             "prijavljen": prijavljen
                             }
@@ -96,11 +97,12 @@ class DodavanjeTreningaView(View):
             return render(request, 'dodavanjeTreninga.html', context)
 
     def post(self, request):
+        imeTreninga = request.POST.get('ime')
         orgId = request.POST.get('orgId')
         vrijemeP = request.POST.get('vrijemeP')
         vrijemeZ = request.POST.get('vrijemeZ')
         opis = request.POST.get('opis')
-        noviTrening = Trening(organizator_id=orgId, vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, opisTreninga=opis)
+        noviTrening = Trening(ime=imeTreninga, organizator_id=orgId, vrijemePocetka=vrijemeP, vrijemeZavrsetka=vrijemeZ, opisTreninga=opis)
         vrijemePocetkaNovi = datetime.strptime(vrijemeP, "%Y-%m-%dT%H:%M")
         vrijemeZavrsetkaNovi = datetime.strptime(vrijemeZ, "%Y-%m-%dT%H:%M")
         sviTreninzi = Trening.objects.filter(vidljivost=True)
