@@ -1,19 +1,25 @@
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import AnonymousUser, User
-from .views.profil_view import ProfileView
+from .views.main_views import HomeView
 from .views.prikazNovosti_view import NovostiView
 from .models import Trening, DojavaPogreske, Turnir, Novost
 
-class RequestProfilTest(TestCase):
+class RequestHomepageTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='jakov', email='jakov@fer.hr', password='top_secret')
 
     def test_details(self):
-        request = self.factory.get('/profil')
-        request.user = self.user
-        response = ProfileView.as_view()(request)
+        print("Upisite korisnicko ime")
+        username = input()
+        print("Upisite lozinku")
+        lozinka = input()
+        request = self.factory.get('/')
+        try:
+            request.user = User.objects.create_user(
+                username=username, email=username+'@fer.hr', password=lozinka)
+        except ValueError:
+            pass
+        response = HomeView.as_view()(request)
         self.assertEqual(response.status_code, 200)
 
 class UnitTreningTest(TestCase):
@@ -34,6 +40,7 @@ class UnitTreningTestFail(TestCase):
         self.user = "korisnik123"
 
     def test_details(self):
+        #atributu organizator treba proslijediti objekt korisnika, a ne username
         try:
             trening = Trening(organizator=self.user)
         except ValueError:
@@ -44,12 +51,18 @@ class UnitTreningTestFail(TestCase):
 class RequestNovostiTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='jakov', email='jakov@fer.hr', password='top_secret')
     
     def test_details(self):
+        print("Upisite korisnicko ime")
+        username = input()
+        print("Upisite lozinku")
+        lozinka = input()
         request = self.factory.get('/novosti')
-        request.user = self.user
+        try:
+            request.user = User.objects.create_user(
+                username=username, email=username + '@fer.hr', password=lozinka)
+        except ValueError:
+            pass
         response = NovostiView.as_view()(request)
         self.assertEqual(response.status_code, 200)
 
