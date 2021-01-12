@@ -1,10 +1,10 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 from django.contrib.auth.models import AnonymousUser, User
 from django.utils import timezone
 from .views.main_views import HomeView
 from .views.taktika_views import TacticRevisionView
 from .views.prikazNovosti_view import NovostiView
-from .models import Trening, DojavaPogreske, Turnir, Novost, Profil, Taktika
+from .models import Trening, DojavaPogreske, Turnir, Novost, Profil, Taktika, Transakcija
 import datetime
 
 class RequestHomepageTest(TestCase):
@@ -116,3 +116,24 @@ class RequestTacticErrorReportToRightUserTest(TestCase):
         request.user = self.trener
         response = TacticRevisionView.as_view()(request)
         self.assertEqual(response.status_code, 200)
+
+class RequestNotDefinedRouteTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='clan', email='clan@fer.hr', password='password')
+
+    def test_details(self):
+        c = Client()
+        response = c.get('/nedefiniranaRuta')
+        self.assertEqual(response.status_code, 404)
+
+class UnitTransakcijaTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='clan', email='clan@fer.hr', password='top_secret')
+
+    def testDetails(self):
+        transakcija = Transakcija(user=self.user, datumTransakcije=datetime.datetime.now(tz=timezone.utc), iznosUplate=100.00)
+        transakcija.save()
