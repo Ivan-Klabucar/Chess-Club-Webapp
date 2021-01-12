@@ -39,7 +39,6 @@ class UnitTreningTest(TestCase):
         self.assertEqual(trening.vrijemePocetka, vrijeme)
         self.assertEqual(trening.vrijemeZavrsetka, vrijeme)
 
-
 class UnitTreningTestFail(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -49,8 +48,6 @@ class UnitTreningTestFail(TestCase):
         vrijeme = datetime.datetime.now(tz=timezone.utc)
         trening = Trening(organizator=self.user)
         trening.save()
-
-
 
 class RequestNovostiTest(TestCase):
     def setUp(self):
@@ -96,7 +93,6 @@ class UnitTurnirTest(TestCase):
         turnir = Turnir(organizator=self.user, brojSudionika=self.brojSudionika)
         turnir.save()
 
-
 class RequestTacticErrorReportToRightUserTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -137,3 +133,13 @@ class UnitTransakcijaTest(TestCase):
     def testDetails(self):
         transakcija = Transakcija(user=self.user, datumTransakcije=datetime.datetime.now(tz=timezone.utc), iznosUplate=100.00)
         transakcija.save()
+
+class UnitTaktikaTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.trener = User.objects.create_user(username='trener', email='trener@hotmail.com', password='lozinka')
+        self.trener.profil.trener = True
+
+    def testDetails(self):
+        taktika = Taktika(ime="test_taktika", createdAt=datetime.datetime.now(tz=timezone.utc), user=self.trener, initConfig="k7/8/8/8/5n2/8/8/1K3Q2 w KQkq - 0 1", movesWhite="Qh1+,Qe4,Qxf4", movesBlack="Ka7,Ka6", tezina=1, brojGlasova=1, validnost=True, vidljivost=True)
+        taktika.save()
