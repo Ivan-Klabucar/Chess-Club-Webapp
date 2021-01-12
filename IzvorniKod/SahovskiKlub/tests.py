@@ -80,11 +80,12 @@ class UnitTurnirTest(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='trener', email='trener@fer.hr', password='top_secret')
+        self.brojSudionika = 'deset'
 
     def test_details(self):
-        turnir = Turnir(organizator=self.user)
+        turnir = Turnir(organizator=self.user, brojSudionika=self.brojSudionika)
         self.assertEqual(turnir.organizator.username, self.user.username)
         self.assertEqual(turnir.vrijemePocetka, None)
         self.assertEqual(turnir.vrijemeZavrsetka, None)
         self.assertEqual(turnir.formatTurnira, '')
-        self.assertEqual(turnir.brojSudionika, None)
+        self.assertTrue(type(self.brojSudionika) is int)
