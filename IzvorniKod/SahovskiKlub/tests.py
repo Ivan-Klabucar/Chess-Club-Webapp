@@ -1,8 +1,10 @@
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import AnonymousUser, User
+from django.utils import timezone
 from .views.main_views import HomeView
 from .views.prikazNovosti_view import NovostiView
 from .models import Trening, DojavaPogreske, Turnir, Novost
+import datetime
 
 class RequestHomepageTest(TestCase):
     def setUp(self):
@@ -29,10 +31,13 @@ class UnitTreningTest(TestCase):
             username='trener', email='trener@fer.hr', password='top_secret')
 
     def test_details(self):
-        trening = Trening(organizator=self.user)
+        vrijeme = datetime.datetime.now(tz=timezone.utc)
+        trening = Trening(organizator=self.user, vrijemePocetka=vrijeme, vrijemeZavrsetka=vrijeme)
+        trening.save()
         self.assertEqual(trening.organizator.username, self.user.username)
-        self.assertEqual(trening.vrijemePocetka, None)
-        self.assertEqual(trening.vrijemeZavrsetka, None)
+        self.assertEqual(trening.vrijemePocetka, vrijeme)
+        self.assertEqual(trening.vrijemeZavrsetka, vrijeme)
+
 
 class UnitTreningTestFail(TestCase):
     def setUp(self):
@@ -40,7 +45,9 @@ class UnitTreningTestFail(TestCase):
         self.user = "korisnik123"
 
     def test_details(self):
+        vrijeme = datetime.datetime.now(tz=timezone.utc)
         trening = Trening(organizator=self.user)
+        trening.save()
 
 
 
@@ -69,9 +76,11 @@ class UnitNovostiTest(TestCase):
             username='trener', email='trener@fer.hr', password='top_secret')
 
     def test_details(self):
-        novost = Novost(user_id=self.user.id)
+        vrijeme = datetime.datetime.now(tz=timezone.utc)
+        novost = Novost(user_id=self.user.id, vrijemeObjave=vrijeme)
+        novost.save()
         self.assertEqual(novost.user.username, self.user.username)
-        self.assertEqual(novost.vrijemeObjave, None)
+        self.assertEqual(novost.vrijemeObjave, vrijeme)
         self.assertEqual(novost.naslov, '')
         self.assertEqual(novost.tekst, '')
 
@@ -84,8 +93,4 @@ class UnitTurnirTest(TestCase):
 
     def test_details(self):
         turnir = Turnir(organizator=self.user, brojSudionika=self.brojSudionika)
-        self.assertEqual(turnir.organizator.username, self.user.username)
-        self.assertEqual(turnir.vrijemePocetka, None)
-        self.assertEqual(turnir.vrijemeZavrsetka, None)
-        self.assertEqual(turnir.formatTurnira, '')
-        self.assertTrue(type(self.brojSudionika) is int)
+        turnir.save()
