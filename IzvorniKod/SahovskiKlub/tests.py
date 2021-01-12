@@ -40,11 +40,7 @@ class UnitTreningTestFail(TestCase):
         self.user = "korisnik123"
 
     def test_details(self):
-        #atributu organizator treba proslijediti objekt korisnika, a ne username
-        try:
-            trening = Trening(organizator=self.user)
-        except ValueError:
-            pass
+        trening = Trening(organizator=self.user)
 
 
 
