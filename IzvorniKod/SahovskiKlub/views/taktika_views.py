@@ -218,14 +218,15 @@ class RangListaView(View):
         rang_lista_obj = []
         for zapis in rang_lista:
             user = User.objects.get(username=zapis.username)
-            zapis_obj = {
-                "username": zapis.username,
-                "bodovi": zapis.bodovi,
-                "pozicija": i,
-                "userId": user.id
-            }
-            i += 1
-            rang_lista_obj.append(zapis_obj)
+            if not user.profil.zabranjenPristup:
+                zapis_obj = {
+                    "username": zapis.username,
+                    "bodovi": zapis.bodovi,
+                    "pozicija": i,
+                    "userId": user.id
+                }
+                i += 1
+                rang_lista_obj.append(zapis_obj)
         #    zapis_str = " - username: {}, bodovi: {}<br/><br/>".format(zapis.username, zapis.bodovi)
         #    print(zapis_str)
         #    response += zapis_str
