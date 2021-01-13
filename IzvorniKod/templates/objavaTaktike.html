@@ -84,7 +84,7 @@
         </div>
 
         <div class="modal-body">
-            Igra za ovakvu konfiguraciju već je završila, ispravi konfiguraciju!
+            Igra za ovakvu konfiguraciju već je završila, ispravi konfiguraciju! <br/>Na ploči moraju biti točno 2 kralja raličitih boja!
         </div>
       </div>
     </div>
@@ -161,7 +161,14 @@ game = Chess()
 var $status = $('#status')
 
 function bothKingsInFen(fen) {
-  if(fen.includes('k') && fen.includes('K')) return true;
+  let black_kings = 0;
+  let white_kings = 0;
+  for(const piece of fen) {
+    if(piece == 'k') black_kings++;
+    if(piece == 'K') white_kings++;
+  }
+  if(white_kings == 1 && black_kings == 1) return true;
+  //if(fen.includes('k') && fen.includes('K')) return true;
   return false;
 }
 
@@ -245,7 +252,7 @@ function initConfirm() {
     init_config_string = board.fen() + ' w KQkq - 0 1'
     try {
       game.load(init_config_string)
-      if (!game.game_over() && bothKingsInFen(init_config_string)) {
+      if (!game.game_over() && bothKingsInFen(board.fen())) {
         $('#myBoard').hide()
         $('#initBtnRow').hide()
         $('.recordRow').show()
