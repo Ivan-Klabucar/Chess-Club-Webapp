@@ -189,7 +189,7 @@
 		\section{Dijagram razmještaja}
 			
 			
-			Na slici 5.1 prikazan je dijagram razmještaja. Na poslužiteljskom računalu se nalaze web poslužitelj i poslužitelj baze padataka MISFLIP. Za pristup web aplikaciji Šahovski klub, klijent se služi web preglednikom. Sustav je baziran na arhitekturi klijent-poslužitelj. Komunikacija između korisnikovog računala (neregistrirani korisnik, član, trener, administrator) i poslužitelja odvija se preko HTTPS veze.
+			Na slici 5.22 prikazan je dijagram razmještaja. Na poslužiteljskom računalu se nalaze web poslužitelj i poslužitelj baze padataka MISFLIP. Za pristup web aplikaciji Šahovski klub, klijent se služi web preglednikom. Sustav je baziran na arhitekturi klijent-poslužitelj. Komunikacija između korisnikovog računala (neregistrirani korisnik, član, trener, administrator) i poslužitelja odvija se preko HTTPS veze.
 			
 			\begin{figure}[H]
 				\centerfloat
@@ -206,7 +206,7 @@
 			
 			\noindent U sljedećem koraku treba otvoriti Command Prompt i pozicionirati se u mapu IzvorniKod unutar projekta.
 			
-			\noindent Treba upisati naredbu heroku login i potom pritisnuti bilo koji gumb izuzevši q pri čemu se otvara stranica na web pregledniku gdje je potrebno prijaviti se s podacima koji su kreirani putem registracije.
+			\noindent Treba upisati naredbu "heroku login" i potom pritisnuti bilo koji gumb izuzevši q pri čemu se otvara stranica na web pregledniku gdje je potrebno prijaviti se s podacima koji su kreirani putem registracije.
 			
 			\noindent Potom se u Command Promptu upisuje naredba „heroku create“ pri čijem izvršavanju se dobije ime servera.
 			
@@ -217,11 +217,11 @@
 				
 			\end{figure}
 			
-			\noindent Sljedeće treba upisat git init, a nakon toga „heroku git:remote -a“, i uz ovu naredbu se navodi ime heroku servera koji je dobiven u prethodnom koraku npr. „serene-stream-43293“.
+			\noindent Sljedeće treba upisat "git init", a nakon toga "heroku git:remote -a“, i uz ovu naredbu se navodi ime heroku servera koji je dobiven u prethodnom koraku npr. „serene-stream-43293“.
 			
 			\noindent Nakon toga u datoteku settings.py u ALLOWED\texttt{\char`_}HOSTS treba staviti ime heroku servera i završiti sa ''.herokuapp.com'' npr. ''serene-stream-43293.herokuapp.com''. 
 			
-			\noindent Nakon što je to napravljeno u Command Promptu upisuje se naredba „git add .“.
+			\noindent Nakon što je to napravljeno u Command Promptu upisuje se naredba "git add .“.
 			
 			\begin{figure}[H]
 				\centerfloat
@@ -232,7 +232,7 @@
 			
 			\eject
 			
-			\noindent Zatim se upisuje "git commit -m "message" (pri čemu message može biti bilo koji niz znakova npr. "initial commit").
+			\noindent Zatim se upisuje "git commit -m "message"" (pri čemu message može biti bilo koji niz znakova npr. "initial commit").
 			
 			\begin{figure}[H]
 				\centerfloat
@@ -241,7 +241,7 @@
 				
 			\end{figure}
 			
-			\noindent Na kraju se upisuje „git push heroku master“, te je time aplikacija namještena.
+			\noindent Na kraju se upisuje "git push heroku master“, te je time aplikacija namještena.
 			
 			\begin{figure}[H]
 				\centerfloat
