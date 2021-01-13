@@ -26,27 +26,162 @@
 		
 	
 		\section{Ispitivanje programskog rješenja}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
+		U nastavku se nalazi 6 unit testova (izvorni kod i rezultat ispitivanja) numeriranih od 1 do 6.
+		
+		\begin{figure}[H]
+			\centerfloat
+			\includegraphics[scale=0.55]{slike/unittest1izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			\caption{Izvorni kod unit testa 1}
 			
+		\end{figure}
+	
+	\begin{figure}[H]
+		\centerfloat
+		\includegraphics[scale=0.55]{slike/unittest1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+		\caption{Rezultat ispitivanja unit testa 1}
+		
+	\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.40]{slike/unittest2izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 2}
+	
+\end{figure}
+	
+	\begin{figure}[H]
+		\centerfloat
+		\includegraphics[scale=0.55]{slike/unittest2.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+		\caption{Rezultat ispitivanja unit testa 2}
+		
+	\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest3izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 3}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 3}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest4izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 4}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest4.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 4}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest5izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 5}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest5.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 5}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 6}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6-1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 6 - 1. dio}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6-2.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 6 - 2. dio}
+\end{figure}
+		
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+			U nastavku se nalaze 4 slučajeva ispitivanja sustava (izvorni kod i rezultat ispitivanja) numeriranih od 1 do 4.
+			
+			 	\begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 1}
+			 	
+			 \end{figure}
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 1}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava2izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 2}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 2}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 3}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 3}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.40]{slike/ispitivanjesustava4izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 4}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 4}
+			 	
+			 \end{figure}
 			
 			\eject 
 		
