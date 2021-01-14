@@ -3,56 +3,251 @@
 		
 		\section{Korištene tehnologije i alati}
 		
-			\textbf{\textit{dio 2. revizije}}
 			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
+			\noindent Komunikacija u timu je ostvarena putem aplikacija \underline{WhatsApp}\footnote{https://www.whatsapp.com/} i \underline{Microsoft Teams}\footnote{https://www.microsoft.com/hr-hr/microsoft-365/microsoft-teams/group-chat-software}. Aplikacija WhatsApp korištena je isključivo za slikovno-tekstualnu komunikaciju, dok je Microsoft Teams korišten za telekonferencijski kontakt. Kao sustav za upravljanje izvornim kodom korišten je \underline{Git}\footnote{https://git-scm.com/}, dok se udaljeni repozitorij projekta nalazi na web platformi \underline{Git Lab}\footnote{https://about.gitlab.com/}. Za izradu UML dijagrama korišten je \underline{Astah UML}\footnote{https://astah.net/}.
+			
+			\noindent Od alata za razvojno okruženje korišteni su \underline{PyCharm}\footnote{https://www.jetbrains.com/pycharm/} i \underline{Notepad++}\footnote{https://notepad-plus-plus.org/downloads/}. PyCharm je razvojno sučelje koje se koristi za programiranje u Pythonu. Od velike je pomoći kod pisanja koda s laganom navigacijom unutar programa. Notepad++ je dobar za uređenje teksta i izvornog koda za upotrebu u sustavu Microsoft Windows.
+			
+			\noindent Korištena baza podataka je \underline{PostgreSQL}\footnote{https://www.postgresql.org/}, a nalazi se na poslužitelju u oblaku \underline{Heroku}\footnote{https://www.heroku.com/}.
+			
+			\noindent Za izradu backenda korišteni su \underline{Python}\footnote{https://www.python.org/} i \underline{Django}\footnote{https://www.djangoproject.com/}, a za frontend \underline{Bootstrap}\footnote{https://getbootstrap.com/}.
+			
+			\noindent Python (Guido van Rossum, 1990.) programski je jezik opće namjene koji dopušta nekoliko stilova programiranja (objektno orijentirano, strukturno i aspektno orijentirano programiranje).
+			
+			\noindent Django je besplatan i open-source web framework koji se temelji na Pythonu. Olakšava stvaranje složenih web stanica.
+			
+			\noindent Bootstrap je frontend framework i besplatna open-source kolekcija HTML CSS i java script alata za kreiranje web stranica i web aplikacija.
+			
+			\noindent Za pisanje dokumentacije korišten je alat TeXstudio.
+			
 			
 			
 			\eject 
 		
 	
 		\section{Ispitivanje programskog rješenja}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
+		U nastavku se nalazi 6 unit testova (izvorni kod i rezultat ispitivanja) numeriranih od 1 do 6.
+		
+		\begin{figure}[H]
+			\centerfloat
+			\includegraphics[scale=0.55]{slike/unittest1izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			\caption{Izvorni kod unit testa 1}
 			
+		\end{figure}
+	
+	\begin{figure}[H]
+		\centerfloat
+		\includegraphics[scale=0.55]{slike/unittest1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+		\caption{Rezultat ispitivanja unit testa 1}
+		
+	\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.40]{slike/unittest2izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 2}
+	
+\end{figure}
+	
+	\begin{figure}[H]
+		\centerfloat
+		\includegraphics[scale=0.55]{slike/unittest2.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+		\caption{Rezultat ispitivanja unit testa 2}
+		
+	\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest3izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 3}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 3}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest4izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 4}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest4.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 4}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest5izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 5}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest5.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 5}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Izvorni kod unit testa 6}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6-1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 6 - 1. dio}
+	
+\end{figure}
+
+\begin{figure}[H]
+	\centerfloat
+	\includegraphics[scale=0.55]{slike/unittest6-2.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\caption{Rezultat ispitivanja unit testa 6 - 2. dio}
+\end{figure}
+		
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+			U nastavku se nalaze 4 slučajeva ispitivanja sustava (izvorni kod i rezultat ispitivanja) numeriranih od 1 do 4.
+			
+			 	\begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 1}
+			 	
+			 \end{figure}
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 1}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava2izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 2}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 2}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 3}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 3}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.40]{slike/ispitivanjesustava4izv.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Izvorni kod ispitivanja sustava 4}
+			 	
+			 \end{figure}
+			 
+			 \begin{figure}[H]
+			 	\centerfloat
+			 	\includegraphics[scale=0.55]{slike/ispitivanjesustava3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\caption{Rezultat ispitivanja sustava 4}
+			 	
+			 \end{figure}
 			
 			\eject 
 		
 		
 		\section{Dijagram razmještaja}
 			
-			\textbf{\textit{dio 2. revizije}}
 			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+			Na slici 5.22 prikazan je dijagram razmještaja. Na poslužiteljskom računalu se nalaze web poslužitelj i poslužitelj baze padataka MISFLIP. Za pristup web aplikaciji Šahovski klub, klijent se služi web preglednikom. Sustav je baziran na arhitekturi klijent-poslužitelj. Komunikacija između korisnikovog računala (neregistrirani korisnik, član, trener, administrator) i poslužitelja odvija se preko HTTPS veze.
 			
-			\eject 
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.40]{dijagrami/Dijagramrazmjestaja.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram razmještaja}
+				
+			\end{figure}
+			
+			\eject
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
+			\noindent Za početak potrebno je otići na stranicu \url{https://www.heroku.com/} i registrirati se. 
 			
+			\noindent U sljedećem koraku treba otvoriti Command Prompt i pozicionirati se u mapu IzvorniKod unutar projekta.
 			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
+			\noindent Treba upisati naredbu "heroku login" i potom pritisnuti bilo koji gumb izuzevši q pri čemu se otvara stranica na web pregledniku gdje je potrebno prijaviti se s podacima koji su kreirani putem registracije.
 			
+			\noindent Potom se u Command Promptu upisuje naredba „heroku create“ pri čijem izvršavanju se dobije ime servera.
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.3]{slike/pustanjeupogon1.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Podešavanje u Command Promptu 1}
+				
+			\end{figure}
+			
+			\noindent Sljedeće treba upisat "git init", a nakon toga "heroku git:remote -a“, i uz ovu naredbu se navodi ime heroku servera koji je dobiven u prethodnom koraku npr. „serene-stream-43293“.
+			
+			\noindent Nakon toga u datoteku settings.py u ALLOWED\texttt{\char`_}HOSTS treba staviti ime heroku servera i završiti sa ''.herokuapp.com'' npr. ''serene-stream-43293.herokuapp.com''. 
+			
+			\noindent Nakon što je to napravljeno u Command Promptu upisuje se naredba "git add .“.
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.4]{slike/pustanjeupogon2.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Podešavanje u Command Promptu 2}
+				
+			\end{figure}
+			
+			\eject
+			
+			\noindent Zatim se upisuje "git commit -m "message"" (pri čemu message može biti bilo koji niz znakova npr. "initial commit").
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.4]{slike/pustanjeupogon3.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Podešavanje u Command Promptu 3}
+				
+			\end{figure}
+			
+			\noindent Na kraju se upisuje "git push heroku master“, te je time aplikacija namještena.
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.4]{slike/pustanjeupogon4.jpeg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Podešavanje u Command Promptu 4}
+				
+			\end{figure}
 			
 			\eject 
