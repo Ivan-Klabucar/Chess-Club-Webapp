@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container text-center">
+    <h1>Rang lista</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section id="about" class="pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+
+            <h2>Rang lista</h2>
+            <div class="list-group mt-3 mb-4">
+            {% for stavka in rangLista %}
+            <div class="{% if user.id == stavka.userId %} bg-primary text-white {% else %} {% if stavka.pozicija == 1 %} bg-warning {% else %} {% if stavka.pozicija == 2 %} bg-secondary text-white {% endif %} {% endif %} {% endif %} list-group-item list-group-item-action border border-dark">
+                    {% if user.id == stavka.userId %}
+                    (Vi)
+                    {% endif %}
+                    {{ stavka.pozicija }}.
+                    User: {{ stavka.username }}<br/>
+                    Bodovi: {{ stavka.bodovi }}
+            </div>
+            {%endfor%}
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}

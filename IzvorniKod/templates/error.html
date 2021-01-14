@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<div class="container text-center">
+    <h1>Dogodila se greška!</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<section class="pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <h4>{{ err_desc }}</h4>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

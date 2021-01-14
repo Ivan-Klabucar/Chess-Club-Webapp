@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_import %}
+<link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="container text-center">
+    <h1>Revizija Taktike</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<section id="tactic" class="pt-5">
+    <div class="container-fluid">
+      <div class="row justify-content-around">
+        <div class="col-3">
+          <h3 class="mb-3">Opis greške:</h3>
+          <p>
+            {{ tactic_data.opis_greske }}
+          </p>
+          <button id="prihvatiBtn" type="button" class="btn btn-lg btn-success m-2">Prihvati dojavu</button>
+          <button id="odbaciBtn" class="btn btn-lg btn-danger m-2">Odbaci dojavu</button>
+        </div>  
+        <div class="col-4">
+          <div class="row">
+            <div class="col">
+              <h3 class="text-center mb-3">Trenutna verzija</h3>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col d-flex justify-content-center">
+                <div id="old_tactic_board" style="width: 500px"></div>
+              </div>
+            </div>
+            <div class="row" id="initBtnRow">
+              <div class="col d-flex justify-content-center">
+                <button id="oldNextMoveBtn" type="button" class="btn btn-primary m-2">Sljedeći potez</button>
+                <button id="oldResetBtn" class="btn btn-primary m-2">Resetiraj taktiku</button>
+              </div>
+            </div>
+        </div>
+
+        <div class ="col-4">
+          <div class="row">
+            <div class="col">
+              <h3 class="text-center mb-3">Predložena verzija</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <div id="new_tactic_board" style="width: 500px"></div>
+            </div>
+          </div>
+          <div class="row" id="initBtnRow">
+            <div class="col d-flex justify-content-center">
+              <button id="newNextMoveBtn" type="button" class="btn btn-primary m-2">Sljedeći potez</button>
+              <button id="newResetBtn" class="btn btn-primary m-2">Resetiraj taktiku</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<div class="modal fade" id="revisionSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center">
+        <h5 class="modal-title" id="exampleModalLongTitle">Taktika uspješno revidirana!</h5>
+      </div>
+
+      <div class="modal-body d-flex justify-content-center">
+        <a href="/" type="button" role="button" class="btn btn-primary">Povratak</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="revisionRejectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dojava o grešci uspješno odbačena!</h5>
+      </div>
+
+      <div class="modal-body d-flex justify-content-center">
+        <a href="/" type="button" role="button" class="btn btn-primary">Povratak</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js_import %} 
+
+<script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
+<script src="{% static 'js/chess-0.10.2.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js" integrity="sha384-s3XgLpvmHyscVpijnseAmye819Ee3yaGa8NxstkJVyA6nuDFjt59u1QvuEl/mecz" crossorigin="anonymous"></script> -->
+
+{{ tactic_data|json_script:"tacticData" }}
+{% csrf_token %}
+<script>
+// --- Begin Example JS --------------------------------------------------------
+// NOTE: this example uses the chess.js library:
+// https://github.com/jhlywa/chess.js
+$('.recordRow').hide()
+$.ajaxSetup({
+   headers:{
+    "X-CSRFToken": '{{ csrf_token }}'
+   }
+});
+
+const tactic_data = JSON.parse(document.getElementById('tacticData').textContent)
+let old_black_moves = tactic_data.old_black_moves
+let old_white_moves = tactic_data.old_white_moves
+let new_black_moves = tactic_data.new_black_moves
+let new_white_moves = tactic_data.new_white_moves
+let old_start_position = tactic_data.old_start_position
+let new_start_position = tactic_data.new_start_position
+let revision_id = tactic_data.revision_id
+let tactic_id = tactic_data.tactic_id
+
+var old_game = new Chess(old_start_position)
+var new_game = new Chess(new_start_position)
+
+var old_board = null
+var new_board = null
+
+let old_black_moves_indx = 0
+let old_white_moves_indx = 0
+let new_black_moves_indx = 0
+let new_white_moves_indx = 0
+
+function toggleOldButton() {
+  if ($('#oldNextMoveBtn').prop('disabled') == true) {
+    $('#oldNextMoveBtn').prop('disabled', false)
+  } else {
+    $('#oldNextMoveBtn').prop('disabled', true)
+  }
+}
+
+function toggleNewButton() {
+  if ($('#newNextMoveBtn').prop('disabled') == true) {
+    $('#newNextMoveBtn').prop('disabled', false)
+  } else {
+    $('#newNextMoveBtn').prop('disabled', true)
+  }
+}
+
+function makeOldMove () {
+  if(old_game.turn() == 'w') {
+    if (old_white_moves_indx >= old_white_moves.length) return
+    old_game.move(old_white_moves[old_white_moves_indx])
+    old_white_moves_indx++
+    if (old_white_moves_indx >= old_white_moves.length) toggleOldButton()
+  } else if (old_game.turn() == 'b') {
+    if (old_black_moves_indx >= old_black_moves.length) return
+    old_game.move(old_black_moves[old_black_moves_indx])
+    old_black_moves_indx++
+  }
+  old_board.position(old_game.fen())
+}
+
+function makeNewMove () {
+  if(new_game.turn() == 'w') {
+    if (new_white_moves_indx >= new_white_moves.length) return
+    new_game.move(new_white_moves[new_white_moves_indx])
+    new_white_moves_indx++
+    if (new_white_moves_indx >= new_white_moves.length) toggleNewButton()
+  } else if (new_game.turn() == 'b') {
+    if (new_black_moves_indx >= new_black_moves.length) return
+    new_game.move(new_black_moves[new_black_moves_indx])
+    new_black_moves_indx++
+  }
+  new_board.position(new_game.fen())
+}
+
+function resetOldTactic() {
+  old_white_moves_indx = 0
+  old_black_moves_indx = 0
+  old_game.load(old_start_position)
+  old_board.position(old_game.fen())
+  if ($('#oldNextMoveBtn').prop('disabled')) toggleOldButton()
+}
+
+function resetNewTactic() {
+  new_white_moves_indx = 0
+  new_black_moves_indx = 0
+  new_game.load(new_start_position)
+  new_board.position(new_game.fen())
+  if ($('#newNextMoveBtn').prop('disabled')) toggleNewButton()
+}
+
+function acceptRevision() {
+  const url = '/revidiranjeTaktike';
+  const data = {
+    revision_id: revision_id,
+    tactic_id: tactic_id,
+    confirmed: true,
+  }
+  console.log(data)
+
+  $.post(url, data, function(data, status) {
+    $('#revisionSuccessModal').modal()
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
+}
+
+function rejectRevision() {
+  const url = '/revidiranjeTaktike';
+  const data = {
+    revision_id: revision_id,
+    tactic_id: tactic_id,
+    confirmed: false,
+  }
+
+  $.post(url, data, function(data, status) {
+    $('#revisionRejectedModal').modal()
+  }).fail(function(jqxhr, settings, ex) { alert('failed, ' + ex); })
+}
+
+var old_config = {
+  position: old_start_position,
+}
+old_board = Chessboard('old_tactic_board', old_config)
+
+var new_config = {
+  position: new_start_position,
+}
+new_board = Chessboard('new_tactic_board', new_config)
+
+$('#oldNextMoveBtn').on('click', makeOldMove)
+$('#oldResetBtn').on('click', resetOldTactic)
+$('#newNextMoveBtn').on('click', makeNewMove)
+$('#newResetBtn').on('click', resetNewTactic)
+$('#prihvatiBtn').on('click', acceptRevision)
+$('#odbaciBtn').on('click', rejectRevision)
+</script>
+{% endblock %}
