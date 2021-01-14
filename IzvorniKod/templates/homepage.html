@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block header %}
+    <div class="container text-center">
+      <h1>Dobro došli u šahovski klub MISFLIP!</h1>
+      <p class="lead">{% if user.is_authenticated %}Pozdrav, {{ user.username }}!{% endif %}</p>
+    </div>
+{% endblock %}
+
+{% block content %}
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>O nama</h2>
+          <p class="lead">Šahovski klub MISFLIP osnovan je 1998. godine od strane trojice vrhunskih šahista sa željom da svoje znanje prenesu na nove generacije.
+          Odnedavno se klub može pohvaliti novom web-stranicom koja, osim što privlači nove članove, onim starijim članovima i trenerima olakšava rad i organizaciju.
+          Nova web-stranica pruža mnoge mogućnosti:</p>
+          <ul>
+            <li>Pregled novosti i obavijesti</li>
+            <li>Prijava na organizirane treninge</li>
+            <li>Prijava na nadolazeće turnire</li>
+            <li>Rješavanje dnevnih šahovskih taktika na interaktivnoj ploči</li>
+            <li>Pregled rang liste članova kluba</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Dnevne šahovske taktike</h2>
+          <p class="lead">Dnevne šahovske taktike osmišljavaju i objavljuju naši treneri, a vaš je zadatak riješiti ih u što manje vremena.
+          Taktike mogu rješavati i korisnici koji nisu članovi našeg kluba, ali u tom slučaju neće moći pratiti svoj napredak na rang listi.
+          Interaktivna ploča će vas upozoriti ako napravite pogrešan potez, a po uspješno rješenoj taktici, ako ste član našeg kluba, moći ćete predložiti novo i bolje rješenje.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Treninzi i turniri</h2>
+          <p class="lead">Treninge i turnire organiziraju naši treneri. Svaki trening određen je svojim terminom i trenerom koji ga organizira,
+          članovi se mogu prijaviti na koji god trening žele, a ako se predomisle lako se odjave. Turniri su određeni svojim terminom, formatom i maksimalnim brojem sudionika.
+          Članovi se mogu prijaviti na turnir sve dok on nije popunjen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

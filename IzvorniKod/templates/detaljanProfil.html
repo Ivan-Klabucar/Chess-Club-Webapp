@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Prikaz profila</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+    <section id="info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2>{{ detaljan_user.user.username }}</h2>
+                <br/>
+                    {% if detaljan_user.admin %}
+                        <h5>Administrator</h5>
+                        <br/>
+                    {% elif detaljan_user.trener %}
+                        <h5>Trener</h5>
+                        <br/>
+                    {% else %}
+                        <h5>Član</h5>
+                    {% endif %}
+                    {% if detaljan_user.zabranjenPristup %}
+                        <h5>Zabranjen pristup</h5>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit" name ="enable" value="{{ detaljan_user.user_id }}">
+                                Omogući pristup
+                            </button>
+                        </form>
+                        <br>
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit" name ="disable" value="{{ detaljan_user.user_id }}">
+                                Onemogući pristup
+                            </button>
+                        </form>
+                        <br>
+                        <div class="container">
+                            {% if not detaljan_user.trener and not detaljan_user.admin%}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit" name ="promoteTrener" value="{{ detaljan_user.user_id }}">
+                                        Dodijeli ulogu trenera
+                                    </button>
+                                </form>
+                                <br>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit" name ="promoteAdmin" value="{{ detaljan_user.user_id }}">
+                                        Dodijeli ulogu administratora
+                                    </button>
+                                </form>
+                            {% elif detaljan_user.trener %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit" name ="demoteTrener" value="{{ detaljan_user.user_id }}">
+                                        Oduzmi ulogu trenera
+                                    </button>
+                                </form>
+                            {% elif detaljan_user.admin %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger" type="submit" name ="demoteAdmin" value="{{ detaljan_user.user_id }}">
+                                        Oduzmi ulogu administratora
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto text-center">
+                                <br/>
+                                <h3>Aktivnosti</h3>
+                            </div>
+                        </div>
+                    {% for aktivnost in listaAktivnosti %}
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 text-right">
+                            {{ aktivnost.vrijemeAktivnosti }}
+                        </div>
+                        <div class="col-lg-4 text-left">
+                            {{ aktivnost.aktivnost }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    <br/>
+                    <div>
+                        Datum stvaranja korisničkog računa: {{ detaljan_user.user.date_joined }}
+                    </div>
+                <br/>
+                    <a href="/sviProfili" class="btn btn-link">
+                        Povratak na sve profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,31 @@
+.istaknutiStavakContainer{
+
+}
+
+.stavakContainer {
+
+    border-style: solid;
+    border-radius: 25px;
+    background: #3399ff;
+    padding: 20px;
+    width: 50%;
+    height: 150px;
+    margin-left: 25%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+}
+
+.istaknutiStavakContainer {
+
+    border-style: solid;
+    border-radius: 25px;
+    background: #00ccff;
+    padding: 20px;
+    width: 50%;
+    height: 150px;
+    margin-left: 25%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+}
