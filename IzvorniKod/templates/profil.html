@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block header %}
+	<div class="container text-center">
+		<h1>Prikaz profila</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+    <section id="info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h3>Osnovne informacije</h3>
+                    Korisničko ime: {{ request.user.username }}
+                </div>
+                <div class="col-lg-8 mx-auto text-center">
+                    Uloga: {{ uloga }}
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <br/>
+                    <h3>Aktivnosti</h3>
+                </div>
+            </div>
+            {% for aktivnost in listaAktivnosti %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 text-right">
+                        {{ aktivnost.vrijemeAktivnosti }}
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        {{ aktivnost.aktivnost }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <br/>
+                    <h3>Prijave</h3>
+                    <br/>
+                </div>
+            </div>
+            {% for prijava in prijaveTrening %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 text-right">
+                        {{ prijava.trening.opisTreninga }}
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        <form method="post" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTrening" value="{{ prijava.id }}"
+                                onclick="return confirm('Želite li se odjaviti s treninga?')">
+                                Odjavi se
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+            {% endfor %}
+         {% for prijava in prijaveTurnir %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 text-right">
+                        Turnir br. {{ prijava.turnir.id }}
+                        {{ prijava.turnir.formatTurnira }}
+                        -
+                        {{ prijava.turnir.brojSudionika }} Sudionika
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        <form method="post" style="display:inline-block;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary btn-sm" type="submit" name ="odjavaTurnir" value="{{ prijava.id }}"
+                                onclick="return confirm('Želite li se odjaviti s turnira?')">
+                                Odjavi se
+                            </button>
+                        </form>
+                    </div>
+                </div>
+             <br/>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

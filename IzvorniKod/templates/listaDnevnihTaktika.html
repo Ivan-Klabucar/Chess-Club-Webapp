@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block header %}
-<div class="container text-center">
-    <h1>Dnevne Taktike</h1>
-</div>
+    <div class="container text-center">
+        <h1>Dnevne Taktike</h1>
+        {% if request.user.is_authenticated and request.user.profil.trener %}
+                <a class="btn btn-primary" href="/listaDojavaPogreski" role="button">Pregled dojava pogreški</a>
+                <br/>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user.profil.admin or request.user.profil.trener %}
+            <a class="btn btn-primary" href="/objavaTaktike">Dodaj taktiku</a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -11,33 +18,25 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-            
-            <h2>Aktivne dnevne taktike</h2>
-            <div class="list-group mt-3 mb-4">
-            {% for taktikaIstaknuta in listaTaktikeIstaknute %}
-            <a class="bg-light list-group-item list-group-item-action" href="/taktika">
-                    Autor: {{ taktikaIstaknuta.autor }}<br/>
-                    Datum: {{ taktikaIstakunta.datum }}
-            </a>
-            {%endfor%}
-            </div>
-
-            
-            
-            <h2>Popis neaktivnih dnevnih taktika</h2>
+            <h2>Dnevne taktike</h2>
             <div class="list-group mt-3 mb-4">
             {% for taktika in listaTaktika %}
-            <a class="bg-secondary text-white list-group-item list-group-item-action" href="/taktika">
-                Autor: {{ taktika.autor }}<br/>
-                Datum: {{ taktika.datum }}
+            <a class="{% if taktika.rjeseno %}bg-success text-light {% else %} bg-light {% endif %} list-group-item list-group-item-action border border-dark" href="/taktika?id={{ taktika.idTaktika }}">
+                    Ime: {{ taktika.ime }}<br/>
+                    Autor: {{ taktika.autor }}<br/>
+                    Datum: {{ taktika.datum }}
+                    {% if taktika.rjeseno %}<br/> Zabilježeno vrijeme: {{ taktika.vrijeme }} {% endif %}
             </a>
+            {% if user.profil.trener and taktika.autor_id == user.id or user.profil.admin %}
+            <a class="list-group-item list-group-item-action border border-dark bg-danger text-light" href="/deleteTaktika?id={{ taktika.idTaktika }}">
+                Delete {{ taktika.ime }}
+            </a>
+            {% endif %}
             {%endfor%}
             </div>
         </div>
       </div>
     </div>
 </section>
-
-
 
 {% endblock %}

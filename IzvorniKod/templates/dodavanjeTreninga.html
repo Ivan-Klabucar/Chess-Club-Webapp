@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container text-center">
+    <h1>Dodavanje treninga</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center" style="padding: 2rem">
+    <div class="h-25 w-25 border border-primary rounded" style="padding: 4rem;box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3)">
+        <form method="post" onsubmit="return confirm('Jeste li sigurni da želite stvoriti ovaj trening?');">
+			{% csrf_token %}
+
+            {% if form.errors %}
+                <p style="color: red"> Neispravan unos </p>
+            {% endif %}
+
+
+
+            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
+				<input class="form-control" type="hidden" name="orgId" value="{{ request.user.id }}" readonly id="id_userID">
+            </div>
+
+
+
+            <label class="font-weight-light" style="font-size: 25px">
+                Ime treninga:
+            </label>
+            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
+                <input class="form-control" type="text" size ="80rem" name="ime" autofocus autocapitalize="none" maxlength="100">
+            </div>
+
+
+
+			<label for="startTime" class="font-weight-light" style="font-size: 25px">
+                Od:
+            </label>
+            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
+                <input class="form-control" type="datetime-local" name="vrijemeP" required id="id_startTime">
+            </div>
+
+
+
+			<label for="endTime" class="font-weight-light" style="font-size: 25px">
+                Do:
+            </label>
+            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
+                <input class="form-control" type="datetime-local" name="vrijemeZ" required id="id_endTime">
+            </div>
+
+
+
+			<label for="description" class="font-weight-light" style="font-size: 25px">
+                Opis treninga:
+            </label>
+            <div class="input-group input-group-lg" style="padding-bottom: 2rem">
+                <textarea class="form-control" name="opis" required id="id_description" rows="5" cols="30"></textarea>
+            </div>
+
+
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg">Stvori trening</button>
+            </div>
+			
+        </form>
+    </div>
+</div>
+
+{% endblock %}

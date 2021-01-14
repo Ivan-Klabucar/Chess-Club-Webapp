@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="container text-center">
+    <h1>Pregled Transakcija</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section id="about" class="pt-5">
+    <div class="{% if listaDuznika %} border border-dark {% endif %} bg-white position-fixed" style="right: 0px;">
+        </br>
+        {% for duznik in listaDuznika %}
+        <p class="text-danger text-right">{{ duznik.username }} <span><a class="btn btn-danger btn-sm" href="/zabrani?id={{ duznik.userid }}">Zabrani</a></span></p>
+        {% endfor %}
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+
+            <h2>Transakcije u poslijednjih mjesec dana</h2>
+
+            <ul class="list-group">
+                {% for transakcija in listaTransakcijaMjesec %}
+                <li class="list-group-item bg-success">
+                    <div>
+                        <p class="text-white text-center">
+                            Platitelj: {{ transakcija.platitelj }}<br/>
+                            Datum: {{ transakcija.datum }}<br/>
+                            Iznos: {{ transakcija.iznos }}
+                        </p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <h2>Prijašnje transakcije</h2>
+            <ul class="list-group">
+                {% for transakcija in listaTransakcijaPrije %}
+                <li class="list-group-item bg-secondary">
+                    <div>
+                        <p class="text-white text-center">
+                            Platitelj: {{ transakcija.platitelj }}<br/>
+                            Datum: {{ transakcija.datum }}<br/>
+                            Iznos: {{ transakcija.iznos }}
+                        </p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+
+
+{% endblock %}

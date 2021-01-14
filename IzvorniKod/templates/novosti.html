@@ -2,6 +2,9 @@
 {% block header %}
 	<div class="container text-center">
 		<h1>Novosti</h1>
+		{% if request.user.is_authenticated and request.user.profil.admin or request.user.profil.trener %}
+		<a class="btn btn-primary" href="/objavaNovosti" role="button">Objava novosti</a>
+		{% endif %}
 	</div>
 {% endblock %}
 
@@ -11,6 +14,12 @@
 			<section id="novost" class="bg-light">
 				<div class="container">
 					<div class="row">
+						{% if request.user.profil.admin %}
+						<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovu novost?');">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-danger" style="top:0;right:0" name="brisanje" value="{{novost.id}}">Obriši novost</button>
+						</form>
+						{%endif%}
 						<div class="col-lg-8 mx-auto">
 							<h2>{{ novost.naslov }}</h2>
 							<p class="lead">{{ novost.tekst }}</p>
@@ -23,6 +32,12 @@
 			<section id="novost">
 				<div class="container">
 					<div class="row">
+						{% if request.user.profil.admin %}
+						<form method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovu novost?');">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-danger" style="top:0;right:0" name="brisanje" value="{{novost.id}}">Obriši novost</button>
+						</form>
+						{%endif%}
 						<div class="col-lg-8 mx-auto">
 							<h2>{{ novost.naslov }}</h2>
 							<p class="lead">{{ novost.tekst }}</p>
