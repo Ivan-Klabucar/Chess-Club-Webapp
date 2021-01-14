@@ -320,62 +320,91 @@
 			
 			
 		\section{Dijagram razreda}
+		
+		Na sljedećim dijagramima prikazani su razredi koji pripadaju backend dijelu aplikacije. 
+		Na slikama 4.2 i 4.3 prikazano je stanje razreda modela koji modeliraju stanje objekata u bazi.
+		Dijagram 4.4 prikazuje sve razrede koje nasljeđuju View. Svaki od ovih razreda zadužen je 
+		za obradu upita za određenu putanju. Jedini podržani tipovi zahtjeva su GET i POST koje
+		implementiraju odgovarajućim metodama. Te metode vraćaju HTTP odgovore na upite 
+		najčešće u obliku HTML i JSON datoteka.
 
-			\text{Dijagram modela potrebnih za funkcionalnosti autentikacije.}
+\eject
+
+			\text{Dijagrami modela}
 			\begin{figure}[H]
 					\centerfloat
-					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.45]{dijagrami/ModelsClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Dijagram razreda modela generične funkcionalnosti}
+					\advance\leftskip13cm
+        					\includegraphics[scale=0.26]{dijagrami/final_models1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda modela 1. dio}
         					\label{fig:DijagramRazredaModel}
 			\end{figure}
+			\eject
 			
 			\begin{figure}[H]
 					\centerfloat
 					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.65]{dijagrami/ViewClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Dijagram razreda view-ova generične funkcionalnosti}
+        					\includegraphics[scale=0.37]{dijagrami/final_models2.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda modela 2. dio}
         					\label{fig:DijagramRazredaView}
 			\end{figure}
+			
+			
+			\begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.145]{dijagrami/classes_view.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Razredni dijagram View-ova}
+        					\label{fig:idejniDijagramRazreda}
+				\end{figure}
 			
 			\eject
 			
 			\begin{figure}[H]
 					\centerfloat
 					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.35]{dijagrami/Classdiagram.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Idejni dijagram razreda}
+        					\includegraphics[scale=0.28]{dijagrami/classes_test.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Razredni dijagram testnih razreda}
         					\label{fig:idejniDijagramRazreda}
-				\end{figure}
-
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
-			
+				\end{figure}	
 			\eject
 		
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Na slici 4.5 prikazan je dijagram stanja za člana. Pri pokretanju aplikacije i prijavljivanju u korisnički račun, članu se otvara početna stranica. Iz nje može otvoriti stranice "Početna",  "Novosti", "Dnevne taktike", "Rang lista", "Treninzi", "Turniri" i "Prikaz profila". Pritiskom na "Početna" članu se otvara stranica s osnovnim informacijama o web stranici Šahovski klub MISFLIP. Na stranici "Novosti" mogu se pročitati sve objavljene novosti. Pritiskom na "Prikaz profila" članu se otvara stranica s pregledom vlastitog profila. U slučaju otvaranja stranica "Dnevne taktike", "Rang lista", "Treninzi" i "Turniri" članu se u slučaju neplaćene članarine otvara stranica za plaćanje članarine, a u protivnom odabrana stranica. Uz uvjet da je članarina plaćena, pri otvaranju stranice "Treninzi" član se može prijaviti na trening, a slično je i sa stranicom "Turniri" gdje se može prijaviti na turnir. Stranica "Rang lista" nudi prikaz rang liste, a odlaskom na stranicu "Dnevne taktike" moguće je odabrati jednu od ponuđenih dnevnih taktika, riješiti ju, odabrati težinu za nju i eventualno prijaviti primijećenu pogrešku u postupku rješavanje taktike.
+				
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.21]{dijagrami/dijagramstanjaclan2.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram stanja za člana}
+				\label{fig:UC9}
+			\end{figure}
+			
+			\eject
 			
 			
-			\eject 
-		
 		\section{Dijagram aktivnosti}
+		
+		Na slici 4.6 prikazan je proces revidiranja pogreške u taktici. Trener otvara pregled s detaljima o dojavi pogreške u taktici i u ovisnosti o tome je li dojava o pogrešci valjana potvrđuje ili odbija dojavu. U slučaju da prihvati dojavu, šalje se zahtjev za brisanje zastarjelih rješenja revidirane taktike te baza automatski ažurira rang listu kad se promijeni neko od rješenja.
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+				\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.25]{dijagrami/dijakt.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram aktivnosti za revidiranje dojave o pogrešci na taktici}
+				\label{fig:UC9}
+			\end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			Dijagram komponenti prikazan dolje ilustrira međuodnose i ovisnosti komponenta aplikacije Sahovski Klub. Korisnici sustavu pristupaju u web pregledniku putem standardnog REST api-ja. HTTP REST zahtjeve djangov interni ruter preusmjerava na odgovarajući view koji onda izvršava potrebnu logiku. Kada za izvršavanje te logike view mora raditi sa podatcima iz baze podataka on to obavlja preko DTO (data transfer objects). DTO su python objekti koji opisuju Modele objekata u bazi, a komunikaciju s bazom ostvaruju preko psycopg2 drivera koji Django aplikaciji omogućava komunikaciju sa PostgreSQL bazom podataka. Django middleware moduli pružaju razne funkcionalnosti o kojima su ovisne gotovo sve ostale komponente. Na primjer, Modeli koriste gotova rješenja za autentikaciju Usera kao sigurno spremanje šifri (hash, salt itd.), Template-ovi koriste CSRF tokene za sprječavanje cross site request forgery-ja, te View-ovi koriste session middleware za obavljanje logike o sesijama. Na kraju, view predaje sve potrebne informacije odgovarajućem template-u na renderiranje kojim se generiraju svi potrebni HTML dokumenti koji se zajedno sa CSS i Javascript datotekama šalju kao odgovor na REST upit web preglednika. Također trebaju se istaknuti Chessboard.js i Chess.js Javascript biblioteke koje omogućuju igranje šaha unutar korisnikovog web preglednika. Chessboard.js zadužen je za izgled šahovske ploče a za svu potrebnu šahovsku logiku oslanja se na Chess.js biblioteku. Za početak rada Chessboard.js biblioteci potrebne su određene šahovske informacije poput početnog stanja ploče koje je web preglednik dobio u sklopu odgovora na svoj REST upit.
+			 
+			 \begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.5cm
+        					\includegraphics[scale=0.55]{dijagrami/dijagramKomponenti.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram Komponenti}
+        					\label{fig:dijagramKomponenti}
+				\end{figure}
