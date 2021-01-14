@@ -320,41 +320,52 @@
 			
 			
 		\section{Dijagram razreda}
+		
+		Na sljedećim dijagramima prikazani su razredi koji pripadaju backend dijelu aplikacije. 
+		Na slikama 4.2 i 4.3 prikazano je stanje razreda modela koji modeliraju stanje objekata u bazi.
+		Dijagram 4.4 prikazuje sve razrede koje nasljeđuju View. Svaki od ovih razreda zadužen je 
+		za obradu upita za određenu putanju. Jedini podržani tipovi zahtjeva su GET i POST koje
+		implementiraju odgovarajućim metodama. Te metode vraćaju HTTP odgovore na upite 
+		najčešće u obliku HTML i JSON datoteka.
 
-			\text{Dijagram modela potrebnih za funkcionalnosti autentikacije.}
+\eject
+
+			\text{Dijagrami modela}
 			\begin{figure}[H]
 					\centerfloat
-					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.45]{dijagrami/ModelsClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Dijagram razreda modela generične funkcionalnosti}
+					\advance\leftskip13cm
+        					\includegraphics[scale=0.26]{dijagrami/final_models1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda modela 1. dio}
         					\label{fig:DijagramRazredaModel}
 			\end{figure}
+			\eject
 			
 			\begin{figure}[H]
 					\centerfloat
 					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.65]{dijagrami/ViewClassDiagram1.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Dijagram razreda view-ova generične funkcionalnosti}
+        					\includegraphics[scale=0.37]{dijagrami/final_models2.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Dijagram razreda modela 2. dio}
         					\label{fig:DijagramRazredaView}
 			\end{figure}
+			
+			
+			\begin{figure}[H]
+					\centerfloat
+					\advance\leftskip0.7cm
+        					\includegraphics[scale=0.145]{dijagrami/classes_view.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Razredni dijagram View-ova}
+        					\label{fig:idejniDijagramRazreda}
+				\end{figure}
 			
 			\eject
 			
 			\begin{figure}[H]
 					\centerfloat
 					\advance\leftskip0.7cm
-        					\includegraphics[scale=0.35]{dijagrami/Classdiagram.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-        					\caption{Idejni dijagram razreda}
+        					\includegraphics[scale=0.28]{dijagrami/classes_test.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+        					\caption{Razredni dijagram testnih razreda}
         					\label{fig:idejniDijagramRazreda}
-				\end{figure}
-
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
-			
+				\end{figure}	
 			\eject
 		
 		\section{Dijagram stanja}
