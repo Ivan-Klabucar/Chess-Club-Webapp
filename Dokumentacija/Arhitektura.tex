@@ -367,7 +367,7 @@
 			\begin{figure}[H]
 				\centerfloat
 				\includegraphics[scale=0.21]{dijagrami/dijagramstanjaclan2.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-				\caption{Dijagram stanja za neregistriranog korisnika}
+				\caption{Dijagram stanja za člana}
 				\label{fig:UC9}
 			\end{figure}
 			
@@ -376,11 +376,11 @@
 			
 		\section{Dijagram aktivnosti}
 		
-		Na slici 4.6 prikazan je proces revidiranja pogreške u taktici. Trener otvara pregled s detaljima o dojavi pogreške u taktici i u ovisnosti o tome je li dojava o pogrešci valjana potvrđuje ili odbija dojavu. U slučaju da prihvati dojavu, taktika se automatski revidira te se rang liste članova također ažuriraju.
+		Na slici 4.6 prikazan je proces revidiranja pogreške u taktici. Trener otvara pregled s detaljima o dojavi pogreške u taktici i u ovisnosti o tome je li dojava o pogrešci valjana potvrđuje ili odbija dojavu. U slučaju da prihvati dojavu, šalje se zahtjev za brisanje zastarjelih rješenja revidirane taktike te baza automatski ažurira rang listu kad se promijeni neko od rješenja.
 			
 				\begin{figure}[H]
 				\centerfloat
-				\includegraphics[scale=0.25]{dijagrami/Dijagramaktivnosti.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\includegraphics[scale=0.25]{dijagrami/dijakt.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
 				\caption{Dijagram aktivnosti za revidiranje dojave o pogrešci na taktici}
 				\label{fig:UC9}
 			\end{figure}
