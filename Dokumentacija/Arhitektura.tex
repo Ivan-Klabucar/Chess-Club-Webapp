@@ -371,18 +371,30 @@
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Na slici 4.5 prikazan je dijagram stanja za člana. Pri pokretanju aplikacije i prijavljivanju u korisnički račun, članu se otvara početna stranica. Iz nje može otvoriti stranice "Početna",  "Novosti", "Dnevne taktike", "Rang lista", "Treninzi", "Turniri" i "Prikaz profila". Pritiskom na "Početna" članu se otvara stranica s osnovnim informacijama o web stranici Šahovski klub MISFLIP. Na stranici "Novosti" mogu se pročitati sve objavljene novosti. Pritiskom na "Prikaz profila" članu se otvara stranica s pregledom vlastitog profila. U slučaju otvaranja stranica "Dnevne taktike", "Rang lista", "Treninzi" i "Turniri" članu se u slučaju neplaćene članarine otvara stranica za plaćanje članarine, a u protivnom odabrana stranica. Uz uvjet da je članarina plaćena, pri otvaranju stranice "Treninzi" član se može prijaviti na trening, a slično je i sa stranicom "Turniri" gdje se može prijaviti na turnir. Stranica "Rang lista" nudi prikaz rang liste, a odlaskom na stranicu "Dnevne taktike" moguće je odabrati jednu od ponuđenih dnevnih taktika, riješiti ju, odabrati težinu za nju i eventualno prijaviti primijećenu pogrešku u postupku rješavanje taktike.
+				
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			
+			\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.21]{dijagrami/dijagramstanjaclan2.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram stanja za člana}
+				\label{fig:UC9}
+			\end{figure}
+			
+			\eject
 			
 			
-			\eject 
-		
 		\section{Dijagram aktivnosti}
+		
+		Na slici 4.6 prikazan je proces revidiranja pogreške u taktici. Trener otvara pregled s detaljima o dojavi pogreške u taktici i u ovisnosti o tome je li dojava o pogrešci valjana potvrđuje ili odbija dojavu. U slučaju da prihvati dojavu, šalje se zahtjev za brisanje zastarjelih rješenja revidirane taktike te baza automatski ažurira rang listu kad se promijeni neko od rješenja.
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+				\begin{figure}[H]
+				\centerfloat
+				\includegraphics[scale=0.25]{dijagrami/dijakt.jpg} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\caption{Dijagram aktivnosti za revidiranje dojave o pogrešci na taktici}
+				\label{fig:UC9}
+			\end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
